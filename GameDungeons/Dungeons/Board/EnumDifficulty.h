@@ -1,0 +1,4 @@
+#ifndef ENUMDIFFICULTY_H
+#define ENUMDIFFICULTY_H
+
+#endif // ENUMDIFFICULTY_H
