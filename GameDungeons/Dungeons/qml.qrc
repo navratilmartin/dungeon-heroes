@@ -2,6 +2,11 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>images/Papirus-Team-dungeon.ico</file>
+        <file>Room.qml</file>
+        <file>Hero.qml</file>
+        <file>GridField.qml</file>
+        <file>Field.qml</file>
+        <file>Exit.qml</file>
     </qresource>
     <qresource prefix="/images"/>
 </RCC>
