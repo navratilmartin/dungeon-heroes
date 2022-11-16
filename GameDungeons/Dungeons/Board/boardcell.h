@@ -1,6 +1,8 @@
 #ifndef BOARDCELL_H
 #define BOARDCELL_H
 
+#include "character.h"
+#include "item.h"
 
 class BoardCell
 {

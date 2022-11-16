@@ -1,6 +1,10 @@
 #include "board.h"
 
-Board::Board()
-{
+Board::Board(EnumDifficulty difficulty){
+    m_size = boardSize;
+    generateRooms(difficulty);
+}
+
+void Board::generateRooms(EnumDifficulty difficulty) {
 
 }
