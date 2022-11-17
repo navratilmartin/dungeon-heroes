@@ -5,7 +5,7 @@ Loader::Loader(){
 }
 
 Board* Loader::laodNewGame(EnumDifficulty difficulty) {
-    Board* board = new Board(boardSize, difficulty);
+    Board* board = new Board(difficulty);
     return board;
 }
 

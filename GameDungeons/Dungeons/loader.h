@@ -1,7 +1,7 @@
 #ifndef LOADER_H
 #define LOADER_H
 
-#include "board.h"
+#include "Board/board.h"
 
 class Loader
 {

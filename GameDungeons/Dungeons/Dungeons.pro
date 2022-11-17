@@ -8,18 +8,19 @@ SOURCES += \
         Board/board.cpp \
         Board/boardcell.cpp \
         Board/boardroom.cpp \
-        BoardCellObjects/EnemyFactory/enemyfactory.cpp \
-        BoardCellObjects/EnemyFactory/enemyfactoryrobber.cpp \
-        BoardCellObjects/EnemyFactory/enemyfactoryshaman.cpp \
-        BoardCellObjects/EnemyFactory/enemyfactoryslime.cpp \
-        BoardCellObjects/armor.cpp \
-        BoardCellObjects/enemy.cpp \
-        BoardCellObjects/hero.cpp \
+        Board/character.cpp \
+        Board/item.cpp \
+        CharacterObjects/EnemyFactory/enemyfactory.cpp \
+        CharacterObjects/EnemyFactory/enemyfactoryrobber.cpp \
+        CharacterObjects/EnemyFactory/enemyfactoryshaman.cpp \
+        CharacterObjects/EnemyFactory/enemyfactoryslime.cpp \
+        CharacterObjects/Items/armor.cpp \
+        CharacterObjects/enemy.cpp \
+        CharacterObjects/hero.cpp \
         BoardCellObjects/hideout.cpp \
-        BoardCellObjects/item.cpp \
-        BoardCellObjects/potion.cpp \
+        CharacterObjects/Items/potion.cpp \
         BoardCellObjects/road.cpp \
-        BoardCellObjects/weapon.cpp \
+        CharacterObjects/Items/weapon.cpp \
         game.cpp \
         loader.cpp \
         main.cpp
@@ -44,17 +45,18 @@ HEADERS += \
     Board/board.h \
     Board/boardcell.h \
     Board/boardroom.h \
-    BoardCellObjects/EnemyFactory/enemyfactory.h \
-    BoardCellObjects/EnemyFactory/enemyfactoryrobber.h \
-    BoardCellObjects/EnemyFactory/enemyfactoryshaman.h \
-    BoardCellObjects/EnemyFactory/enemyfactoryslime.h \
-    BoardCellObjects/armor.h \
-    BoardCellObjects/enemy.h \
-    BoardCellObjects/hero.h \
+    Board/character.h \
+    Board/item.h \
+    CharacterObjects/EnemyFactory/enemyfactory.h \
+    CharacterObjects/EnemyFactory/enemyfactoryrobber.h \
+    CharacterObjects/EnemyFactory/enemyfactoryshaman.h \
+    CharacterObjects/ItemsEnemyFactory/enemyfactoryslime.h \
+    CharacterObjects/Items/armor.h \
+    CharacterObjects/enemy.h \
+    CharacterObjects/hero.h \
     BoardCellObjects/hideout.h \
-    BoardCellObjects/item.h \
-    BoardCellObjects/potion.h \
+    CharacterObjects/Items/potion.h \
     BoardCellObjects/road.h \
-    BoardCellObjects/weapon.h \
+    CharacterObjects/Items/weapon.h \
     game.h \
     loader.h
