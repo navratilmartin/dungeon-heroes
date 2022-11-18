@@ -2,10 +2,11 @@
 #define BOARD_H
 
 #include <iostream>
+#include <algorithm>
 
 #include "boardroom.h"
 
-const int boardSize = 8;
+const int boardSize = 8; // Initializing here for more transparency, could be initialized in the constructor
 
 class Board
 {

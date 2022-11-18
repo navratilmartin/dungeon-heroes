@@ -3,5 +3,9 @@
 BoardRoom::BoardRoom(EnumDifficulty difficulty)
 {
     m_size = roomSize;
-    //generateCells(difficulty);
+    generateCells(difficulty);
+}
+
+void BoardRoom::generateCells(EnumDifficulty difficulty) {
+
 }

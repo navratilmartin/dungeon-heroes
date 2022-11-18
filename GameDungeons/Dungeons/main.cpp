@@ -1,9 +1,11 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "Board/board.h"
 
 
 int main(int argc, char *argv[])
 {
+    Board* b = new Board(EnumDifficulty::Easy);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif

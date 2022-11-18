@@ -1,11 +1,11 @@
 #ifndef ENEMYFACTORYSLIME_H
 #define ENEMYFACTORYSLIME_H
 
+#include "enemyfactory.h"
 
-class EnemyFactorySlime
-{
+class EnemyFactorySlime: public EnemyFactory{
 public:
-    EnemyFactorySlime();
+    Enemy* getEnemy(int x, int y) override;
 };
 
 #endif // ENEMYFACTORYSLIME_H

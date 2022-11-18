@@ -1,11 +1,14 @@
 #ifndef ENEMYFACTORY_H
 #define ENEMYFACTORY_H
 
+#include <ctime>
+#include <cstdlib>
 
-class EnemyFactory
-{
+#include "../enemy.h"
+
+class EnemyFactory{
 public:
-    EnemyFactory();
+    virtual Enemy* getEnemy(int x, int y) = 0;
 };
 
 #endif // ENEMYFACTORY_H

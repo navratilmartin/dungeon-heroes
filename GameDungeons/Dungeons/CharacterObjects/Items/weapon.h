@@ -1,11 +1,19 @@
 #ifndef WEAPON_H
 #define WEAPON_H
 
+#include "../../Board/item.h"
+#include <iostream>
 
-class Weapon
-{
+
+class Weapon: public Item {
+private:
+    int m_damageBonus;
+    int m_durability;
 public:
-    Weapon();
+    Weapon(int damageBonus, const std::string& name, std::string description, int x, int y);
+    int getDamageBonus() const;
+    int getDurability() const;
+    void decreaseDurabilityByOne();
 };
 
 #endif // WEAPON_H
