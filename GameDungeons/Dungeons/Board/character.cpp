@@ -1,13 +1,13 @@
 
 #include "character.h"
 
-Character::Character(int x, int y, std::string name, int damage, int armor) {
+Character::Character(int x, int y, const std::string &name, int baseDamage, int defense) {
     m_x = x;
     m_y = y;
     m_name = name;
-    m_damage = damage;
-    m_armor = armor;
-    m_maxHealth = 1000;
+    m_baseDamage = baseDamage;
+    m_defense = defense;
+    m_maxHealth = 100;
     m_actualHealth = m_maxHealth;
 }
 
@@ -31,10 +31,10 @@ int Character::getMaxHealth() const {
     return m_maxHealth;
 }
 
-int Character::getArmor() const {
-    return m_armor;
+int Character::getDefense() const {
+    return m_defense;
 }
 
-int Character::getDamage() const {
-    return m_damage;
+int Character::getBaseDamage() const {
+    return m_baseDamage;
 }

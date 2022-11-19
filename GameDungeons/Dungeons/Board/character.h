@@ -10,17 +10,17 @@ protected:
     std::string m_name;
     int m_maxHealth;
     int m_actualHealth;
-    int m_damage;
-    int m_armor;
+    int m_baseDamage;
+    int m_defense;
 public:
-    Character(int x, int y, std::string name, int damage, int armor);
+    Character(int x, int y, const std::string &name, int baseDamage, int defense);
     int getX() const;
     int getY() const;
     std::string getName();
     int getMaxHealth() const;
     int getActualHealth() const;
-    int getDamage() const;
-    int getArmor() const;
+    int getBaseDamage() const;
+    int getDefense() const;
 };
 
 

@@ -9,6 +9,7 @@
 
 #include <algorithm>
 #include <array>
+#include <cmath>
 
 class Hero: public Character{
 private:
@@ -17,8 +18,13 @@ private:
     std::array<Item*, 10> m_inventory;
     Weapon* m_weapon;
     Armor* m_armor;
+
+    void useWeapon();
+    void useArmor(int durabilityDecrease);
+    void getXp(int experienceBonus);
+    void takeDamage(int damage);
 public:
-    Hero(int x, int y, const std::string& name, int damage, int armor);
+    Hero(int x, int y, const std::string& name, int baseDamage);
     void attack(Enemy* e);
     void equipWeapon(Weapon* w);
     void equipArmor(Armor* a);
