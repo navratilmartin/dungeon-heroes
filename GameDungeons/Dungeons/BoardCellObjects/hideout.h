@@ -1,11 +1,14 @@
 #ifndef HIDEOUT_H
 #define HIDEOUT_H
 
+#include "../Board/boardcell.h"
 
-class Hideout
-{
+
+class Hideout: public BoardCell{
+private:
+    int m_healingBonus;
 public:
-    Hideout();
+    Hideout(int x, int y, int healingBonus, Character* ch = nullptr, Item* i = nullptr);
 };
 
 #endif // HIDEOUT_H

@@ -1,18 +1,10 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "Board/board.h"
-#include "CharacterObjects/Items/weapon.h"
-
-void test(Board*b){
-    std::cout << "vyslo";
-}
-
 
 int main(int argc, char *argv[])
 {
-    Weapon* w = new Weapon(5, "x", "y", 1, 2);
     Board* b = new Board(EnumDifficulty::Easy);
-    test(w);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <cmath>
 
 #include "boardroom.h"
 
@@ -15,9 +16,11 @@ private:
     std::vector<std::vector<BoardRoom*>> m_board;
 
     void generateRooms(EnumDifficulty difficulty);
+    void generateHideouts(EnumDifficulty difficulty);
+    void generateEnemies(EnumDifficulty difficulty);
 public:
     Board(EnumDifficulty difficulty);
-
+    std::vector<std::vector<BoardRoom*>> getBoard();
 };
 
 #endif // BOARD_H
