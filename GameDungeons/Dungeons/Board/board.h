@@ -18,6 +18,8 @@ private:
 public:
     Board(EnumDifficulty difficulty);
 
+    std::vector<std::vector<BoardRoom*>> getBoard() const;
+
 };
 
 #endif // BOARD_H

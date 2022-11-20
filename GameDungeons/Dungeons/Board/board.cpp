@@ -28,3 +28,7 @@ void Board::generateRooms(EnumDifficulty difficulty) {
         });
     }
 }
+
+std::vector<std::vector<BoardRoom*>> Board::getBoard() const {
+    return m_board;
+}
