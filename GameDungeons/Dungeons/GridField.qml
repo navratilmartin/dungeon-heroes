@@ -5,13 +5,17 @@ Grid {
     columns:8
     spacing:5
 
-    Repeater{
+    Repeater {
         model: game.board
-
         Repeater {
-            model: game.board[index]
-            Field {
+            id: columnRep
+            property int outerIndex: index
+            model: game.board[outerIndex]
 
+            Field {
+                Room {
+                    visible: game.board[index][columnRep.outerIndex].emptyRoom
+                }
             }
         }
 

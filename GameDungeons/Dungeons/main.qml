@@ -22,22 +22,7 @@ Window {
         visible: false
 
         Hero {
-            onXChanged: function() {
-                if(x===room.x && y===room.y){
-                    pageloader.active=true
-                }
-            }
-            onYChanged: function() {
-                if(x===room.x && y===room.y) {
-                    pageloader.active=true
-                }
-            }
-        }
 
-        Room {
-            id:room
-            positionx:4
-            positiony:4
         }
 
         Loader {

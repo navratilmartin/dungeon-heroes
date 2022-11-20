@@ -30,8 +30,16 @@ void Board::generateRooms(EnumDifficulty difficulty) {
             return r;
         });
     }
-    generateHideouts(difficulty);
-    generateEnemies(difficulty);
+    // generateHideouts(difficulty); - nefunguje
+    // generateEnemies(difficulty); - nefunguje
+
+    //TODO udelat tak, aby pri generovani nektere Room byli viditelne, zbytek je prazdny
+    m_board.at(6).at(6)->unsetEmpty();
+    m_board.at(7).at(7)->unsetEmpty();
+    m_board.at(1).at(1)->unsetEmpty();
+    m_board.at(2).at(5)->unsetEmpty();
+    m_board.at(0).at(7)->unsetEmpty();
+
 }
 
 void Board::generateHideouts(EnumDifficulty difficulty) {
