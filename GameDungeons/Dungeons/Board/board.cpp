@@ -6,10 +6,6 @@ Board::Board(EnumDifficulty difficulty){
     // Initializing of the vector
     generateRooms(difficulty);
 }
-
-std::vector<std::vector<BoardRoom *>> Board::getBoard() {
-    return m_board;
-}
 // Both generateRooms algorithms work. The one with generator is weird, maybe we should not use for cycle at all? Idk
 
 /*
@@ -80,4 +76,8 @@ void Board::generateEnemies(EnumDifficulty difficulty) {
             m_board.at(x).at(y) ->addEnemy(3);  // creates a shaman
         }
     }
+}
+
+std::vector<std::vector<BoardRoom*>> Board::getBoard() const {
+    return m_board;
 }

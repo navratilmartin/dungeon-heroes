@@ -13,11 +13,13 @@
 #include <algorithm>
 #include <cstdlib>
 #include <time.h>
+#include <QObject>
 
 const int roomSize = 8;
 
-class BoardRoom{
+class BoardRoom : public QObject {
 private:
+    Q_OBJECT
     int m_size;
     std::vector<std::vector<BoardCell*>> m_room;
 
@@ -26,6 +28,7 @@ public:
     BoardRoom( EnumDifficulty difficulty);
     void addHideout();
     void addEnemy(int type);
+
 };
 
 #endif // BOARDROOM_H

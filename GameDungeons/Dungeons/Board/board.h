@@ -20,7 +20,9 @@ private:
     void generateEnemies(EnumDifficulty difficulty);
 public:
     Board(EnumDifficulty difficulty);
-    std::vector<std::vector<BoardRoom*>> getBoard();
+
+    std::vector<std::vector<BoardRoom*>> getBoard() const;
+
 };
 
 #endif // BOARD_H

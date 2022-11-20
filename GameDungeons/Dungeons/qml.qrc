@@ -7,6 +7,10 @@
         <file>GridField.qml</file>
         <file>Field.qml</file>
         <file>Exit.qml</file>
+        <file>MenuDifficulty.qml</file>
+        <file>MenuButton.qml</file>
+        <file>Menu.qml</file>
+        <file>NewGame.qml</file>
     </qresource>
     <qresource prefix="/images"/>
 </RCC>

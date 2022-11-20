@@ -9,7 +9,7 @@ private:
     void controlFiles();
 public:
     Loader();
-    Board* laodNewGame(EnumDifficulty difficulty);
+    Board* loadNewGame(EnumDifficulty difficulty);
     Board* loadSavedGame();
     void saveGame(const Board* currentBoard);
 };
