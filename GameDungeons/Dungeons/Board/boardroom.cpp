@@ -52,4 +52,9 @@ void BoardRoom::unsetEmpty() {
     m_emptyRoom = true;
 
     emit emptyRoomChanged();
+    emit roomChanged();
+}
+
+std::vector<std::vector<BoardCell*>> BoardRoom::getRoom() const {
+    return m_room;
 }

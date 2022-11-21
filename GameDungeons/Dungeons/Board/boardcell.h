@@ -3,9 +3,11 @@
 
 #include "character.h"
 #include "item.h"
+#include <QObject>
 
-class BoardCell{
+class BoardCell : public QObject {
 protected:
+    Q_OBJECT
     int m_x;
     int m_y;
     Character* m_character;

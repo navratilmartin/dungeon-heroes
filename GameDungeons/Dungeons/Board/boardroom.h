@@ -21,6 +21,7 @@ class BoardRoom : public QObject {
 private:
     Q_OBJECT
     Q_PROPERTY(bool emptyRoom READ isEmptyRoom NOTIFY emptyRoomChanged)
+    Q_PROPERTY (std::vector<std::vector<BoardCell*>> room READ getRoom NOTIFY roomChanged)
     int m_size;
     bool m_emptyRoom;
     std::vector<std::vector<BoardCell*>> m_room;
@@ -34,9 +35,15 @@ public:
     bool isEmptyRoom() const;
     void unsetEmpty();
 
+    std::vector<std::vector<BoardCell*>> getRoom() const;
+
 signals:
     void emptyRoomChanged();
 
+    void roomChanged();
+
 };
+
+Q_DECLARE_METATYPE(std::vector<std::vector<BoardCell*> >)
 
 #endif // BOARDROOM_H

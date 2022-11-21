@@ -11,6 +11,12 @@
         <file>MenuButton.qml</file>
         <file>Menu.qml</file>
         <file>NewGame.qml</file>
+        <file>Cell.qml</file>
+        <file>CellField.qml</file>
+        <file>images/stone-path.png</file>
+        <file>images/exit-door.png</file>
+        <file>images/frog-mouth-helm.png</file>
+        <file>images/path-tile.png</file>
     </qresource>
     <qresource prefix="/images"/>
 </RCC>

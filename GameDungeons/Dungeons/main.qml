@@ -22,35 +22,42 @@ Window {
         visible: false
 
         Hero {
-
+            id: hero
         }
 
         Loader {
-            id:pageloader
-            active:false
+            id: pageloader
+            active: false
             sourceComponent: Window {
                 width: 640
                 height: 480
                 visible: true
-                onClosing: winld.active = false
-                GridField {
+                // onClosing: winld.active = false
+                CellField {
                     Hero {
                         onXChanged: function() {
-                            if(x===exit.x && y===exit.y){
+                            if(x===exit.x && y===exit.y) {
+                                hero.enteredRoom=false
                                 pageloader.active=false
+                                root.visible=true
                             }
                         }
+
                         onYChanged: function() {
-                            if(x===exit.x && y===exit.y){
+                            if(x===exit.x && y===exit.y) {
+                                hero.enteredRoom=false
                                 pageloader.active=false
+                                root.visible=true
                             }
                         }
                     }
+
                     Exit {
-                        id:exit
-                        positionx: 3
-                        positiony: 3
+                        id: exit
+                        positionx: 8
+                        positiony: 1
                     }
+
                     anchors {
                         horizontalCenter: parent.horizontalCenter
                         verticalCenter: parent.verticalCenter
