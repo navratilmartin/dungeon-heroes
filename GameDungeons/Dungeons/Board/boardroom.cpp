@@ -21,14 +21,22 @@ void BoardRoom::generateCells(EnumDifficulty difficulty) {  // Misto generate al
 void BoardRoom::addHideout() {
     int randx = rand()%(roomSize*roomSize);
     int x = randx / roomSize;
+    if(x == 0){
+        x++;
+    }
     int y = randx % roomSize;
     m_room.at(x).at(y) = new Hideout(x, y, 15);
 }
 
 void BoardRoom::addEnemy(int type) {
-    int randx = rand()%(roomSize*roomSize);
-    int x = randx / roomSize;
-    int y = randx % roomSize;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, roomSize-1);
+    int x = dis(gen);
+    if(x == 0){
+        x++;
+    }
+    int y = dis(gen);
     while(m_room.at(x).at(y)->getCharacter() != nullptr){
         x = (x+1)%8;
     }
@@ -57,4 +65,14 @@ void BoardRoom::unsetEmpty() {
 
 std::vector<std::vector<BoardCell*>> BoardRoom::getRoom() const {
     return m_room;
+}
+
+void BoardRoom::printCells(){
+    for(int i=0; i<roomSize; i++){
+        for(int j=0; j<roomSize; j++){
+            if(m_room.at(i).at(j) ->getCharacter() != nullptr){
+                std::cout << m_room.at(i).at(j)->getX() << m_room.at(i).at(j)->getY() << std::endl;
+            }
+        }
+    }
 }

@@ -14,6 +14,7 @@
 #include <cstdlib>
 #include <time.h>
 #include <QObject>
+#include <random>
 
 const int roomSize = 8;
 
@@ -34,6 +35,7 @@ public:
 
     bool isEmptyRoom() const;
     void unsetEmpty();
+    void printCells();
 
     std::vector<std::vector<BoardCell*>> getRoom() const;
 

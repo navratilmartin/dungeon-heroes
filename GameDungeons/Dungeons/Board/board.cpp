@@ -3,7 +3,6 @@
 Board::Board(EnumDifficulty difficulty){
     m_size = boardSize;
     m_board = std::vector<std::vector<BoardRoom*>> (boardSize, std::vector<BoardRoom*> (boardSize));
-    // Initializing of the vector
     generateRooms(difficulty);
 }
 // Both generateRooms algorithms work. The one with generator is weird, maybe we should not use for cycle at all? Idk
@@ -23,15 +22,14 @@ void Board::generateRooms(EnumDifficulty difficulty) {
 
 void Board::generateRooms(EnumDifficulty difficulty) {
     for(int height=0; height<boardSize; height++) {
-        std::cout << "y" << std::endl;
         generate(m_board.at(height).begin(), m_board.at(height).end(), [difficulty]() -> BoardRoom * {
             BoardRoom *r = new BoardRoom(difficulty);
-            std::cout << "x" << std::endl;
             return r;
         });
     }
-    // generateHideouts(difficulty); - nefunguje
-    // generateEnemies(difficulty); - nefunguje
+    generateHideouts(difficulty);
+    generateEnemies(difficulty);
+    //printRooms();
 
     //TODO udelat tak, aby pri generovani nektere Room byli viditelne, zbytek je prazdny
     m_board.at(6).at(6)->unsetEmpty();
@@ -46,11 +44,11 @@ void Board::generateHideouts(EnumDifficulty difficulty) {
     srand(time(0));
     int numOfHideouts=0;
     if(difficulty == EnumDifficulty::Easy){
-        numOfHideouts = boardSize;
+        numOfHideouts = boardSize/2;
     }else if(difficulty == EnumDifficulty::Medium){
         numOfHideouts = boardSize/3;
     }else if(difficulty == EnumDifficulty::Hard){
-        numOfHideouts = boardSize/2;
+        numOfHideouts = boardSize/4;
     }
     for(int count=0; count<numOfHideouts; count++){
         int randx = rand()%(boardSize*boardSize);
@@ -61,7 +59,9 @@ void Board::generateHideouts(EnumDifficulty difficulty) {
 }
 
 void Board::generateEnemies(EnumDifficulty difficulty) {
-    srand(time(0));
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, boardSize-1);
     int numOfEnemies=0;
     if(difficulty == EnumDifficulty::Easy){
         numOfEnemies = pow(boardSize, 2) * 0.4;
@@ -71,9 +71,8 @@ void Board::generateEnemies(EnumDifficulty difficulty) {
         numOfEnemies = pow(boardSize, 2) * 0.7;
     }
     for(int count=0; count<numOfEnemies; count++){
-        int randx = rand()%(boardSize*boardSize);
-        int x = randx / boardSize;
-        int y = randx % boardSize;
+        int x = dis(gen);
+        int y = dis(gen);
         if(count < numOfEnemies*0.5){
             m_board.at(x).at(y) ->addEnemy(1);  // creates a robber
         }
@@ -88,4 +87,13 @@ void Board::generateEnemies(EnumDifficulty difficulty) {
 
 std::vector<std::vector<BoardRoom*>> Board::getBoard() const {
     return m_board;
+}
+
+void Board::printRooms(){
+    for(int i=0; i<boardSize; i++){
+        for(int j=0; j<boardSize; j++){
+            std::cout << "room" << i << j << std::endl;
+            m_board.at(i).at(j)->printCells();
+        }
+    }
 }
