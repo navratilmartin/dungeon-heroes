@@ -12,8 +12,13 @@ protected:
     int m_y;
     Character* m_character;
     Item* m_item;
+    Q_PROPERTY(Character* character READ getCharacter() CONSTANT)
+    Q_PROPERTY(bool characterIsNotNull READ characterIsNotNull() CONSTANT)
+    Q_PROPERTY(QString name READ characterName() CONSTANT)
 public:
+
     BoardCell(int x, int y, Character*ch, Item* i);
+    bool characterIsNotNull();
     int getX() const;
     int getY() const;
     Character* getCharacter();
@@ -22,6 +27,7 @@ public:
     void addItem(Item* i);              // If we want to place an item on the cell
     Item* pickUpItem();                 // Returns the item and removes it from the cell
     void removeCharacter();             // When the hero leaves the cell
+    QString characterName();
 };
 
 #endif // BOARDCELL_H
