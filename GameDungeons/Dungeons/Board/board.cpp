@@ -30,7 +30,7 @@ void Board::generateRooms(EnumDifficulty difficulty) {
     generateHideouts(difficulty);
     generateEnemies(difficulty);
     generateItems(difficulty);
-    printRooms();
+    //printRooms();
 
     //TODO udelat tak, aby pri generovani nektere Room byli viditelne, zbytek je prazdny
     m_board.at(6).at(6)->unsetEmpty();
@@ -65,11 +65,11 @@ void Board::generateEnemies(EnumDifficulty difficulty) {
     std::uniform_int_distribution<> dis(0, boardSize-1);
     int numOfEnemies=0;
     if(difficulty == EnumDifficulty::Easy){
-        numOfEnemies = pow(boardSize, 2) * 0.4;
+        numOfEnemies = pow(boardSize, 2) * 1.3;
     }else if(difficulty == EnumDifficulty::Medium){
-        numOfEnemies = pow(boardSize, 2) * 0.5;
+        numOfEnemies = pow(boardSize, 2) * 1.7;
     }else if(difficulty == EnumDifficulty::Hard){
-        numOfEnemies = pow(boardSize, 2) * 0.7;
+        numOfEnemies = pow(boardSize, 2) * 2.0;
     }
     for(int count=0; count<numOfEnemies; count++){
         int x = dis(gen);

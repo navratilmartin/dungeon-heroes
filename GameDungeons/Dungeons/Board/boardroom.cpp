@@ -5,9 +5,9 @@ BoardRoom::BoardRoom(EnumDifficulty difficulty)
     m_size = roomSize;
     m_room = std::vector<std::vector<BoardCell*>> (roomSize, std::vector<BoardCell*> (roomSize));
     generateCells(difficulty);
-    addEnemy(1);
-    addEnemy(2);
-    addEnemy(3);
+    //addEnemy(1);
+    //addEnemy(2);
+    //addEnemy(3);
     m_emptyRoom = false;
 }
 
