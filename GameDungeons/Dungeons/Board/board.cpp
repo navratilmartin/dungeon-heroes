@@ -29,7 +29,8 @@ void Board::generateRooms(EnumDifficulty difficulty) {
     }
     generateHideouts(difficulty);
     generateEnemies(difficulty);
-    //printRooms();
+    generateItems(difficulty);
+    printRooms();
 
     //TODO udelat tak, aby pri generovani nektere Room byli viditelne, zbytek je prazdny
     m_board.at(6).at(6)->unsetEmpty();
@@ -82,6 +83,27 @@ void Board::generateEnemies(EnumDifficulty difficulty) {
         else{
             m_board.at(x).at(y) ->addEnemy(3);  // creates a shaman
         }
+    }
+}
+
+void Board::generateItems(EnumDifficulty difficulty){
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    int numOfItems=0, typeOfItem=0;
+    std::uniform_int_distribution<> dis(0, boardSize-1);
+    std::uniform_int_distribution<> ite(1, 3);
+    if(difficulty == EnumDifficulty::Easy){
+        numOfItems = pow(boardSize, 2) * 0.7;
+    }else if(difficulty == EnumDifficulty::Medium){
+        numOfItems = pow(boardSize, 2) * 0.6;
+    }else if(difficulty == EnumDifficulty::Hard){
+        numOfItems = pow(boardSize, 2) * 0.5;
+    }
+    for(int count=0; count<numOfItems; count++){
+        int x = dis(gen);
+        int y = dis(gen);
+        typeOfItem = ite(gen);
+        m_board.at(x).at(y) ->addItem(typeOfItem);
     }
 }
 

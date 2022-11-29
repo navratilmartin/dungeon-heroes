@@ -7,6 +7,9 @@
 #include "../CharacterObjects/EnemyFactory/enemyfactoryrobber.h"
 #include "../CharacterObjects/EnemyFactory/enemyfactoryshaman.h"
 #include "../CharacterObjects/EnemyFactory/enemyfactoryslime.h"
+#include "../CharacterObjects/Items/armor.h"
+#include "../CharacterObjects/Items/weapon.h"
+#include "../CharacterObjects/Items/potion.h"
 #include "EnumDifficulty.h"
 #include <vector>
 #include <array>
@@ -32,7 +35,7 @@ public:
     BoardRoom( EnumDifficulty difficulty);
     void addHideout();
     void addEnemy(int type);
-
+    void addItem(int typeOfItem);
     bool isEmptyRoom() const;
     void unsetEmpty();
     void printCells();

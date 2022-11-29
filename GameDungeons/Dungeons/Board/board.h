@@ -18,6 +18,7 @@ private:
     void generateRooms(EnumDifficulty difficulty);
     void generateHideouts(EnumDifficulty difficulty);
     void generateEnemies(EnumDifficulty difficulty);
+    void generateItems(EnumDifficulty difficulty);
     void printRooms();
 public:
     Board(EnumDifficulty difficulty);
