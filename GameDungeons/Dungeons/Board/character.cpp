@@ -11,7 +11,7 @@ Character::Character(int x, int y, const std::string &name, int baseDamage, int 
     m_actualHealth = m_maxHealth;
 }
 
-std::string Character::getName() {
+std::string Character::getName(){
     return m_name;
 }
 

@@ -17,6 +17,9 @@
         <file>images/exit-door.png</file>
         <file>images/frog-mouth-helm.png</file>
         <file>images/path-tile.png</file>
+        <file>images/robber-mask.png</file>
+        <file>images/slime.png</file>
+        <file>images/tribal-mask.png</file>
     </qresource>
     <qresource prefix="/images"/>
 </RCC>

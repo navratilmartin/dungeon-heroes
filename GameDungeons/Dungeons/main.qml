@@ -7,6 +7,15 @@ Window {
     height: 480
     visible: true
     title: qsTr("Dungeons")
+    Grid{
+        rows:2
+        spacing:1
+        columns:2
+
+
+
+    }
+
 
     Menu {
 
@@ -32,6 +41,7 @@ Window {
                 width: 640
                 height: 480
                 visible: true
+
                 // onClosing: winld.active = false
                 CellField {
                     Hero {

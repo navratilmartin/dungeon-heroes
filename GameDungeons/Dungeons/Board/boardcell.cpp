@@ -47,3 +47,7 @@ QString BoardCell::characterName(){
     QString qstr = QString::fromStdString(str);
     return qstr;
 }
+   QString qstr = QString::fromStdString(str);
+   return qstr;
+}
+

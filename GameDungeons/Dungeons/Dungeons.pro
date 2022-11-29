@@ -60,3 +60,5 @@ HEADERS += \
     CharacterObjects/Items/weapon.h \
     game.h \
     loader.h
+
+DISTFILES +=
