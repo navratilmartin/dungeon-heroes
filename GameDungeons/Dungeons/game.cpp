@@ -18,8 +18,8 @@ void Game::loadBoard() {
 
 }
 
-std::vector<std::vector<BoardRoom*>> Game::getBoardMatrix() const {
-    return m_board->getBoard();
+Board* Game::getBoardMatrix() const {
+    return m_board;
 }
 
 void Game::play(int userInput) {
@@ -29,7 +29,6 @@ void Game::play(int userInput) {
         loadBoard();
     }
 
-    emit boardChanged();
 }
 
 

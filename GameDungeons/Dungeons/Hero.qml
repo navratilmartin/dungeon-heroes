@@ -8,8 +8,6 @@ Rectangle {
     property int realPositiony:1
     property int dimension: 8
 
-    property bool enteredRoom: false
-
     property int toplimit: 0
     property int rightlimit: 55*dimension
     property int bottomlimit: 55*dimension
@@ -32,62 +30,67 @@ Rectangle {
     }
 
     Keys.onUpPressed: {
-        if(y-55>toplimit){
+        if(y-55>toplimit) {
             y=y-55
             logicalPositiony -= 1
 
-            if (enteredRoom === false) {
-                checkRoom()
-            }
+            checkRoom()
 
-        }else{
+        } else {
 
         }
     }
+
     Keys.onRightPressed: {
-        if(x+55<rightlimit){
+        if(x+55<rightlimit) {
             x=x+55
             logicalPositionx += 1
 
-            if (enteredRoom === false) {
-                checkRoom()
-            }
-        }else{
+            checkRoom()
+
+        } else {
 
         }
     }
+
     Keys.onDownPressed: {
-        if(y+55<bottomlimit){
+        if(y+55<bottomlimit) {
             y=y+55
             logicalPositiony += 1
 
-            if (enteredRoom === false) {
-                checkRoom()
-            }
+            checkRoom()
 
-        }else{
+        } else {
 
         }
     }
+
     Keys.onLeftPressed: {
-        if(x-55>leftlimit){
+        if(x-55>leftlimit) {
             x=x-55
             logicalPositionx -= 1
 
-            if (enteredRoom === false) {
-                checkRoom()
-            }
-        }else{
+            checkRoom()
+
+        } else {
 
         }
 
     }
 
     function checkRoom() {
-        if(game.board[logicalPositionx][logicalPositiony].emptyRoom === true) {
-            enteredRoom = true
-            pageloader.active=true
-            root.visible=false
+        if(logicalPositionx === room.logicalPositionx && logicalPositiony === room.logicalPositiony
+                && room.visible == true) {
+            roomLoader.active = false
+            game.board.switchRoom(1)
+            roomLoader.active = true
+            roomLoader.roomNumber += 1
+        } else if (logicalPositionx === exit.logicalPositionx && logicalPositiony === exit.logicalPositiony
+                   && exit.visible === true) {
+            roomLoader.active = false
+            game.board.switchRoom(0)
+            roomLoader.active = true
+            roomLoader.roomNumber -= 1
         }
     }
 }

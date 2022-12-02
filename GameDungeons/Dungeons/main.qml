@@ -7,15 +7,6 @@ Window {
     height: 480
     visible: true
     title: qsTr("Dungeons")
-    Grid{
-        rows:2
-        spacing:1
-        columns:2
-
-
-
-    }
-
 
     Menu {
 
@@ -25,60 +16,28 @@ Window {
         id: newGameDifficulty
     }
 
+    Component {
+        id: gameFieldComp
 
-    GridField {
-        id: gameField
-        visible: false
-
-        Hero {
-            id: hero
-        }
-
-        Loader {
-            id: pageloader
-            active: false
-            sourceComponent: Window {
-                width: 640
-                height: 480
-                visible: true
-
-                // onClosing: winld.active = false
-                CellField {
-                    Hero {
-                        onXChanged: function() {
-                            if(x===exit.x && y===exit.y) {
-                                hero.enteredRoom=false
-                                pageloader.active=false
-                                root.visible=true
-                            }
-                        }
-
-                        onYChanged: function() {
-                            if(x===exit.x && y===exit.y) {
-                                hero.enteredRoom=false
-                                pageloader.active=false
-                                root.visible=true
-                            }
-                        }
-                    }
-
-                    Exit {
-                        id: exit
-                        positionx: 8
-                        positiony: 1
-                    }
-
-                    anchors {
-                        horizontalCenter: parent.horizontalCenter
-                        verticalCenter: parent.verticalCenter
-                    }
-                }
-            }
-        }
-
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            verticalCenter: parent.verticalCenter
+        CellField {
+            id: gameField
         }
     }
+
+    Loader {
+        id: roomLoader
+        property int roomNumber: 0
+        active: false
+        focus: true
+        sourceComponent: gameFieldComp
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+
+        onLoaded: {
+            item.anchors.horizontalCenter = roomLoader.horizontalCenter
+            item.anchors.verticalCenter = roomLoader.verticalCenter
+        }
+
+    }
+
 }

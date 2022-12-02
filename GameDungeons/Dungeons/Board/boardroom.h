@@ -24,10 +24,11 @@ const int roomSize = 8;
 class BoardRoom : public QObject {
 private:
     Q_OBJECT
-    Q_PROPERTY(bool emptyRoom READ isEmptyRoom NOTIFY emptyRoomChanged)
-    Q_PROPERTY (std::vector<std::vector<BoardCell*>> room READ getRoom NOTIFY roomChanged)
+    Q_PROPERTY(bool bossRoom READ isBossRoom NOTIFY bossRoomChanged)
+    Q_PROPERTY (std::vector<std::vector<BoardCell*>> boardCells READ getCells NOTIFY roomChanged)
     int m_size;
     bool m_emptyRoom;
+    bool m_boss;
     std::vector<std::vector<BoardCell*>> m_room;
 
     void generateCells(EnumDifficulty difficulty);
@@ -37,13 +38,15 @@ public:
     void addEnemy(int type);
     void addItem(int typeOfItem);
     bool isEmptyRoom() const;
+    bool isBossRoom() const;
     void unsetEmpty();
+    void setBoss();
     void printCells();
 
-    std::vector<std::vector<BoardCell*>> getRoom() const;
+    std::vector<std::vector<BoardCell*>> getCells() const;
 
 signals:
-    void emptyRoomChanged();
+    void bossRoomChanged();
 
     void roomChanged();
 

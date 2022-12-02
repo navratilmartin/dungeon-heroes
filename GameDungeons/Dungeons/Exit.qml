@@ -1,12 +1,16 @@
 import QtQuick 2.15
 
 Rectangle {
-    property int positionx: 1
-    property int positiony: 1
+    property int logicalPositionx: 0
+    property int logicalPositiony: 0
+
+    property int realPositionx: 1
+    property int realPositiony: 1
+
     height: 20
     width: 20
-    x: 15+55*(positionx-1)
-    y: 15+55*(positiony-1)
+    x: 15+55*(realPositionx-1)
+    y: 15+55*(realPositiony-1)
 
     Image {
         source: "images/exit-door.png"

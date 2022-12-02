@@ -8,7 +8,8 @@ BoardRoom::BoardRoom(EnumDifficulty difficulty)
     //addEnemy(1);
     //addEnemy(2);
     //addEnemy(3);
-    m_emptyRoom = false;
+    m_emptyRoom = true;
+    m_boss = false;
 }
 
 void BoardRoom::generateCells(EnumDifficulty difficulty) {  // Misto generate algorithmu for cykly - potrebuju
@@ -104,20 +105,23 @@ bool BoardRoom::isEmptyRoom() const {
     return m_emptyRoom;
 }
 
-void BoardRoom::unsetEmpty() {
-    m_emptyRoom = true;
+bool BoardRoom::isBossRoom() const {
+    return m_boss;
+}
 
-    emit emptyRoomChanged();
+void BoardRoom::unsetEmpty() {
+    m_emptyRoom = false;
+
     emit roomChanged();
 }
 
-std::vector<std::vector<BoardCell*>> BoardRoom::getRoom() const {
-    for(int i =0;i<m_room.size();i++){
-        for(int j=0;j<m_room[i].size();j++){
+void BoardRoom::setBoss() {
+    m_boss = true;
 
+    emit bossRoomChanged();
+}
 
-        }
-    }
+std::vector<std::vector<BoardCell*>> BoardRoom::getCells() const {
     return m_room;
 }
 

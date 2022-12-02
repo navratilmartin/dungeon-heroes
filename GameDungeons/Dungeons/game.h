@@ -6,7 +6,7 @@
 
 class Game : public QObject {
     Q_OBJECT
-    Q_PROPERTY(std::vector<std::vector<BoardRoom*>> board READ getBoardMatrix NOTIFY boardChanged)
+    Q_PROPERTY(Board* board READ getBoardMatrix CONSTANT)
 
     Loader* m_loader;
     Board* m_board;
@@ -20,16 +20,14 @@ public:
 
     Game& operator=(const Game&) = delete;
 
-    std::vector<std::vector<BoardRoom*>> getBoardMatrix() const;
+    Board* getBoardMatrix() const;
 
     Q_INVOKABLE void play(int userInput = 3);
 
     ~Game();
 
-signals:
-    void boardChanged();
 };
 
-Q_DECLARE_METATYPE(std::vector<std::vector<BoardRoom*> >); // None Qt Data types must be registered
+Q_DECLARE_METATYPE(Board*); // None Qt Data types must be registered
 
 #endif // GAME_H

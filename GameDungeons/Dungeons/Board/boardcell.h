@@ -12,9 +12,9 @@ protected:
     int m_y;
     Character* m_character;
     Item* m_item;
-    Q_PROPERTY(Character* character READ getCharacter() CONSTANT)
-    Q_PROPERTY(bool characterIsNotNull READ characterIsNotNull() CONSTANT)
-    Q_PROPERTY(QString name READ characterName() CONSTANT)
+    Q_PROPERTY(Character* character READ getCharacter CONSTANT)
+    Q_PROPERTY(bool characterIsNotNull READ characterIsNotNull CONSTANT)
+    Q_PROPERTY(QString name READ characterName CONSTANT)
 public:
 
     BoardCell(int x, int y, Character*ch, Item* i);

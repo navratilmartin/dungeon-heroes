@@ -21,9 +21,9 @@ Rectangle {
         }
 
         onClicked: {
-            gameField.visible = true
             newGameDifficulty.visible = false
             game.play(levelDifficulty)
+            roomLoader.active = true
         }
     }
 }
