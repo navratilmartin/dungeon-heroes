@@ -13,6 +13,7 @@
 
 class Hero: public Character{
 private:
+
     int m_level;
     int m_experience;
     std::array<Item*, 10> m_inventory;
@@ -24,12 +25,25 @@ private:
     void getXp(int experienceBonus);
     void takeDamage(int damage);
 public:
-    Hero(int x, int y, const std::string& name, int baseDamage);
+     Hero(int x, int y, const std::string& name, int baseDamage);
+
+
     void attack(Enemy* e);
     void equipWeapon(Weapon* w);
     void equipArmor(Armor* a);
     void drinkPotion(Potion* p);
     void pickupItem(Item* i);
+    Q_OBJECT
+    Q_PROPERTY(int heroX READ getX NOTIFY xChanged)
+    Q_PROPERTY(int heroY READ getY NOTIFY yChanged)
+
+    Q_INVOKABLE int changeX(const int by);
+    Q_INVOKABLE int changeY(const int by);
+    Q_INVOKABLE void resetXY();
+signals:
+    void xChanged();
+    void yChanged();
+
 };
 
 #endif // HERO_H
