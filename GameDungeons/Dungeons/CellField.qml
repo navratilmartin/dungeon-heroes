@@ -15,11 +15,11 @@ Grid {
                     Cell {
                                  Image {
                                      source:if(modelData.characterIsNotNull) {
-                                             if(modelData.name==="Robber") {
+                                             if(modelData.characterName==="Robber") {
                                                  "images/robber-mask.png"
-                                             } else if(modelData.name==="Shaman") {
+                                             } else if(modelData.characterName==="Shaman") {
                                                  "images/tribal-mask.png"
-                                             } else if(modelData.name==="Slime") {
+                                             } else if(modelData.characterName==="Slime") {
                                                  "images/slime.png"
                                              }
 
@@ -33,7 +33,33 @@ Grid {
                                      anchors {
                                          centerIn: parent
                                      }
+                                     Image {
+                                         source:if(modelData.itemIsNotNull) {
+                                                 if(modelData.itemName==="Sword") {
+                                                     "images/piercing-sword.png"
+                                                 } else if(modelData.itemName==="Axe") {
+                                                     "images/battle-axe.png"
+                                                 } else if(modelData.itemName==="Dagger") {
+                                                     "images/plain-dagger.png"
+                                                 }
+                                                 else if(modelData.itemName==="Armor") {
+                                                     "images/armor-vest.png"
+                                                 }
+                                                 else if(modelData.itemName==="Potion") {
+                                                     "images/potion-ball.png"
+                                                 }
+                                                 } else {
+                                                    ""
+                                                 }
 
+                                         width: 30
+                                         height: 30
+
+                                         anchors {
+                                             centerIn: parent
+                                         }
+
+                                    }
                                 }
                     }
                 }

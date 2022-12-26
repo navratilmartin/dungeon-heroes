@@ -20,6 +20,11 @@
         <file>images/robber-mask.png</file>
         <file>images/slime.png</file>
         <file>images/tribal-mask.png</file>
+        <file>images/armor-vest.png</file>
+        <file>images/battle-axe.png</file>
+        <file>images/piercing-sword.png</file>
+        <file>images/plain-dagger.png</file>
+        <file>images/potion-ball.png</file>
     </qresource>
     <qresource prefix="/images"/>
 </RCC>

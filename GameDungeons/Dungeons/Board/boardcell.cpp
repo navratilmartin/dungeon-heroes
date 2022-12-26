@@ -18,6 +18,10 @@ int BoardCell::getX() const{
 bool BoardCell::characterIsNotNull(){
     return m_character!=nullptr;
 }
+
+bool BoardCell::itemIsNotNull(){
+    return m_item!=nullptr;
+}
 Character *BoardCell::getCharacter() {
     return m_character;
 }
@@ -44,6 +48,11 @@ void BoardCell::removeCharacter() {
 }
 QString BoardCell::characterName(){
     std::string str = m_character->getName();
+    QString qstr = QString::fromStdString(str);
+    return qstr;
+}
+QString BoardCell::itemName(){
+    std::string str = m_item->getName();
     QString qstr = QString::fromStdString(str);
     return qstr;
 }
