@@ -3,6 +3,7 @@
 Game::Game() {
     m_loader = new Loader();
     m_board = new Board(EnumDifficulty::Easy);
+
 }
 
 Game::~Game() {
@@ -14,6 +15,9 @@ void Game::createBoard(EnumDifficulty difficulty) {
     m_board = m_loader->loadNewGame(difficulty);
 }
 
+Hero* Game::getHero(){
+    return m_hero;
+}
 void Game::loadBoard() {
 
 }

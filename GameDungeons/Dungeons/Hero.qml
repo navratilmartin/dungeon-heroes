@@ -1,11 +1,12 @@
 import QtQuick 2.15
 
 Rectangle {
-    property int logicalPositionx: 0
-    property int logicalPositiony: 0
+    property int logicalPositionx: game.hero.heroX
+    property int logicalPositiony: game.hero.heroY
 
-    property int realPositionx:1
-    property int realPositiony:1
+
+    property int realPositionx:logicalPositionx+1
+    property int realPositiony:logicalPositionY+1
     property int dimension: 8
 
     property int toplimit: 0
@@ -13,12 +14,14 @@ Rectangle {
     property int bottomlimit: 55*dimension
     property int leftlimit: 0
 
-    x: 15+(realPositionx-1)*55
-    y: 15+(realPositiony-1)*55
+    x: 15+(logicalPositionx)*55
+    y: 15+(logicalPositiony)*55
     width: 20
     height: 20
 
     focus: true
+
+
 
     Image {
         source: "images/frog-mouth-helm.png"
@@ -27,12 +30,21 @@ Rectangle {
         anchors {
             centerIn: parent
         }
+        Text{
+            text:logicalPositionx
+            color:"red"
+
+        }
+        Text{
+            text:logicalPositiony
+            color:"red"
+            leftPadding: 10
+        }
     }
 
     Keys.onUpPressed: {
-        if(y-55>toplimit) {
-            y=y-55
-            logicalPositiony -= 1
+        if(logicalPositiony-1>=0) {
+            game.hero.changeY(-1)
 
             checkRoom()
 
@@ -42,9 +54,8 @@ Rectangle {
     }
 
     Keys.onRightPressed: {
-        if(x+55<rightlimit) {
-            x=x+55
-            logicalPositionx += 1
+        if(logicalPositionx+1<dimension) {
+            game.hero.changeX(1);
 
             checkRoom()
 
@@ -54,9 +65,9 @@ Rectangle {
     }
 
     Keys.onDownPressed: {
-        if(y+55<bottomlimit) {
-            y=y+55
-            logicalPositiony += 1
+        if(logicalPositiony+1<dimension) {
+            game.hero.changeY(1)
+
 
             checkRoom()
 
@@ -66,10 +77,9 @@ Rectangle {
     }
 
     Keys.onLeftPressed: {
+        if(logicalPositionx-1>=0) {
 
-        if(x-55>leftlimit) {
-            x=x-55
-            logicalPositionx -= 1
+            game.hero.changeX(-1)
 
             checkRoom()
 
@@ -81,17 +91,19 @@ Rectangle {
 
     function checkRoom() {
         if(logicalPositionx === room.logicalPositionx && logicalPositiony === room.logicalPositiony
-                && room.visible == true) {
+                && room.visible === true) {
             roomLoader.active = false
             game.board.switchRoom(1)
             roomLoader.active = true
             roomLoader.roomNumber += 1
+            game.hero.resetXY()
         } else if (logicalPositionx === exit.logicalPositionx && logicalPositiony === exit.logicalPositiony
                    && exit.visible === true) {
             roomLoader.active = false
             game.board.switchRoom(0)
             roomLoader.active = true
             roomLoader.roomNumber -= 1
+             game.hero.resetXY()
         }
     }
 }

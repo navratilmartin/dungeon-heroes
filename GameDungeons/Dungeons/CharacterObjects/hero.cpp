@@ -1,5 +1,5 @@
 #include "hero.h"
-
+#include <iostream>
 Hero::Hero(int x, int y, const std::string& name, int baseDamage):
         Character(x, y, name, baseDamage, 0){
     m_experience = 0;
@@ -9,6 +9,23 @@ Hero::Hero(int x, int y, const std::string& name, int baseDamage):
     m_armor = nullptr;
 }
 
+int Hero::changeX(const int by){
+    m_x +=by;
+    emit xChanged();
+    return m_x;
+}
+
+int Hero::changeY(const int by){
+    m_y +=by;
+    emit yChanged();
+    return m_y;
+}
+void Hero::resetXY(){
+    m_x=0;
+    m_y=0;
+    emit xChanged();
+    emit yChanged();
+}
 void Hero::attack(Enemy *e) { //Hero always attacks the enemy, never the other way around.
     int weaponBonusDamage = 0;
     if(m_weapon != nullptr){
