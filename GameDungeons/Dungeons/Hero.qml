@@ -66,6 +66,7 @@ Rectangle {
     }
 
     Keys.onLeftPressed: {
+
         if(x-55>leftlimit) {
             x=x-55
             logicalPositionx -= 1

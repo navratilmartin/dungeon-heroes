@@ -41,7 +41,7 @@
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="cmake.loaded.for.project" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../testRandom" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -75,7 +75,9 @@
       <workItem from="1669478513875" duration="2422000" />
       <workItem from="1669677292532" duration="240000" />
       <workItem from="1669677545157" duration="10000" />
-      <workItem from="1669758904845" duration="834000" />
+      <workItem from="1669758904845" duration="1282000" />
+      <workItem from="1670230118010" duration="172000" />
+      <workItem from="1670593097732" duration="1707000" />
     </task>
     <servers />
   </component>

@@ -31,7 +31,7 @@ void Board::generateRooms(EnumDifficulty difficulty) {
     generateHideouts(difficulty);
     generateEnemies(difficulty);
     generateItems(difficulty);
-    // printRooms();
+    //printRooms();
 
     // TODO udelat tak, aby se prazdnost Room nastavovala na zaklade zvolene slozitosti
 
