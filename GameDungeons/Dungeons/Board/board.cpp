@@ -3,7 +3,7 @@
 Board::Board(EnumDifficulty difficulty){
     m_size = boardSize;
     m_boardRow = 0;
-    m_board = std::vector<std::vector<BoardRoom*>> (boardSize, std::vector<BoardRoom*> (boardSize));
+    m_board = std::vector<BoardRoom*> (std::vector<BoardRoom*> (boardSize));
     generateRooms(difficulty);
 }
 // Both generateRooms algorithms work. The one with generator is weird, maybe we should not use for cycle at all? Idk
@@ -22,12 +22,10 @@ void Board::generateRooms(EnumDifficulty difficulty) {
  */
 
 void Board::generateRooms(EnumDifficulty difficulty) {
-    for(int height=0; height<boardSize; height++) {
-        generate(m_board.at(height).begin(), m_board.at(height).end(), [difficulty]() -> BoardRoom * {
+        generate(m_board.begin(), m_board.end(), [difficulty]() -> BoardRoom * {
             BoardRoom *r = new BoardRoom(difficulty);
             return r;
         });
-    }
     generateHideouts(difficulty);
     generateEnemies(difficulty);
     generateItems(difficulty);
@@ -36,21 +34,10 @@ void Board::generateRooms(EnumDifficulty difficulty) {
     // TODO udelat tak, aby se prazdnost Room nastavovala na zaklade zvolene slozitosti
 
     // Prvni Room by vzdy nemela byt prazdna, proc? Pro jednoduchost, at nemusim vyhledavat pomoci std::find_if
-    m_board.at(0).at(0)->unsetEmpty();
-    m_boardRoom = m_board.at(m_boardRow).begin();
-
-    m_board.at(6).at(6)->unsetEmpty();
-    m_board.at(7).at(7)->unsetEmpty();
-    m_board.at(1).at(1)->unsetEmpty();
-    m_board.at(2).at(5)->unsetEmpty();
-    m_board.at(0).at(7)->unsetEmpty();
-    m_board.at(0).at(2)->unsetEmpty();
-    m_board.at(0).at(3)->unsetEmpty();
-    m_board.at(7).at(6)->unsetEmpty();
+    m_boardRoom = m_board.begin();
 
     // Posledni Room vzdy bude mit bossa
-    m_board.at(7).at(7)->unsetEmpty();
-    m_board.at(7).at(7)->setBoss();
+    m_board.at(boardSize-1)->setBoss();
 
 }
 
@@ -67,8 +54,7 @@ void Board::generateHideouts(EnumDifficulty difficulty) {
     for(int count=0; count<numOfHideouts; count++){
         int randx = rand()%(boardSize*boardSize);
         int x = randx / boardSize;
-        int y = randx % boardSize;
-        m_board.at(x).at(y) ->addHideout();
+        m_board.at(x) ->addHideout();
     }
 }
 
@@ -78,23 +64,22 @@ void Board::generateEnemies(EnumDifficulty difficulty) {
     std::uniform_int_distribution<> dis(0, boardSize-1);
     int numOfEnemies=0;
     if(difficulty == EnumDifficulty::Easy){
-        numOfEnemies = pow(boardSize, 2) * 1.3;
+        numOfEnemies = boardSize * 1.8;
     }else if(difficulty == EnumDifficulty::Medium){
-        numOfEnemies = pow(boardSize, 2) * 1.7;
+        numOfEnemies = boardSize * 2.4;
     }else if(difficulty == EnumDifficulty::Hard){
-        numOfEnemies = pow(boardSize, 2) * 2.0;
+        numOfEnemies = boardSize * 3.0;
     }
     for(int count=0; count<numOfEnemies; count++){
         int x = dis(gen);
-        int y = dis(gen);
         if(count < numOfEnemies*0.5){
-            m_board.at(x).at(y) ->addEnemy(1);  // creates a robber
+            m_board.at(x) ->addEnemy(1);  // creates a robber
         }
         else if(count < numOfEnemies*0.8){
-            m_board.at(x).at(y) ->addEnemy(2);  // creates a slime
+            m_board.at(x)->addEnemy(2);  // creates a slime
         }
         else{
-            m_board.at(x).at(y) ->addEnemy(3);  // creates a shaman
+            m_board.at(x) ->addEnemy(3);  // creates a shaman
         }
     }
 }
@@ -106,17 +91,16 @@ void Board::generateItems(EnumDifficulty difficulty){
     std::uniform_int_distribution<> dis(0, boardSize-1);
     std::uniform_int_distribution<> ite(1, 3);
     if(difficulty == EnumDifficulty::Easy){
-        numOfItems = pow(boardSize, 2) * 0.7;
+        numOfItems = boardSize * 1.5;
     }else if(difficulty == EnumDifficulty::Medium){
-        numOfItems = pow(boardSize, 2) * 0.6;
+        numOfItems = boardSize * 1.3;
     }else if(difficulty == EnumDifficulty::Hard){
-        numOfItems = pow(boardSize, 2) * 0.5;
+        numOfItems = boardSize * 1;
     }
     for(int count=0; count<numOfItems; count++){
         int x = dis(gen);
-        int y = dis(gen);
         typeOfItem = ite(gen);
-        m_board.at(x).at(y) ->addItem(typeOfItem);
+        m_board.at(x) ->addItem(typeOfItem);
     }
 }
 
@@ -124,29 +108,29 @@ void Board::findRoom(bool direction) {
     if (direction) {
 
         while ((*m_boardRoom)->isEmptyRoom() == true) {
-        m_boardRoom = std::find_if(m_boardRoom, m_board.at(m_boardRow).end(),
+        m_boardRoom = std::find_if(m_boardRoom, m_board.end(),
                                     [](BoardRoom* boardRoom) {
                 return boardRoom->isEmptyRoom() == false;
         });
 
-        if (m_boardRoom == m_board.at(m_boardRow).end()) {
+        if (m_boardRoom == m_board.end()) {
             m_boardRow++;
-            m_boardRoom = m_board.at(m_boardRow).begin();
+            m_boardRoom = m_board.begin();
         }
     }
 
     } else {
-        auto reversedRoom = m_board.at(m_boardRow).rend();
+        auto reversedRoom = m_board.rend();
 
-        while (reversedRoom == m_board.at(m_boardRow).rend() or (*reversedRoom)->isEmptyRoom() == true) {
-        reversedRoom = std::find_if(m_board.at(m_boardRow).rbegin()+1, m_board.at(m_boardRow).rend(),
+        while (reversedRoom == m_board.rend() or (*reversedRoom)->isEmptyRoom() == true) {
+        reversedRoom = std::find_if(m_board.rbegin()+1, m_board.rend(),
                                     [this](BoardRoom* boardRoom) {
                 return boardRoom != *m_boardRoom and boardRoom->isEmptyRoom() == false;
         });
 
-        if (reversedRoom == m_board.at(m_boardRow).rend()) {
+        if (reversedRoom == m_board.rend()) {
             m_boardRow--;
-            reversedRoom = m_board.at(m_boardRow).rend();
+            reversedRoom = m_board.rend();
         } else {
             m_boardRoom = (reversedRoom+1).base();
         }
@@ -160,7 +144,7 @@ void Board::findRoom(bool direction) {
 }
 
 
-std::vector<std::vector<BoardRoom*>> Board::getBoard() const {
+std::vector<BoardRoom*> Board::getBoard() const {
     return m_board;
 }
 
@@ -169,11 +153,11 @@ BoardRoom* Board::getRoom() const {
 }
 
 void Board::switchRoom(bool direction) {
-    if (direction and m_boardRoom-m_board.at(m_boardRow).begin() < 7) {
+    if (direction and m_boardRoom-m_board.begin() < 7) {
             m_boardRoom++;
     } else if (direction) {
             m_boardRow++;
-            m_boardRoom = m_board.at(m_boardRow).begin();
+            m_boardRoom = m_board.begin();
     }
     findRoom(direction);
 
@@ -182,9 +166,7 @@ void Board::switchRoom(bool direction) {
 
 void Board::printRooms(){
     for(int i=0; i<boardSize; i++){
-        for(int j=0; j<boardSize; j++){
-            std::cout << "room" << i << j << std::endl;
-            m_board.at(i).at(j)->printCells();
-        }
+        std::cout << "room" << i << std::endl;
+        m_board.at(i)->printCells();
     }
 }

@@ -17,7 +17,7 @@ private:
     int m_size;
     int m_boardRow;
     std::vector<BoardRoom*>::iterator m_boardRoom;
-    std::vector<std::vector<BoardRoom*>> m_board;
+    std::vector<BoardRoom*> m_board;
 
     void generateRooms(EnumDifficulty difficulty);
     void generateHideouts(EnumDifficulty difficulty);
@@ -29,7 +29,7 @@ private:
 public:
     Board(EnumDifficulty difficulty);
 
-    std::vector<std::vector<BoardRoom*>> getBoard() const;
+    std::vector<BoardRoom*> getBoard() const;
 
     BoardRoom* getRoom() const;
 
