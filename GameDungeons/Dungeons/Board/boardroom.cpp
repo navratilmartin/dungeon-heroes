@@ -1,11 +1,9 @@
 #include "boardroom.h"
 
-BoardRoom::BoardRoom(EnumDifficulty difficulty)
-{
+BoardRoom::BoardRoom(EnumDifficulty difficulty) {
     m_size = roomSize;
     m_room = std::vector<std::vector<BoardCell*>> (roomSize, std::vector<BoardCell*> (roomSize));
     generateCells(difficulty);
-    m_emptyRoom = false;
     m_boss = false;
 }
 
@@ -98,18 +96,8 @@ void BoardRoom::addItem(int typeOfItem){
 
 }
 
-bool BoardRoom::isEmptyRoom() const {
-    return m_emptyRoom;
-}
-
 bool BoardRoom::isBossRoom() const {
     return m_boss;
-}
-
-void BoardRoom::unsetEmpty() {
-    m_emptyRoom = false;
-
-    emit roomChanged();
 }
 
 void BoardRoom::setBoss() {

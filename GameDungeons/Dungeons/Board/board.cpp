@@ -1,25 +1,22 @@
 #include "board.h"
 
-Board::Board(EnumDifficulty difficulty){
+Board::Board(EnumDifficulty difficulty) {
     m_size = boardSize;
     m_boardRow = 0;
+    m_boardCurrentRoom = nullptr;
     m_board = std::vector<BoardRoom*> (std::vector<BoardRoom*> (boardSize));
     generateRooms(difficulty);
 }
-// Both generateRooms algorithms work. The one with generator is weird, maybe we should not use for cycle at all? Idk
 
-/*
-void Board::generateRooms(EnumDifficulty difficulty) {
-    for(int height=0; height<boardSize; height++){
-        for(int width=0; width<boardSize; width++){
-            BoardRoom* r=  new BoardRoom(difficulty);   // The cell is being generated now, once it is
-            m_board.at(height).at(width) = r;           // generated, it is put into the board
-            std::cout << height << width <<r->r;
-        }
-        std::cout << std::endl;
-    }
+Board::~Board() {
+    delete m_boardCurrentRoom;
+
+//    for (unsigned long long i = 0; i < m_board.size(); i++) {
+//        if (m_board.at(i) != nullptr) {
+//            delete m_board.at(i);
+//        }
+//    }
 }
- */
 
 void Board::generateRooms(EnumDifficulty difficulty) {
         generate(m_board.begin(), m_board.end(), [difficulty]() -> BoardRoom * {
@@ -29,16 +26,9 @@ void Board::generateRooms(EnumDifficulty difficulty) {
     generateHideouts(difficulty);
     generateEnemies(difficulty);
     generateItems(difficulty);
-    //printRooms();
 
-    // TODO udelat tak, aby se prazdnost Room nastavovala na zaklade zvolene slozitosti
-
-    // Prvni Room by vzdy nemela byt prazdna, proc? Pro jednoduchost, at nemusim vyhledavat pomoci std::find_if
-    m_boardRoom = m_board.begin();
-
-    // Posledni Room vzdy bude mit bossa
-    m_board.at(boardSize-1)->setBoss();
-
+    m_boardCurrentRoom = m_board.at(m_boardRow);
+    m_board.at(boardSize-1)->setBoss(); // last room always has a boss
 }
 
 void Board::generateHideouts(EnumDifficulty difficulty) {
@@ -104,64 +94,25 @@ void Board::generateItems(EnumDifficulty difficulty){
     }
 }
 
-void Board::findRoom(bool direction) {
-    if (direction) {
-
-        while ((*m_boardRoom)->isEmptyRoom() == true) {
-        m_boardRoom = std::find_if(m_boardRoom, m_board.end(),
-                                    [](BoardRoom* boardRoom) {
-                return boardRoom->isEmptyRoom() == false;
-        });
-
-        if (m_boardRoom == m_board.end()) {
-            m_boardRow++;
-            m_boardRoom = m_board.begin();
-        }
-    }
-
-    } else {
-        auto reversedRoom = m_board.rend();
-
-        while (reversedRoom == m_board.rend() or (*reversedRoom)->isEmptyRoom() == true) {
-        reversedRoom = std::find_if(m_board.rbegin()+1, m_board.rend(),
-                                    [this](BoardRoom* boardRoom) {
-                return boardRoom != *m_boardRoom and boardRoom->isEmptyRoom() == false;
-        });
-
-        if (reversedRoom == m_board.rend()) {
-            m_boardRow--;
-            reversedRoom = m_board.rend();
-        } else {
-            m_boardRoom = (reversedRoom+1).base();
-        }
-    }
-
-    }
-
-    // std::cout << "Coordinates of the room: " << m_boardRow << ", " << std::distance(m_board.at(m_boardRow).begin(), m_boardRoom) << std::endl;
-    // std::cout << std::boolalpha;
-    // std::cout << "Emptiness: " << (*m_boardRoom)->isEmptyRoom() << std::endl;
-}
-
-
 std::vector<BoardRoom*> Board::getBoard() const {
     return m_board;
 }
 
-BoardRoom* Board::getRoom() const {
-        return *m_boardRoom;
+BoardRoom* Board::getCurrentRoom() const {
+        return m_boardCurrentRoom;
 }
 
 void Board::switchRoom(bool direction) {
-    if (direction and m_boardRoom-m_board.begin() < 7) {
-            m_boardRoom++;
-    } else if (direction) {
+    // if true - the player goes to the next room, otherwise - to the previous
+    if (direction and m_boardRow+1 < m_size) {
             m_boardRow++;
-            m_boardRoom = m_board.begin();
+            m_boardCurrentRoom = m_board.at(m_boardRow);
+            emit changedBoardRoom();
+    } else if (!direction and m_boardRow-1 >= 0) {
+            m_boardRow--;
+            m_boardCurrentRoom = m_board.at(m_boardRow);
+            emit changedBoardRoom();
     }
-    findRoom(direction);
-
-    emit changedBoardRoom();
 }
 
 void Board::printRooms(){

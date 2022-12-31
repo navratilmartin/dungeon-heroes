@@ -4,12 +4,15 @@
 #include <QObject>
 #include "loader.h"
 #include "CharacterObjects/hero.h"
+
 class Game : public QObject {
     Q_OBJECT
     Q_PROPERTY(Board* board READ getBoardMatrix CONSTANT)
     Q_PROPERTY(Hero* hero READ getHero CONSTANT)
+
     Loader* m_loader;
     Board* m_board;
+    Hero* m_hero;
 
     void createBoard(EnumDifficulty difficulty);
 
@@ -17,19 +20,20 @@ class Game : public QObject {
 
 public:
     Game();
-    Hero* m_hero = new Hero(0,0,"",8);
+
     Game& operator=(const Game&) = delete;
 
     Board* getBoardMatrix() const;
+
+    Hero* getHero() const;
 
     Q_INVOKABLE void play(int userInput = 3);
 
     ~Game();
 
-    Hero* getHero();
-
 };
 
 Q_DECLARE_METATYPE(Board*); // None Qt Data types must be registered
+Q_DECLARE_METATYPE(Hero*);
 
 #endif // GAME_H

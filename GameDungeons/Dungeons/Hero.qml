@@ -5,8 +5,8 @@ Rectangle {
     property int logicalPositiony: game.hero.heroY
 
 
-    property int realPositionx:logicalPositionx+1
-    property int realPositiony:logicalPositionY+1
+    property int realPositionx: logicalPositionx+1
+    property int realPositiony: logicalPositionY+1
     property int dimension: 8
 
     property int toplimit: 0
@@ -30,16 +30,15 @@ Rectangle {
         anchors {
             centerIn: parent
         }
-        Text{
-            text:logicalPositionx
-            color:"red"
-
-        }
-        Text{
-            text:logicalPositiony
-            color:"red"
-            leftPadding: 10
-        }
+//        Text{
+//            text:logicalPositionx
+//            color:"red"
+//        }
+//        Text {
+//            text:logicalPositiony
+//            color:"red"
+//            leftPadding: 10
+//        }
     }
 
     Keys.onUpPressed: {
@@ -92,18 +91,14 @@ Rectangle {
     function checkRoom() {
         if(logicalPositionx === room.logicalPositionx && logicalPositiony === room.logicalPositiony
                 && room.visible === true) {
-            roomLoader.active = false
             game.board.switchRoom(1)
-            roomLoader.active = true
             roomLoader.roomNumber += 1
             game.hero.resetXY()
         } else if (logicalPositionx === exit.logicalPositionx && logicalPositiony === exit.logicalPositiony
                    && exit.visible === true) {
-            roomLoader.active = false
             game.board.switchRoom(0)
-            roomLoader.active = true
             roomLoader.roomNumber -= 1
-             game.hero.resetXY()
+            game.hero.resetXY()
         }
     }
 }

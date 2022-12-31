@@ -10,11 +10,10 @@ void test(Board*b){
 }
 
 
-int main(int argc, char *argv[])
-{
-    Weapon* w = new Weapon(5, "x", "y", 1, 2);
-    Board* b = new Board(EnumDifficulty::Easy);
-    test(b);
+int main(int argc, char *argv[]) {
+    // Weapon* w = new Weapon(5, "x", "y", 1, 2);
+    // Board* b = new Board(EnumDifficulty::Easy);
+    // test(b);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif

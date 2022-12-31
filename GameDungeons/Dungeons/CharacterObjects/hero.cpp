@@ -1,5 +1,5 @@
 #include "hero.h"
-#include <iostream>
+
 Hero::Hero(int x, int y, const std::string& name, int baseDamage):
         Character(x, y, name, baseDamage, 0){
     m_experience = 0;
@@ -9,31 +9,32 @@ Hero::Hero(int x, int y, const std::string& name, int baseDamage):
     m_armor = nullptr;
 }
 
-int Hero::changeX(const int by){
-    m_x +=by;
+int Hero::changeX(const int by) {
+    m_x += by;
     emit xChanged();
     return m_x;
 }
 
-int Hero::changeY(const int by){
-    m_y +=by;
+int Hero::changeY(const int by) {
+    m_y += by;
     emit yChanged();
     return m_y;
 }
-void Hero::resetXY(){
-    m_x=0;
-    m_y=0;
+
+void Hero::resetXY() {
+    m_x = 0;
+    m_y = 0;
     emit xChanged();
     emit yChanged();
 }
-void Hero::attack(Enemy *e) { //Hero always attacks the enemy, never the other way around.
+void Hero::attack(Enemy *e) { // Hero always attacks the enemy, never the other way around.
     int weaponBonusDamage = 0;
     if(m_weapon != nullptr){
         weaponBonusDamage = m_weapon->getDamageBonus();
     }
     float attackDamage = (m_baseDamage+weaponBonusDamage) * (1-float(e->getDefense())/100);
     float attackDamageEnemy = e->getBaseDamage() * (1-float(m_defense)/100);
-    if(attackDamage >= 2*attackDamageEnemy){   // If the hero damage is twice the enemy damage, kills the enemy immediately
+    if(attackDamage >= 2*attackDamageEnemy){   // If the hero damage is twice than enemy's, he kills immediately
         if(m_weapon != nullptr){
             useWeapon();
         }
@@ -63,7 +64,7 @@ void Hero::attack(Enemy *e) { //Hero always attacks the enemy, never the other w
 }
 
 void Hero::useWeapon() {
-    if(m_weapon->getDurability() == 1){ // Pokud je zbran tesne pred znicenim
+    if(m_weapon->getDurability() == 1){ // If the weapon is just about to be destroyed
         delete m_weapon;
         m_weapon = nullptr;
         std::cout << "Weapon destroyed" << std::endl;
@@ -74,7 +75,7 @@ void Hero::useWeapon() {
 }
 
 void Hero::useArmor(int durabilityDecrease) {
-    if(m_armor->getDurability() == 1){ // Pokud je armor tesne pred znicenim
+    if(m_armor->getDurability() == 1){ // If the armor is about to be destroyed
         delete m_armor;
         m_armor = nullptr;
         std::cout << "Armor destroyed" << std::endl;
@@ -84,7 +85,7 @@ void Hero::useArmor(int durabilityDecrease) {
     }
 }
 
-void Hero::getXp(int experienceBonus) { // Pokud hrdina ma xp 100, dostane dalsi level a zvednou se mu staty
+void Hero::getXp(int experienceBonus) { // If the hero has 100xp, he will level up and his stats will increase
     if((m_experience + experienceBonus) >= 100){
         m_level += (m_experience + experienceBonus) /100;
         m_experience = (m_experience + experienceBonus) % 100;
@@ -106,7 +107,7 @@ void Hero::takeDamage(int damage) {
     }
 }
 
-void Hero::equipWeapon(Weapon *w) {     //Item seberu ze zeme, pak z batohu pridam pomoci equip.
+void Hero::equipWeapon(Weapon *w) {  //Item seberu ze zeme, pak z batohu pridam pomoci equip.
     try {
         m_weapon = w;
     }

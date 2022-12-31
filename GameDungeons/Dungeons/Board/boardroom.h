@@ -27,19 +27,16 @@ private:
     Q_PROPERTY(bool bossRoom READ isBossRoom NOTIFY bossRoomChanged)
     Q_PROPERTY (std::vector<std::vector<BoardCell*>> boardCells READ getCells NOTIFY roomChanged)
     int m_size;
-    bool m_emptyRoom;
     bool m_boss;
     std::vector<std::vector<BoardCell*>> m_room;
 
     void generateCells(EnumDifficulty difficulty);
 public:
-    BoardRoom( EnumDifficulty difficulty);
+    BoardRoom(EnumDifficulty difficulty);
     void addHideout();
     void addEnemy(int type);
     void addItem(int typeOfItem);
-    bool isEmptyRoom() const;
     bool isBossRoom() const;
-    void unsetEmpty();
     void setBoss();
     void printCells();
 
@@ -47,9 +44,7 @@ public:
 
 signals:
     void bossRoomChanged();
-
     void roomChanged();
-
 };
 
 Q_DECLARE_METATYPE(std::vector<std::vector<BoardCell*> >)
