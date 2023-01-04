@@ -17,6 +17,7 @@ protected:
     Q_PROPERTY(QString characterName READ characterName CONSTANT)
     Q_PROPERTY(bool itemIsNotNull READ itemIsNotNull CONSTANT)
     Q_PROPERTY(QString itemName READ itemName CONSTANT)
+
 public:
 
     BoardCell(int x, int y, Character*ch, Item* i);
@@ -32,6 +33,7 @@ public:
     void removeCharacter();             // When the hero leaves the cell
     QString characterName();
     QString itemName();
+
 };
 
 #endif // BOARDCELL_H

@@ -18,6 +18,8 @@ Board::~Board() {
 //    }
 }
 
+
+
 void Board::generateRooms(EnumDifficulty difficulty) {
         generate(m_board.begin(), m_board.end(), [difficulty]() -> BoardRoom * {
             BoardRoom *r = new BoardRoom(difficulty);

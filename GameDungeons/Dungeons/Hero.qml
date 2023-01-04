@@ -24,6 +24,21 @@ Rectangle {
 
 
     Image {
+        Text{
+            id:onEnemy
+            text: game.onEnemy()
+            color:"red"
+
+        }
+        Text{
+            id:enemyName
+            topPadding: 10
+            text:"Nothing"
+            color:"red"
+        }
+
+
+
         source: "images/frog-mouth-helm.png"
         width: 30
         height: 30
@@ -43,9 +58,23 @@ Rectangle {
 
     Keys.onUpPressed: {
         if(logicalPositiony-1>=0) {
+
             game.hero.changeY(-1)
+            onEnemy.text= game.onEnemy()
+            if(game.onEnemy()){
+                enemyName.text = game.enemyName
+            }else{
+                enemyName.text = "Nothing"
+            }
+
 
             checkRoom()
+            if(game.onEnemy()){
+                roomLoader.active=false
+
+                fightLoader.active=true
+
+            }
 
         } else {
 
@@ -54,9 +83,20 @@ Rectangle {
 
     Keys.onRightPressed: {
         if(logicalPositionx+1<dimension) {
-            game.hero.changeX(1);
 
+            game.hero.changeX(1);
+            onEnemy.text= game.onEnemy()
+            if(game.onEnemy()){
+                enemyName.text = game.enemyName
+            }else{
+                enemyName.text = "Nothing"
+            }
             checkRoom()
+            if(game.onEnemy()){
+                roomLoader.active=false
+
+               fightLoader.active=true
+            }
 
         } else {
 
@@ -65,10 +105,20 @@ Rectangle {
 
     Keys.onDownPressed: {
         if(logicalPositiony+1<dimension) {
+
             game.hero.changeY(1)
-
-
+            onEnemy.text= game.onEnemy()
+            if(game.onEnemy()){
+                enemyName.text = game.enemyName
+            }else{
+                enemyName.text = "Nothing"
+            }
             checkRoom()
+            if(game.onEnemy()){
+                roomLoader.active=false
+
+               fightLoader.active=true
+            }
 
         } else {
 
@@ -79,8 +129,19 @@ Rectangle {
         if(logicalPositionx-1>=0) {
 
             game.hero.changeX(-1)
-
+            onEnemy.text= game.onEnemy()
+            if(game.onEnemy()){
+                enemyName.text = game.enemyName
+            }else{
+                enemyName.text = "Nothing"
+            }
             checkRoom()
+            if(game.onEnemy()){
+                roomLoader.active=false
+
+                fightLoader.active=true
+
+            }
 
         } else {
 

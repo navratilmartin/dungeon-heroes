@@ -18,7 +18,7 @@
 #include <time.h>
 #include <QObject>
 #include <random>
-
+#include <map>
 const int roomSize = 8;
 
 class BoardRoom : public QObject {
@@ -26,12 +26,14 @@ private:
     Q_OBJECT
     Q_PROPERTY(bool bossRoom READ isBossRoom NOTIFY bossRoomChanged)
     Q_PROPERTY (std::vector<std::vector<BoardCell*>> boardCells READ getCells NOTIFY roomChanged)
+
     int m_size;
     bool m_boss;
     std::vector<std::vector<BoardCell*>> m_room;
 
     void generateCells(EnumDifficulty difficulty);
 public:
+
     BoardRoom(EnumDifficulty difficulty);
     void addHideout();
     void addEnemy(int type);
@@ -40,11 +42,16 @@ public:
     void setBoss();
     void printCells();
 
+
+    std::vector <Enemy* >m_enemies;
     std::vector<std::vector<BoardCell*>> getCells() const;
+    Q_INVOKABLE int enemyHealth(int x,int y);
+
 
 signals:
     void bossRoomChanged();
     void roomChanged();
+
 };
 
 Q_DECLARE_METATYPE(std::vector<std::vector<BoardCell*> >)

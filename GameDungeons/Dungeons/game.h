@@ -9,11 +9,12 @@ class Game : public QObject {
     Q_OBJECT
     Q_PROPERTY(Board* board READ getBoardMatrix CONSTANT)
     Q_PROPERTY(Hero* hero READ getHero CONSTANT)
+    Q_PROPERTY(QString enemyName READ enemyName CONSTANT)
 
     Loader* m_loader;
     Board* m_board;
     Hero* m_hero;
-
+    bool isOnEnemy();
     void createBoard(EnumDifficulty difficulty);
 
     void loadBoard();
@@ -27,8 +28,10 @@ public:
 
     Hero* getHero() const;
 
-    Q_INVOKABLE void play(int userInput = 3);
+    QString enemyName();
 
+    Q_INVOKABLE void play(int userInput = 3);
+    Q_INVOKABLE bool onEnemy();
     ~Game();
 
 };

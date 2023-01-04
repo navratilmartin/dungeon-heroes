@@ -76,6 +76,13 @@ Window {
                 id: gameField
             }
         }
+        Component {
+            id: fightFieldComp
+
+            Fight{
+                id: fightField
+            }
+        }
 
         Loader {
             id: roomLoader
@@ -90,6 +97,22 @@ Window {
             onLoaded: {
                 item.anchors.horizontalCenter = roomLoader.horizontalCenter
                 item.anchors.verticalCenter = roomLoader.verticalCenter
+            }
+
+        }
+        Loader {
+            id: fightLoader
+            property string enemy : ""
+            active: false
+            focus: true
+            sourceComponent: fightFieldComp
+
+            anchors.right: parent.right
+            anchors.rightMargin: 40
+            anchors.verticalCenter: parent.verticalCenter
+            onLoaded: {
+                item.anchors.horizontalCenter = fightLoader.horizontalCenter
+                item.anchors.verticalCenter = fightLoader.verticalCenter
             }
 
         }

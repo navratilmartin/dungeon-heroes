@@ -38,9 +38,11 @@ public:
     void drinkPotion(Potion* p);
     void pickupItem(Item* i);
 
-    Q_INVOKABLE int changeX(const int by);
-    Q_INVOKABLE int changeY(const int by);
+    Q_INVOKABLE int changeX(int by);
+    Q_INVOKABLE int changeY(int by);
     Q_INVOKABLE void resetXY();
+
+
 signals:
     void xChanged();
     void yChanged();

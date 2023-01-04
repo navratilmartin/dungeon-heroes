@@ -9,15 +9,29 @@ Hero::Hero(int x, int y, const std::string& name, int baseDamage):
     m_armor = nullptr;
 }
 
-int Hero::changeX(const int by) {
+
+int Hero::changeX(int by) {
+
     m_x += by;
+
+    std::cout<<"##################################"<<std::endl;
+    std::cout<<m_x<<std::endl;
+    std::cout<<m_y<<std::endl;
     emit xChanged();
     return m_x;
 }
 
-int Hero::changeY(const int by) {
+int Hero::changeY(int by) {
+
     m_y += by;
+
+    std::cout<<"##################################"<<std::endl;
+    std::cout<<m_x<<std::endl;
+    std::cout<<m_y<<std::endl;
     emit yChanged();
+
+
+
     return m_y;
 }
 

@@ -6,6 +6,7 @@ Rectangle {
     height: 50
     color: "black"
 
+
     Image {
         id: fieldImage
         source: "images/path-tile"

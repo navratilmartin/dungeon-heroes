@@ -36,6 +36,7 @@ public:
 
     ~Board();
 
+
 signals:
     void changedBoardRoom();
 };
