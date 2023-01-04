@@ -6,6 +6,7 @@ Rectangle{
     width:600
     height:600
     focus:true
+
     Rectangle{
        id:healthBar
        height:20
@@ -43,10 +44,15 @@ Rectangle{
 
     }
 
-    Keys.onEnterPressed: {
+    Keys.onDeletePressed:{
+        game.attackEnemy()
+        if(game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)>0){
+            healthBarText.text=game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)
+            healthBar.width=game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)
+        }else{
 
-        healthBarText.text=length(game.board.boardRoom.boardCells[game.hero.heroY][game.hero.heroY])
-        healthBar.width=game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)
+        }
+
 
     }
 

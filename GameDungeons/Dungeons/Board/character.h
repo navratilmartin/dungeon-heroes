@@ -23,6 +23,8 @@ public:
     int getActualHealth() const;
     int getBaseDamage() const;
     int getDefense() const;
+    //temp
+    void decHealth(int health);
 };
 
 

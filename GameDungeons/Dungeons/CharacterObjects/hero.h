@@ -37,7 +37,8 @@ public:
     void equipArmor(Armor* a);
     void drinkPotion(Potion* p);
     void pickupItem(Item* i);
-
+    //temp
+    void simpleAttack(Character* ch);
     Q_INVOKABLE int changeX(int by);
     Q_INVOKABLE int changeY(int by);
     Q_INVOKABLE void resetXY();

@@ -7,6 +7,7 @@ BoardRoom::BoardRoom(EnumDifficulty difficulty) {
     m_boss = false;
 }
 
+
 int BoardRoom::enemyHealth(int x,int y){
     return this->getCells().at(y).at(x)->getCharacter()->getActualHealth();
 }

@@ -20,7 +20,7 @@ Rectangle {
     height: 20
 
     focus: true
-
+    id:hero
 
 
     Image {
@@ -137,10 +137,7 @@ Rectangle {
             }
             checkRoom()
             if(game.onEnemy()){
-                roomLoader.active=false
-
-                fightLoader.active=true
-
+                roomLoader.sourceComponent=fightFieldComp
             }
 
         } else {
@@ -148,6 +145,13 @@ Rectangle {
         }
 
     }
+    Keys.onDeletePressed: {
+         focus=false
+    }
+
+
+
+
 
     function checkRoom() {
         if(logicalPositionx === room.logicalPositionx && logicalPositiony === room.logicalPositiony

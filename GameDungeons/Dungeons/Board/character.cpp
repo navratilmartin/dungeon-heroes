@@ -18,7 +18,9 @@ std::string Character::getName(){
 int Character::getX() const {
     return m_x;
 }
-
+void Character::decHealth(int health){
+    m_actualHealth-=health;
+}
 int Character::getY() const {
     return m_y;
 }

@@ -11,6 +11,12 @@ Game::~Game() {
     delete m_board;
     delete m_hero;
 }
+void Game::attackEnemy(){
+    m_hero->simpleAttack(m_board->getCurrentRoom()->getCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter());
+    if(m_board->getCurrentRoom()->getCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter()->getActualHealth()<=0){
+        m_board->getCurrentRoom()->getCells().at(m_hero->getY()).at(m_hero->getX())->removeCharacter();
+    }
+}
 
 void Game::createBoard(EnumDifficulty difficulty) {
     m_board = m_loader->loadNewGame(difficulty);

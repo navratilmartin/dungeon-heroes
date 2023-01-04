@@ -32,6 +32,7 @@ public:
 
     Q_INVOKABLE void play(int userInput = 3);
     Q_INVOKABLE bool onEnemy();
+    Q_INVOKABLE void attackEnemy();
     ~Game();
 
 };

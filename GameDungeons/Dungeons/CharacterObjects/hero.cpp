@@ -8,7 +8,9 @@ Hero::Hero(int x, int y, const std::string& name, int baseDamage):
     m_weapon = nullptr;
     m_armor = nullptr;
 }
-
+void Hero::simpleAttack(Character* ch){
+    ch->decHealth(this->m_baseDamage);
+}
 
 int Hero::changeX(int by) {
 

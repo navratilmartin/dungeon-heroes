@@ -104,7 +104,7 @@ Window {
             id: fightLoader
             property string enemy : ""
             active: false
-            focus: true
+            focus:false
             sourceComponent: fightFieldComp
 
             anchors.right: parent.right
