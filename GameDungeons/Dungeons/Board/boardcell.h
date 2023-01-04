@@ -15,6 +15,7 @@ protected:
     Q_PROPERTY(Character* character READ getCharacter CONSTANT)
     Q_PROPERTY(bool characterIsNotNull READ characterIsNotNull CONSTANT)
     Q_PROPERTY(QString characterName READ characterName CONSTANT)
+    Q_PROPERTY(int characterHealth READ getCharacterHealth CONSTANT)
     Q_PROPERTY(bool itemIsNotNull READ itemIsNotNull CONSTANT)
     Q_PROPERTY(QString itemName READ itemName CONSTANT)
 
@@ -26,6 +27,7 @@ public:
     int getX() const;
     int getY() const;
     Character* getCharacter();
+    int getCharacterHealth();
     Item* getItem();
     void addCharacter(Character* ch);   // When the hero steps on the cell, or we want to place an enemy on the cell
     void addItem(Item* i);              // If we want to place an item on the cell

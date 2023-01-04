@@ -6,7 +6,9 @@ BoardCell::BoardCell(int x, int y, Character*ch, Item* i){
     m_character = ch;
     m_item = i;
 }
-
+int BoardCell::getCharacterHealth(){
+    return m_character->getActualHealth();
+}
 int BoardCell::getY() const{
     return m_y;
 }

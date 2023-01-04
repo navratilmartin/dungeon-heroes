@@ -7,12 +7,7 @@ Rectangle{
     height:600
     focus:true
 
-    Rectangle{
-       id:healthBar
-       height:20
-       width:game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)
-       color:"green"
-    }
+
     Image{
         source: if(enemy == "Robber"){
                     "images/robber-mask.png"
@@ -29,6 +24,19 @@ Rectangle{
         anchors.centerIn: parent
         x:600
         y:250
+        Rectangle{
+           id:healthBar
+           height:20
+           width:game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)
+           color:"green"
+
+           Text{
+               id:healthBarText
+               color:"red"
+               text:game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)
+
+           }
+        }
     }
     Image{
             source: "images/frog-mouth-helm.png"
@@ -37,12 +45,7 @@ Rectangle{
             x:100
             y:250
         }
-    Text{
-        id:healthBarText
-        color:"red"
-        text:game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)
 
-    }
 
     Keys.onDeletePressed:{
         game.attackEnemy()
@@ -50,7 +53,8 @@ Rectangle{
             healthBarText.text=game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)
             healthBar.width=game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)
         }else{
-
+            roomLoader.source=""
+            roomLoader.source="CellField.qml"
         }
 
 

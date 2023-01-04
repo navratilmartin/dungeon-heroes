@@ -25,6 +25,7 @@ public:
     int getDefense() const;
     //temp
     void decHealth(int health);
+
 };
 
 

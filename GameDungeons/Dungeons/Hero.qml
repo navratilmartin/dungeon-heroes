@@ -70,10 +70,9 @@ Rectangle {
 
             checkRoom()
             if(game.onEnemy()){
-                roomLoader.active=false
-
-                fightLoader.active=true
-
+                if(game.board.boardRoom.boardCells[game.hero.heroY][game.hero.heroX].characterHealth>0){
+                    roomLoader.sourceComponent=fightFieldComp
+                }
             }
 
         } else {
@@ -93,9 +92,13 @@ Rectangle {
             }
             checkRoom()
             if(game.onEnemy()){
-                roomLoader.active=false
+                if(game.board.boardRoom.boardCells[game.hero.heroY][game.hero.heroX].characterHealth>0){
+                    if(game.board.boardRoom.boardCells[game.hero.heroY][game.hero.heroX].characterHealth>0){
+                        roomLoader.sourceComponent=fightFieldComp
+                    }
+                }
 
-               fightLoader.active=true
+
             }
 
         } else {
@@ -115,9 +118,9 @@ Rectangle {
             }
             checkRoom()
             if(game.onEnemy()){
-                roomLoader.active=false
-
-               fightLoader.active=true
+                if(game.board.boardRoom.boardCells[game.hero.heroY][game.hero.heroX].characterHealth>0){
+                    roomLoader.sourceComponent=fightFieldComp
+                }
             }
 
         } else {
@@ -137,16 +140,14 @@ Rectangle {
             }
             checkRoom()
             if(game.onEnemy()){
-                roomLoader.sourceComponent=fightFieldComp
+                if(game.board.boardRoom.boardCells[game.hero.heroY][game.hero.heroX].characterHealth>0){
+                    roomLoader.sourceComponent=fightFieldComp
+                }
             }
-
         } else {
 
         }
 
-    }
-    Keys.onDeletePressed: {
-         focus=false
     }
 
 

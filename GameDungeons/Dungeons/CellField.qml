@@ -15,15 +15,17 @@ Grid {
                     Cell {
                                  Image {
                                      source:if(modelData.characterIsNotNull) {
-                                             if(modelData.characterName==="Robber") {
-                                                 "images/robber-mask.png"
-                                             } else if(modelData.characterName==="Shaman") {
-                                                 "images/tribal-mask.png"
-                                             } else if(modelData.characterName==="Slime") {
-                                                 "images/slime.png"
+                                                if(modelData.characterHealth>0){
+                                                    if(modelData.characterName==="Robber") {
+                                                        "images/robber-mask.png"
+                                                    } else if(modelData.characterName==="Shaman") {
+                                                        "images/tribal-mask.png"
+                                                    } else if(modelData.characterName==="Slime") {
+                                                        "images/slime.png"
+                                                    }
+                                                } else {
+                                                ""
                                              }
-
-
                                              } else {
                                                 ""
                                              }
