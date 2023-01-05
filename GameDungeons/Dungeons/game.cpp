@@ -13,7 +13,10 @@ Game::~Game() {
 }
 void Game::attackEnemy(){
     m_hero->simpleAttack(m_board->getCurrentRoom()->getCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter());
+    if(m_board->getCurrentRoom()->getCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter()->getActualHealth()<=0){
+        m_board->getCurrentRoom()->getCells().at(m_hero->getY()).at(m_hero->getX())->removeCharacter();
 
+    }
 }
 
 void Game::createBoard(EnumDifficulty difficulty) {
@@ -43,16 +46,17 @@ void Game::play(int userInput) {
 }
 
 bool Game::onEnemy(){
-   for(auto pair : m_board->getCurrentRoom()->m_enemies) {
-       std::cout<<pair->getName()<<std::endl;
-       std::cout<<pair->getX()<<std::endl;
-       std::cout<<pair->getY()<<std::endl;
-       //i have no idea why the characters coordinates are not consitant
-       if((m_hero->getX()==pair->getY())&&(m_hero->getY()==pair->getX())){
-           return true;
-       }
 
-   }
+
+       //i have no idea why the characters coordinates are not consitant
+
+           if(m_board->getCurrentRoom()->getCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter()!=nullptr){
+               return true;
+           }
+
+
+
+
    return false;
 }
 

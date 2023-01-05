@@ -42,8 +42,6 @@ public:
     void setBoss();
     void printCells();
 
-
-    std::vector <Enemy* >m_enemies;
     std::vector<std::vector<BoardCell*>> getCells() const;
     Q_INVOKABLE int enemyHealth(int x,int y);
 

@@ -9,7 +9,11 @@ BoardRoom::BoardRoom(EnumDifficulty difficulty) {
 
 
 int BoardRoom::enemyHealth(int x,int y){
+   if(this->getCells().at(y).at(x)->getCharacter()!=nullptr)
+   {
     return this->getCells().at(y).at(x)->getCharacter()->getActualHealth();
+   }
+   return -1;
 }
 void BoardRoom::generateCells(EnumDifficulty difficulty) {  // Misto generate algorithmu for cykly - potrebuju
     for(int height=0; height<roomSize; height++) {          // x a y souradnice do konstruktoru Roads.
@@ -43,19 +47,19 @@ void BoardRoom::addEnemy(int type) {
     }
     if(type == 1){
         EnemyFactory* ef = new EnemyFactoryRobber();
-        Enemy* enemyToBePut = ef->getEnemy(x,y);
-        m_room.at(x).at(y)->addCharacter(enemyToBePut);
-        m_enemies.push_back(enemyToBePut);
+
+        m_room.at(x).at(y)->addCharacter(ef->getEnemy(x,y));
+
     } else if(type == 2){
         EnemyFactory* ef = new EnemyFactorySlime();
-        Enemy* enemyToBePut = ef->getEnemy(x,y);
-        m_room.at(x).at(y)->addCharacter(enemyToBePut);
-        m_enemies.push_back(enemyToBePut);
+
+        m_room.at(x).at(y)->addCharacter(ef->getEnemy(x,y));
+
     } else {
         EnemyFactory* ef = new EnemyFactoryShaman();
-        Enemy* enemyToBePut = ef->getEnemy(x,y);
-        m_room.at(x).at(y)->addCharacter(enemyToBePut);
-        m_enemies.push_back(enemyToBePut);
+
+        m_room.at(x).at(y)->addCharacter(ef->getEnemy(x,y));
+
     }
 }
 
