@@ -5,16 +5,18 @@ BoardRoom::BoardRoom(EnumDifficulty difficulty) {
     m_room = std::vector<std::vector<BoardCell*>> (roomSize, std::vector<BoardCell*> (roomSize));
     generateCells(difficulty);
     m_boss = false;
+    m_oneBoardCell = m_room.at(0).at(0);
 }
 
 
 int BoardRoom::enemyHealth(int x,int y){
-   if(this->getCells().at(y).at(x)->getCharacter()!=nullptr)
+   if(this->getBoardCells().at(y).at(x)->getCharacter()!=nullptr)
    {
-    return this->getCells().at(y).at(x)->getCharacter()->getActualHealth();
+    return this->getBoardCells().at(y).at(x)->getCharacter()->getActualHealth();
    }
    return -1;
 }
+
 void BoardRoom::generateCells(EnumDifficulty difficulty) {  // Misto generate algorithmu for cykly - potrebuju
     for(int height=0; height<roomSize; height++) {          // x a y souradnice do konstruktoru Roads.
         for(int width=0; width<roomSize; width++) {
@@ -120,8 +122,17 @@ void BoardRoom::setBoss() {
     emit bossRoomChanged();
 }
 
-std::vector<std::vector<BoardCell*>> BoardRoom::getCells() const {
+void BoardRoom::extractOneBoardCell(int x, int y) {
+    m_oneBoardCell = m_room.at(x).at(y);
+    emit boardCellChanged();
+}
+
+std::vector<std::vector<BoardCell*>> BoardRoom::getBoardCells() const {
     return m_room;
+}
+
+BoardCell* BoardRoom::getOneBoardCell() const {
+    return m_oneBoardCell;
 }
 
 void BoardRoom::printCells(){

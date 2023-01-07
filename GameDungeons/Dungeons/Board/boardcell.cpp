@@ -42,12 +42,17 @@ void BoardCell::addItem(Item *i) {
 
 Item *BoardCell::pickUpItem() {
     return m_item;
-    m_item = nullptr;
 }
 
 void BoardCell::removeCharacter() {
     m_character = nullptr;
 }
+
+void BoardCell::removeItem() {
+    m_item = nullptr;
+    emit itemIsNotNullChanged();
+}
+
 QString BoardCell::characterName(){
     std::string str = m_character->getName();
     QString qstr = QString::fromStdString(str);

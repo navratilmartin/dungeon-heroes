@@ -16,11 +16,9 @@ protected:
     Q_PROPERTY(bool characterIsNotNull READ characterIsNotNull CONSTANT)
     Q_PROPERTY(QString characterName READ characterName CONSTANT)
     Q_PROPERTY(int characterHealth READ getCharacterHealth CONSTANT)
-    Q_PROPERTY(bool itemIsNotNull READ itemIsNotNull CONSTANT)
+    Q_PROPERTY(bool itemIsNotNull READ itemIsNotNull NOTIFY itemIsNotNullChanged)
     Q_PROPERTY(QString itemName READ itemName CONSTANT)
-
 public:
-
     BoardCell(int x, int y, Character*ch, Item* i);
     bool itemIsNotNull();
     bool characterIsNotNull();
@@ -33,9 +31,11 @@ public:
     void addItem(Item* i);              // If we want to place an item on the cell
     Item* pickUpItem();                 // Returns the item and removes it from the cell
     void removeCharacter();             // When the hero leaves the cell
+    void removeItem();
     QString characterName();
     QString itemName();
-
+signals:
+    void itemIsNotNullChanged();
 };
 
 #endif // BOARDCELL_H

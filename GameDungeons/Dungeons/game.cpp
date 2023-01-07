@@ -11,10 +11,11 @@ Game::~Game() {
     delete m_board;
     delete m_hero;
 }
+
 void Game::attackEnemy(){
-    m_hero->simpleAttack(m_board->getCurrentRoom()->getCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter());
-    if(m_board->getCurrentRoom()->getCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter()->getActualHealth()<=0){
-        m_board->getCurrentRoom()->getCells().at(m_hero->getY()).at(m_hero->getX())->removeCharacter();
+    m_hero->simpleAttack(m_board->getCurrentRoom()->getBoardCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter());
+    if(m_board->getCurrentRoom()->getBoardCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter()->getActualHealth()<=0){
+        m_board->getCurrentRoom()->getBoardCells().at(m_hero->getY()).at(m_hero->getX())->removeCharacter();
 
     }
 }
@@ -50,7 +51,7 @@ bool Game::onEnemy(){
 
        //i have no idea why the characters coordinates are not consitant
 
-           if(m_board->getCurrentRoom()->getCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter()!=nullptr){
+           if(m_board->getCurrentRoom()->getBoardCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter()!=nullptr){
                return true;
            }
 
@@ -61,8 +62,9 @@ bool Game::onEnemy(){
 }
 
 QString Game::enemyName(){
-        if(m_board->getCurrentRoom()->getCells().at(m_hero->getY()).at(m_hero->getX())!=nullptr){
-            return QString::fromStdString(m_board->getCurrentRoom()->getCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter()->getName());
+        if(m_board->getCurrentRoom()->getBoardCells().at(m_hero->getY()).at(m_hero->getX())!=nullptr){
+            return QString::fromStdString(m_board->getCurrentRoom()
+                                          ->getBoardCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter()->getName());
 
         }
         return QString::fromStdString("Nothing");;

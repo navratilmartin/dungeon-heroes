@@ -8,18 +8,6 @@ Board::Board(EnumDifficulty difficulty) {
     generateRooms(difficulty);
 }
 
-Board::~Board() {
-    delete m_boardCurrentRoom;
-
-//    for (unsigned long long i = 0; i < m_board.size(); i++) {
-//        if (m_board.at(i) != nullptr) {
-//            delete m_board.at(i);
-//        }
-//    }
-}
-
-
-
 void Board::generateRooms(EnumDifficulty difficulty) {
         generate(m_board.begin(), m_board.end(), [difficulty]() -> BoardRoom * {
             BoardRoom *r = new BoardRoom(difficulty);

@@ -33,10 +33,6 @@ public:
     BoardRoom* getCurrentRoom() const;
 
     Q_INVOKABLE void switchRoom(bool direction);
-
-    ~Board();
-
-
 signals:
     void changedBoardRoom();
 };

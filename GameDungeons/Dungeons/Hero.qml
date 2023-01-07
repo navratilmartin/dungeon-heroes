@@ -155,7 +155,10 @@ Rectangle {
 
 
     function checkRoom() {
-        if(logicalPositionx === room.logicalPositionx && logicalPositiony === room.logicalPositiony
+        if (logicalPositiony >= 1) {
+                  game.board.boardRoom.extractOneBoardCell(logicalPositiony, logicalPositionx)
+                  game.hero.interactWithBoardCell(game.board.boardRoom.oneBoardCell)
+        } else if(logicalPositionx === room.logicalPositionx && logicalPositiony === room.logicalPositiony
                 && room.visible === true) {
             game.board.switchRoom(1)
             roomLoader.roomNumber += 1

@@ -49,7 +49,7 @@ Window {
             }
 
             Inventory {
-
+                id: gameInventory
             }
 
             MenuButton {
@@ -76,6 +76,7 @@ Window {
                 id: gameField
             }
         }
+
         Component {
             id: fightFieldComp
 
@@ -100,6 +101,7 @@ Window {
             }
 
         }
+
         Loader {
             id: fightLoader
             property string enemy : ""

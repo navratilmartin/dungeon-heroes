@@ -25,15 +25,16 @@ class BoardRoom : public QObject {
 private:
     Q_OBJECT
     Q_PROPERTY(bool bossRoom READ isBossRoom NOTIFY bossRoomChanged)
-    Q_PROPERTY (std::vector<std::vector<BoardCell*>> boardCells READ getCells NOTIFY roomChanged)
+    Q_PROPERTY(std::vector<std::vector<BoardCell*>> boardCells READ getBoardCells NOTIFY roomChanged)
+    Q_PROPERTY(BoardCell* oneBoardCell READ getOneBoardCell NOTIFY boardCellChanged)
 
     int m_size;
     bool m_boss;
     std::vector<std::vector<BoardCell*>> m_room;
+    BoardCell* m_oneBoardCell;
 
     void generateCells(EnumDifficulty difficulty);
 public:
-
     BoardRoom(EnumDifficulty difficulty);
     void addHideout();
     void addEnemy(int type);
@@ -42,18 +43,18 @@ public:
     void setBoss();
     void printCells();
 
-    std::vector<std::vector<BoardCell*>> getCells() const;
-    Q_INVOKABLE int enemyHealth(int x,int y);
+    std::vector<std::vector<BoardCell*>> getBoardCells() const;
+    BoardCell* getOneBoardCell() const;
 
-
-
-
+    Q_INVOKABLE int enemyHealth(int x, int y);
+    Q_INVOKABLE void extractOneBoardCell(int x, int y);
 signals:
     void bossRoomChanged();
     void roomChanged();
-
+    void boardCellChanged();
 };
 
 Q_DECLARE_METATYPE(std::vector<std::vector<BoardCell*> >)
+Q_DECLARE_METATYPE(BoardCell* )
 
 #endif // BOARDROOM_H

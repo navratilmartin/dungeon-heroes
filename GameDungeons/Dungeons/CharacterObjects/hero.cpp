@@ -4,10 +4,18 @@ Hero::Hero(int x, int y, const std::string& name, int baseDamage):
         Character(x, y, name, baseDamage, 0){
     m_experience = 0;
     m_level = 1;
-    m_inventory = {};
+    m_inventory = std::vector<Item*>(inventorySize, nullptr);
     m_weapon = nullptr;
     m_armor = nullptr;
+
+    m_inventory.at(0) = new Item(0, 0, "Sword", "");
+    m_inventory.at(1) = new Item(0, 0, "Armor", "");
 }
+
+std::vector<Item*> Hero::getInventory() const {
+    return m_inventory;
+}
+
 void Hero::simpleAttack(Character* ch){
     ch->decHealth(this->m_baseDamage);
 }
@@ -43,6 +51,24 @@ void Hero::resetXY() {
     emit xChanged();
     emit yChanged();
 }
+
+void Hero::interactWithBoardCell(BoardCell* boardCell) {
+    if (boardCell != nullptr and boardCell->getItem() != nullptr) {
+        for (unsigned long long itemIndex = 0; itemIndex < m_inventory.size(); itemIndex++) {
+            if (m_inventory.at(itemIndex) == nullptr) {
+                m_inventory.at(itemIndex) = boardCell->getItem();
+                emit inventoryChanged();
+                std::cout << boardCell->getItem()->getName() << '\n';
+                std::cout << "Item has been added into inventory.\n";
+                boardCell->removeItem();
+                break;
+            } else if (itemIndex == 7 and m_inventory.at(itemIndex) != nullptr) {
+                std::cout << "Inventory is full!\n"; // musi se zobrazit na frontendu!
+            }
+        }
+    }
+}
+
 void Hero::attack(Enemy *e) { // Hero always attacks the enemy, never the other way around.
     int weaponBonusDamage = 0;
     if(m_weapon != nullptr){

@@ -14,7 +14,7 @@ Grid {
                 Field {
                     Cell {
                                  Image {
-                                     source:if(modelData.characterIsNotNull) {
+                                     source: if(modelData !== null && modelData.characterIsNotNull) {
                                                     if(modelData.characterName==="Robber") {
                                                         "images/robber-mask.png"
                                                     } else if(modelData.characterName==="Shaman") {
@@ -33,7 +33,7 @@ Grid {
                                          centerIn: parent
                                      }
                                      Image {
-                                         source:if(modelData.itemIsNotNull) {
+                                         source: if(modelData !== null && modelData.itemIsNotNull) {
                                                  if(modelData.itemName==="Sword") {
                                                      "images/piercing-sword.png"
                                                  } else if(modelData.itemName==="Axe") {

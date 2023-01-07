@@ -17,6 +17,10 @@ int Item::getY() {
     return m_y;
 }
 
+QString Item::getQStringName() const {
+    return QString::fromStdString(m_name);
+}
+
 std::string Item::getName() {
     return m_name;
 }

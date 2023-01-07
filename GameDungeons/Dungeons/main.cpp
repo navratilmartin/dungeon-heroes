@@ -2,12 +2,11 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "game.h"
-#include "Board/board.h"
-#include "CharacterObjects/Items/weapon.h"
 
-void test(Board*b){
-    std::cout << "vyslo";
-}
+
+// void test(Board*b){
+//    std::cout << "vyslo";
+// }
 
 
 int main(int argc, char *argv[]) {
