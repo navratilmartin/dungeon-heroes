@@ -7,9 +7,6 @@ Hero::Hero(int x, int y, const std::string& name, int baseDamage):
     m_inventory = std::vector<Item*>(inventorySize, nullptr);
     m_weapon = nullptr;
     m_armor = nullptr;
-
-    m_inventory.at(0) = new Item(0, 0, "Sword", "");
-    m_inventory.at(1) = new Item(0, 0, "Armor", "");
 }
 
 std::vector<Item*> Hero::getInventory() const {

@@ -36,37 +36,9 @@ Window {
             id: newGameDifficulty
         }
 
-        Column {
+        SessionBlock {
             id: gameSessionBlock
-            spacing: 25
-            anchors.verticalCenter: parent.verticalCenter
-            padding: 15
             visible: false
-
-            InfoField {
-                width: 250
-                height: 200
-            }
-
-            Inventory {
-                id: gameInventory
-            }
-
-            MenuButton {
-                height: 20
-                textB: "Help"
-                textBSize: 18
-                textBFamily: "Papyrus"
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-
-            MenuButton {
-                height: 20
-                textB: "Menu"
-                textBSize: 18
-                textBFamily: "Papyrus"
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
         }
 
         Component {

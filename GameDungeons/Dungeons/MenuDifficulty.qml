@@ -31,7 +31,7 @@ Rectangle {
             roomLoader.active = true
             gameTitle.visible = false
             gameSessionBlock.visible = true
-            gameInventory.inventoryModel = game.hero.heroInventory
+            gameSessionBlock.gameInventory.inventoryModel = game.hero.heroInventory
         }
     }
 }

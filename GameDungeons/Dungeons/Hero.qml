@@ -158,6 +158,7 @@ Rectangle {
         if (logicalPositiony >= 1) {
                   game.board.boardRoom.extractOneBoardCell(logicalPositiony, logicalPositionx)
                   game.hero.interactWithBoardCell(game.board.boardRoom.oneBoardCell)
+                  gameSessionBlock.gameInventory.inventoryModel = game.hero.heroInventory
         } else if(logicalPositionx === room.logicalPositionx && logicalPositiony === room.logicalPositiony
                 && room.visible === true) {
             game.board.switchRoom(1)

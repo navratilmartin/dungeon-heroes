@@ -6,9 +6,9 @@ Rectangle {
     border.width: 1
     border.color: "white"
     radius: 5
-    anchors.left: parent.left
-    y: 18
-    anchors.leftMargin: 15
+    // anchors.left: parent.left
+    // y: 18
+    // anchors.leftMargin: 15
     color: "#96001850"
 
 
