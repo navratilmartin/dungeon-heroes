@@ -39,7 +39,7 @@ Board* Game::getBoardMatrix() const {
 
 void Game::play(int userInput) {
     if (userInput != 3) {
-        m_hero = new Hero(0, 0, "Nameless",15);
+        m_hero = new Hero(0, 0, "Wanderer", 15);
         createBoard(EnumDifficulty(userInput));
     } else {
         loadBoard();

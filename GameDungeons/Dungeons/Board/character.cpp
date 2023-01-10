@@ -15,6 +15,10 @@ std::string Character::getName(){
     return m_name;
 }
 
+QString Character::getQName() {
+    return QString::fromStdString(m_name);
+}
+
 int Character::getX() const {
     return m_x;
 }

@@ -13,6 +13,14 @@ std::vector<Item*> Hero::getInventory() const {
     return m_inventory;
 }
 
+int Hero::getLevel() const {
+    return m_level;
+}
+
+int Hero::getExperience() const {
+    return m_experience;
+}
+
 void Hero::simpleAttack(Character* ch){
     ch->decHealth(this->m_baseDamage);
 }

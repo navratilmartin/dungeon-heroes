@@ -19,7 +19,14 @@ private:
     Q_OBJECT
     Q_PROPERTY(int heroX READ getX NOTIFY xChanged)
     Q_PROPERTY(int heroY READ getY NOTIFY yChanged)
+
     Q_PROPERTY(std::vector<Item*> heroInventory READ getInventory NOTIFY inventoryChanged)
+    Q_PROPERTY(QString heroName READ getQName CONSTANT)
+    Q_PROPERTY(int heroHealth READ getActualHealth NOTIFY healthChanged)
+    Q_PROPERTY(int heroDamage READ getBaseDamage NOTIFY damageChanged)
+    Q_PROPERTY(int heroDefense READ getDefense NOTIFY defenseChanged)
+    Q_PROPERTY(int heroLevel READ getLevel NOTIFY levelChanged)
+    Q_PROPERTY(int heroExperience READ getExperience NOTIFY experienceChanged)
 
     const unsigned long long inventorySize = 8;
 
@@ -37,6 +44,8 @@ public:
     Hero(int x, int y, const std::string& name, int baseDamage);
 
     std::vector<Item*> getInventory() const;
+    int getLevel() const;
+    int getExperience() const;
 
     void attack(Enemy* e);
     void equipWeapon(Weapon* w);
@@ -55,6 +64,11 @@ signals:
     void xChanged();
     void yChanged();
     void inventoryChanged();
+    void healthChanged();
+    void damageChanged();
+    void defenseChanged();
+    void levelChanged();
+    void experienceChanged();
 };
 
 Q_DECLARE_METATYPE(std::vector<Item* >)

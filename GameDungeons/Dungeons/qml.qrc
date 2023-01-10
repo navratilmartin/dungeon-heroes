@@ -28,6 +28,7 @@
         <file>Inventory.qml</file>
         <file>Fight.qml</file>
         <file>SessionBlock.qml</file>
+        <file>InfoFieldText.qml</file>
     </qresource>
     <qresource prefix="/images"/>
 </RCC>

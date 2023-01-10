@@ -27,11 +27,21 @@ Rectangle {
 
         onClicked: {
             newGameDifficulty.visible = false
+
+            // Initializing new Board and Hero
             game.play(levelDifficulty)
             roomLoader.active = true
+
+            // Initializing main session and hero invetory and stats
             gameTitle.visible = false
             gameSessionBlock.visible = true
             gameSessionBlock.gameInventory.inventoryModel = game.hero.heroInventory
+            gameSessionBlock.statsHeroName = game.hero.heroName
+            gameSessionBlock.statsHeroHealth = game.hero.heroHealth
+            gameSessionBlock.statsHeroDamage = game.hero.heroDamage
+            gameSessionBlock.statsHeroDefense = game.hero.heroDefense
+            gameSessionBlock.statsHeroLevel = game.hero.heroLevel
+            gameSessionBlock.statsHeroExperience = game.hero.heroExperience
         }
     }
 }

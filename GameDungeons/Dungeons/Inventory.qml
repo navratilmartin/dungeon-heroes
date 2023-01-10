@@ -21,6 +21,7 @@ Grid {
             property string fieldImage: fieldImagePath
 
             width: 57
+            color: "#96001850"
             border.color: borderColor
             border.width: borderWidth
             radius: 5

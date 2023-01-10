@@ -3,7 +3,9 @@
 
 #include <iostream>
 #include <QObject>
-class Character:public QObject{
+#include <QString>
+
+class Character: public QObject {
 protected:
     int m_x;
     int m_y;
@@ -19,6 +21,7 @@ public:
     int getX() const;
     int getY() const;
     std::string getName();
+    QString getQName();
     int getMaxHealth() const;
     int getActualHealth() const;
     int getBaseDamage() const;
