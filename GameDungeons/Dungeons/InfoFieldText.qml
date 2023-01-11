@@ -6,4 +6,5 @@ Text {
     font.pixelSize: 15
     color: "white"
     anchors.horizontalCenter: parent.horizontalCenter
+    font.bold: true
 }

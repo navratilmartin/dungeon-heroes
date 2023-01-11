@@ -14,8 +14,6 @@ Window {
         id: gameMain
         color: "black"
         anchors.fill: parent
-        // border.width: 1
-        // border.color: "white"
 
         Text {
             id: gameTitle
@@ -57,21 +55,34 @@ Window {
             }
         }
 
-        Loader {
-            id: roomLoader
-            property int roomNumber: 0
-            active: false
-            focus: true
-            sourceComponent: gameFieldComp
+        Rectangle {
+            id: roomLoaderWrapper
+            visible: false
+            width: 450
+            height: 450
+            radius: 5
             anchors.right: parent.right
             anchors.rightMargin: 40
             anchors.verticalCenter: parent.verticalCenter
+            border.width: 2
+            border.color: "white"
+            color: "#00000000"
 
-            onLoaded: {
-                item.anchors.horizontalCenter = roomLoader.horizontalCenter
-                item.anchors.verticalCenter = roomLoader.verticalCenter
+            Loader {
+                id: roomLoader
+                property int roomNumber: 0
+                active: false
+                focus: true
+                sourceComponent: gameFieldComp
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+
+                onLoaded: {
+                    item.anchors.horizontalCenter = roomLoader.horizontalCenter
+                    item.anchors.verticalCenter = roomLoader.verticalCenter
+                }
+
             }
-
         }
 
         Loader {

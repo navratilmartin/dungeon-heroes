@@ -11,8 +11,8 @@ Rectangle {
         id: textDifficulty
         text: "Difficulty"
         color: "white"
-        font.family: "Helvetica"
-        font.pixelSize: 13
+        font.family: "Papyrus"
+        font.pixelSize: 15
         font.bold: true
 
         anchors {
@@ -31,6 +31,7 @@ Rectangle {
             // Initializing new Board and Hero
             game.play(levelDifficulty)
             roomLoader.active = true
+            roomLoaderWrapper.visible = true
 
             // Initializing main session and hero invetory and stats
             gameTitle.visible = false

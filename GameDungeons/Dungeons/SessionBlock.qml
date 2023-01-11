@@ -11,6 +11,9 @@ Column {
     property int statsHeroLevel: 1
     property int statsHeroExperience: 0
 
+    property bool weaponMessageVisible: false
+    property alias weaponMessageRunning: weaponMessageTimer
+
     spacing: 20
     anchors.verticalCenter: parent.verticalCenter
     padding: 15
@@ -29,13 +32,27 @@ Column {
         width: 250
         color: "#00000000"
         anchors.horizontalCenter: parent.horizontalCenter
+
+        InfoFieldText {
+            id: weaponInfoMessage
+
+            visible: weaponMessageVisible
+            text: "You can't equip more than one weapon or armor!"
+            font.pixelSize: 12
+        }
+
+        Timer {
+            id: weaponMessageTimer
+            interval: 5000
+            onTriggered: weaponInfoMessage.visible = false
+            running: false
+        }
     }
 
     MenuButton {
         height: 15
         textB: "Menu"
         textBSize: 18
-        textBFamily: "Papyrus"
         anchors.horizontalCenter: parent.horizontalCenter
     }
 }

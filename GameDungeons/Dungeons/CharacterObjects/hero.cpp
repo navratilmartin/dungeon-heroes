@@ -7,6 +7,10 @@ Hero::Hero(int x, int y, const std::string& name, int baseDamage):
     m_inventory = std::vector<Item*>(inventorySize, nullptr);
     m_weapon = nullptr;
     m_armor = nullptr;
+
+    m_isItemWeapon = false;
+    m_isItemArmor = false;
+    m_isItemPotion = false;
 }
 
 std::vector<Item*> Hero::getInventory() const {
@@ -19,6 +23,14 @@ int Hero::getLevel() const {
 
 int Hero::getExperience() const {
     return m_experience;
+}
+
+Weapon* Hero::getWeapon() const {
+    return m_weapon;
+}
+
+Armor* Hero::getArmor() const {
+    return m_armor;
 }
 
 void Hero::simpleAttack(Character* ch){
@@ -67,10 +79,57 @@ void Hero::interactWithBoardCell(BoardCell* boardCell) {
                 std::cout << "Item has been added into inventory.\n";
                 boardCell->removeItem();
                 break;
-            } else if (itemIndex == 7 and m_inventory.at(itemIndex) != nullptr) {
-                std::cout << "Inventory is full!\n"; // musi se zobrazit na frontendu!
             }
         }
+    }
+}
+
+void Hero::useItem(int itemIndex) {
+    if (dynamic_cast<Weapon*>(m_inventory.at(itemIndex)) and m_weapon == nullptr) {
+        m_weapon = dynamic_cast<Weapon*>(m_inventory.at(itemIndex));
+        m_baseDamage += m_weapon->getDamageBonus();
+        emit damageChanged();
+        emit weaponChanged();
+    } else if (dynamic_cast<Armor*>(m_inventory.at(itemIndex)) and m_armor == nullptr) {
+        m_armor = dynamic_cast<Armor*>(m_inventory.at(itemIndex));
+        m_defense += m_armor->getArmorBonus();
+        emit defenseChanged();
+        emit armorChanged();
+    } else if (dynamic_cast<Potion*>(m_inventory.at(itemIndex))) {
+        m_actualHealth += dynamic_cast<Potion*>(m_inventory.at(itemIndex))->getPercentageHealthBonus();
+        m_inventory.at(itemIndex) = nullptr;
+        emit healthChanged();
+        emit inventoryChanged();
+    }
+}
+
+void Hero::dropItem(int itemIndex) {
+    if (m_inventory.at(itemIndex) != nullptr and m_inventory.at(itemIndex) == m_weapon) {
+        m_baseDamage -= m_weapon->getDamageBonus();
+        m_baseDamage = m_baseDamage < 0 ? 0 : m_baseDamage;
+        m_weapon = nullptr;
+        emit weaponChanged();
+    } else if (m_inventory.at(itemIndex) != nullptr and m_inventory.at(itemIndex) == m_armor) {
+        m_defense -= m_armor->getArmorBonus();
+        m_defense = m_defense < 0 ? 0 : m_defense;
+        m_armor = nullptr;
+        emit armorChanged();
+    }
+
+    m_inventory.at(itemIndex) = nullptr;
+    emit inventoryChanged();
+}
+
+void Hero::inspectItem(int itemIndex) {
+    if (dynamic_cast<Weapon*>(m_inventory.at(itemIndex))) {
+        m_isItemWeapon = true;
+        emit isItemWeaponChanged();
+    } else if (dynamic_cast<Armor*>(m_inventory.at(itemIndex))) {
+        m_isItemArmor = true;
+        emit isItemArmorChanged();
+    } else if (dynamic_cast<Potion*>(m_inventory.at(itemIndex))) {
+        m_isItemPotion = true;
+        emit isItemPotionChanged();
     }
 }
 

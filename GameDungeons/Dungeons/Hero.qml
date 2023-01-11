@@ -72,6 +72,7 @@ Rectangle {
             if(game.onEnemy()){
                 if(game.board.boardRoom.boardCells[game.hero.heroY][game.hero.heroX].characterHealth>0){
                     roomLoader.sourceComponent=fightFieldComp
+                    gameSessionBlock.gameInventory.visible = false
                 }
             }
 
@@ -95,6 +96,7 @@ Rectangle {
                 if(game.board.boardRoom.boardCells[game.hero.heroY][game.hero.heroX].characterHealth>0){
                     if(game.board.boardRoom.boardCells[game.hero.heroY][game.hero.heroX].characterHealth>0){
                         roomLoader.sourceComponent=fightFieldComp
+                        gameSessionBlock.gameInventory.visible = false
                     }
                 }
 
@@ -120,6 +122,7 @@ Rectangle {
             if(game.onEnemy()){
                 if(game.board.boardRoom.boardCells[game.hero.heroY][game.hero.heroX].characterHealth>0){
                     roomLoader.sourceComponent=fightFieldComp
+                    gameSessionBlock.gameInventory.visible = false
                 }
             }
 
@@ -142,6 +145,7 @@ Rectangle {
             if(game.onEnemy()){
                 if(game.board.boardRoom.boardCells[game.hero.heroY][game.hero.heroX].characterHealth>0){
                     roomLoader.sourceComponent=fightFieldComp
+                    gameSessionBlock.gameInventory.visible = false
                 }
             }
         } else {
