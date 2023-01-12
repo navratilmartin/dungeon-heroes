@@ -14,9 +14,9 @@ Game::~Game() {
 
 void Game::attackEnemy() {
     m_hero->simpleAttack(m_board->getCurrentRoom()->getBoardCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter());
+    m_hero->takeDamage(m_board->getCurrentRoom()->getBoardCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter()->getBaseDamage());
     if(m_board->getCurrentRoom()->getBoardCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter()->getActualHealth()<=0){
         m_board->getCurrentRoom()->getBoardCells().at(m_hero->getY()).at(m_hero->getX())->removeCharacter();
-
     }
 }
 

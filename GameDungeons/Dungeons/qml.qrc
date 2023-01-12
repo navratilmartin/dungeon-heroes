@@ -29,6 +29,7 @@
         <file>Fight.qml</file>
         <file>SessionBlock.qml</file>
         <file>InfoFieldText.qml</file>
+        <file>GameOver.qml</file>
     </qresource>
     <qresource prefix="/images"/>
 </RCC>

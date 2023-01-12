@@ -67,13 +67,19 @@ Rectangle {
 
     Keys.onDeletePressed: {
         game.attackEnemy()
+        gameSessionBlock.statsHeroHealth = game.hero.heroHealth
+
         if(game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)>0) {
             healthBarText.text=game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)
             healthBar.width=game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)
-        } else {
+        } if(game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)<=0) {
             roomLoader.source=""
             roomLoader.source="CellField.qml"
             gameSessionBlock.gameInventory.visible = true
+        }if(game.hero.heroHealth<=0){
+            roomLoader.source=""
+            roomLoader.source="GameOver.qml"
+
         }
 
     }

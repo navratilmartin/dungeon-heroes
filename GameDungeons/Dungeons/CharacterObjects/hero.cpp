@@ -205,12 +205,13 @@ void Hero::getXp(int experienceBonus) { // If the hero has 100xp, he will level 
 }
 
 void Hero::takeDamage(int damage) {
-    if((m_actualHealth-damage) <= 0){
-        std:: cout << "You have lost the game" << std::endl;
-        //TODO You have lost
-    } else{
+
         m_actualHealth -= damage;
-    }
+        if((m_actualHealth-damage) <= 0){
+            std:: cout << "You have lost the game" << std::endl;
+            //TODO You have lost
+        }
+
 }
 
 void Hero::equipWeapon(Weapon *w) {  //Item seberu ze zeme, pak z batohu pridam pomoci equip.

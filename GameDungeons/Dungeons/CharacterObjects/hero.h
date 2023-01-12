@@ -51,10 +51,10 @@ private:
     void useWeapon();
     void useArmor(int durabilityDecrease);
     void getXp(int experienceBonus);
-    void takeDamage(int damage);
+
 public:
     Hero(int x, int y, const std::string& name, int baseDamage);
-
+    void takeDamage(int damage);
     std::vector<Item*> getInventory() const;
     Weapon* getWeapon() const;
     Armor* getArmor() const;
