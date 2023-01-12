@@ -4,6 +4,7 @@ Board::Board(EnumDifficulty difficulty) {
     m_size = boardSize;
     m_boardRow = 0;
     m_boardCurrentRoom = nullptr;
+    m_boardCurrentRoomIndex = 0;
     m_board = std::vector<BoardRoom*> (std::vector<BoardRoom*> (boardSize));
     generateRooms(difficulty);
 }
@@ -98,11 +99,18 @@ void Board::switchRoom(bool direction) {
             m_boardRow++;
             m_boardCurrentRoom = m_board.at(m_boardRow);
             emit changedBoardRoom();
+            m_boardCurrentRoomIndex++;
     } else if (!direction and m_boardRow-1 >= 0) {
             m_boardRow--;
             m_boardCurrentRoom = m_board.at(m_boardRow);
+            m_boardCurrentRoomIndex--;
             emit changedBoardRoom();
+            std::cout << "Room n" << m_boardCurrentRoomIndex << std::endl;
     }
+}
+
+int Board:: getCurrentRoomIndex() const {
+    return m_boardCurrentRoomIndex;
 }
 
 void Board::printRooms(){

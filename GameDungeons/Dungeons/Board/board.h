@@ -4,6 +4,8 @@
 #include <iostream>
 #include <algorithm>
 #include <cmath>
+#include <iterator>
+#include <vector>
 #include <QObject>
 
 #include "boardroom.h"
@@ -17,6 +19,7 @@ private:
     int m_size;
     int m_boardRow;
     BoardRoom* m_boardCurrentRoom;
+    int m_boardCurrentRoomIndex;
     std::vector<BoardRoom*> m_board;
 
     void generateRooms(EnumDifficulty difficulty);
@@ -31,6 +34,7 @@ public:
     std::vector<BoardRoom*> getBoard() const;
 
     BoardRoom* getCurrentRoom() const;
+    int getCurrentRoomIndex() const;
 
     Q_INVOKABLE void switchRoom(bool direction);
 signals:

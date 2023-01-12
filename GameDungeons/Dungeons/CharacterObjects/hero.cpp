@@ -84,6 +84,7 @@ void Hero::interactWithBoardCell(BoardCell* boardCell) {
 void Hero::useItem(int itemIndex) {
     if (dynamic_cast<Weapon*>(m_inventory.at(itemIndex)) and m_weapon == nullptr) {
         m_weapon = dynamic_cast<Weapon*>(m_inventory.at(itemIndex));
+        std::cout << "item index " << itemIndex << std::endl;
         m_baseDamage += m_weapon->getDamageBonus();
         emit damageChanged();
         emit weaponChanged();
