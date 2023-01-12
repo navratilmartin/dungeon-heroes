@@ -40,24 +40,21 @@ void Hero::simpleAttack(Character* ch){
 int Hero::changeX(int by) {
 
     m_x += by;
-
-    std::cout<<"##################################"<<std::endl;
-    std::cout<<m_x<<std::endl;
-    std::cout<<m_y<<std::endl;
     emit xChanged();
+    // std::cout<<"##################################"<<std::endl;
+    // std::cout<<m_x<<std::endl;
+    // std::cout<<m_y<<std::endl;
+
     return m_x;
 }
 
 int Hero::changeY(int by) {
 
     m_y += by;
-
-    std::cout<<"##################################"<<std::endl;
-    std::cout<<m_x<<std::endl;
-    std::cout<<m_y<<std::endl;
     emit yChanged();
-
-
+    // std::cout<<"##################################"<<std::endl;
+    // std::cout<<m_x<<std::endl;
+    // std::cout<<m_y<<std::endl;
 
     return m_y;
 }
@@ -75,8 +72,8 @@ void Hero::interactWithBoardCell(BoardCell* boardCell) {
             if (m_inventory.at(itemIndex) == nullptr) {
                 m_inventory.at(itemIndex) = boardCell->getItem();
                 emit inventoryChanged();
-                std::cout << boardCell->getItem()->getName() << '\n';
-                std::cout << "Item has been added into inventory.\n";
+                // std::cout << boardCell->getItem()->getName() << '\n';
+                // std::cout << "Item has been added into inventory.\n";
                 boardCell->removeItem();
                 break;
             }
@@ -96,7 +93,8 @@ void Hero::useItem(int itemIndex) {
         emit defenseChanged();
         emit armorChanged();
     } else if (dynamic_cast<Potion*>(m_inventory.at(itemIndex))) {
-        m_actualHealth += dynamic_cast<Potion*>(m_inventory.at(itemIndex))->getPercentageHealthBonus();
+        m_actualHealth += m_maxHealth * dynamic_cast<Potion*>(m_inventory.at(itemIndex))
+                ->getPercentageHealthBonus() / 100;
         m_inventory.at(itemIndex) = nullptr;
         emit healthChanged();
         emit inventoryChanged();
@@ -181,12 +179,12 @@ void Hero::useWeapon() {
 }
 
 void Hero::useArmor(int durabilityDecrease) {
-    if(m_armor->getDurability() == 1){ // If the armor is about to be destroyed
+    if(m_armor->getDurability() == 1) { // If the armor is about to be destroyed
         delete m_armor;
         m_armor = nullptr;
         std::cout << "Armor destroyed" << std::endl;
         //TODO vypise se na frontend ze armor byl znicen
-    }else{
+    } else {
         m_armor->decreaseDurability(durabilityDecrease);
     }
 }
@@ -205,49 +203,9 @@ void Hero::getXp(int experienceBonus) { // If the hero has 100xp, he will level 
 }
 
 void Hero::takeDamage(int damage) {
+    m_actualHealth -= damage;
 
-        m_actualHealth -= damage;
-        if((m_actualHealth-damage) <= 0){
-            std:: cout << "You have lost the game" << std::endl;
-            //TODO You have lost
-        }
-
-}
-
-void Hero::equipWeapon(Weapon *w) {  //Item seberu ze zeme, pak z batohu pridam pomoci equip.
-    try {
-        m_weapon = w;
+    if((m_actualHealth-damage) <= 0){
+        m_actualHealth = 0;
     }
-    //TODO Pokud bych poslal pointer na jinou tridu nez na weapon. Jakou exception odchytavat?
-    catch(std::exception &e){
-        std::cout << "exception caught in hero.cpp" << std::endl;
-    }
-}
-
-void Hero::equipArmor(Armor *a) {
-    try {
-        m_armor = a;
-    }
-    catch(std::exception &e){
-        std::cout << "exception caught in hero.cpp" << std::endl;
-    }
-}
-
-void Hero::drinkPotion(Potion *p) {
-    try {
-        m_actualHealth += m_maxHealth * p->getPercentageHealthBonus() / 100; // Using potion can exceed the maxHealth
-    }
-    catch(std::exception &e){
-        std::cout << "exception caught in hero.cpp" << std::endl;
-    }
-}
-
-void Hero::pickupItem(Item *i) {    // Finds an empty place in inventory and places the item in.
-    auto ptr = std::find(m_inventory.begin(), m_inventory.end(), nullptr);
-    if (ptr != m_inventory.end()){
-        *ptr = i;
-    }else{
-        //TODO inventory is full, emit signal na frontend a vypise se hlaska
-    }
-
 }

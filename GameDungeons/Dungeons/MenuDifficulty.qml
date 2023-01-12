@@ -33,9 +33,12 @@ Rectangle {
             roomLoader.active = true
             roomLoaderWrapper.visible = true
 
-            // Initializing main session and hero invetory and stats
+            // Initializing main session and hero inventory and stats
             gameTitle.visible = false
             gameSessionBlock.visible = true
+            gameSessionBlock.messageVisible = true
+            gameSessionBlock.messageTimerRunning = true
+
             gameSessionBlock.gameInventory.inventoryModel = game.hero.heroInventory
             gameSessionBlock.statsHeroName = game.hero.heroName
             gameSessionBlock.statsHeroHealth = game.hero.heroHealth

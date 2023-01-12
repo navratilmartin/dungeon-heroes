@@ -108,8 +108,9 @@ GridLayout {
                     game.hero.useItem(useItemButton.currentItem)
                     gameSessionBlock.statsHeroHealth = game.hero.heroHealth
                 } else {
-                    gameSessionBlock.weaponMessageVisible = true
-                    gameSessionBlock.weaponMessageRunning.running = true
+                    gameSessionBlock.messageTimerRunning = true
+                    gameSessionBlock.messageVisible = true
+                    gameSessionBlock.messageText = "You can't equip more than one weapon or armor!"
                     inventoryRepeater.itemAt(useItemButton.currentItem).borderColor = "white"
                 }
             }

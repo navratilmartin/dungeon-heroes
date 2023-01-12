@@ -61,4 +61,6 @@ HEADERS += \
     game.h \
     loader.h
 
-DISTFILES +=
+DISTFILES += \
+    ../AppData/help.txt \
+    ../AppData/save.json

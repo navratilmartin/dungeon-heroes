@@ -27,7 +27,7 @@ Window {
         }
 
         Menu {
-
+            id: gameMainMenu
         }
 
         NewGame {

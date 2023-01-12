@@ -62,10 +62,6 @@ public:
     int getExperience() const;
 
     void attack(Enemy* e);
-    void equipWeapon(Weapon* w);
-    void equipArmor(Armor* a);
-    void drinkPotion(Potion* p);
-    void pickupItem(Item* i);
     void simpleAttack(Character* ch);
 
     Q_INVOKABLE int changeX(int by);

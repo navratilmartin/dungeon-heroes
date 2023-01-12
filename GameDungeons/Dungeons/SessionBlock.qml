@@ -1,6 +1,7 @@
 import QtQuick 2.15
 
 Column {
+    id: sessionBlock
     property alias gameInventory: gameInventoryElement
 
     // properties for hero's stats, then included in InfoField
@@ -11,8 +12,9 @@ Column {
     property int statsHeroLevel: 1
     property int statsHeroExperience: 0
 
-    property bool weaponMessageVisible: false
-    property alias weaponMessageRunning: weaponMessageTimer
+    property bool messageVisible: false
+    property alias messageText: infoMessage.text
+    property alias messageTimerRunning: infoMessageTimer.running
 
     spacing: 20
     anchors.verticalCenter: parent.verticalCenter
@@ -34,25 +36,68 @@ Column {
         anchors.horizontalCenter: parent.horizontalCenter
 
         InfoFieldText {
-            id: weaponInfoMessage
+            id: infoMessage
 
-            visible: weaponMessageVisible
-            text: "You can't equip more than one weapon or armor!"
-            font.pixelSize: 12
+            visible: messageVisible
+            text: "Use the arrow keys to move the hero on the map"
+            font.pixelSize: 13
         }
 
         Timer {
-            id: weaponMessageTimer
+            id: infoMessageTimer
             interval: 5000
-            onTriggered: weaponInfoMessage.visible = false
+            onTriggered: {
+                sessionBlock.messageVisible = false
+            }
             running: false
         }
     }
 
-    MenuButton {
-        height: 15
-        textB: "Menu"
-        textBSize: 18
+    Rectangle {
+        width: 250
+        height: 20
+        color: "#00000000"
         anchors.horizontalCenter: parent.horizontalCenter
+
+        MenuButton {
+        height: 15
+        textB: "Help"
+        textBSize: 18
+        anchors.left: parent.left
+
+            MouseArea {
+                anchors.fill: parent
+
+                onClicked: {
+
+                }
+            }
+        }
+
+        MenuButton {
+            id: gameSessionBlockMenu
+            height: 15
+            textB: "Menu"
+            textBSize: 18
+            anchors.right: parent.right
+
+            MouseArea {
+                anchors.fill: parent
+
+                onClicked: {
+                    gameSessionBlock.visible = false
+                    roomLoaderWrapper.visible = false
+                    roomLoader.visible = false
+
+                    if (fightLoader.visible === true) {
+                        fightLoader.visible = false
+                    }
+
+                    gameMainMenu.visible = true
+                    gameMainMenu.resumeButtonVisible = true
+                    gameMainMenu.saveButtonVisible = true
+                }
+            }
+        }
     }
 }
