@@ -7,6 +7,8 @@ Hero::Hero(int x, int y, const std::string& name, int baseDamage):
     m_inventory = std::vector<Item*>(inventorySize, nullptr);
     m_weapon = nullptr;
     m_armor = nullptr;
+    m_indexOfEquipedWeaponInInventory = 0;
+    m_indexOfEquipedArmorInInventory = 0;
 
     m_isItemWeapon = false;
     m_isItemArmor = false;
@@ -84,7 +86,7 @@ void Hero::interactWithBoardCell(BoardCell* boardCell) {
 void Hero::useItem(int itemIndex) {
     if (dynamic_cast<Weapon*>(m_inventory.at(itemIndex)) and m_weapon == nullptr) {
         m_weapon = dynamic_cast<Weapon*>(m_inventory.at(itemIndex));
-        std::cout << "item index " << itemIndex << std::endl;
+        m_indexOfEquipedWeaponInInventory = itemIndex;
         m_baseDamage += m_weapon->getDamageBonus();
         emit damageChanged();
         emit weaponChanged();
@@ -209,4 +211,12 @@ void Hero::takeDamage(int damage) {
     if((m_actualHealth-damage) <= 0){
         m_actualHealth = 0;
     }
+}
+
+int Hero::getIndexOfEquipedArmorInInventory() const {
+    return m_indexOfEquipedArmorInInventory;
+}
+
+int Hero::getIndexOfEquipedWeaponInInventory() const {
+    return m_indexOfEquipedWeaponInInventory;
 }

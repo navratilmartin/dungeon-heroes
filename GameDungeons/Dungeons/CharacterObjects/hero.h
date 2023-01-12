@@ -42,6 +42,8 @@ private:
     std::vector<Item*> m_inventory;
     Weapon* m_weapon;
     Armor* m_armor;
+    int m_indexOfEquipedWeaponInInventory;
+    int m_indexOfEquipedArmorInInventory;
 
     // Below attributes are for item's inspection
     bool m_isItemWeapon;
@@ -60,6 +62,8 @@ public:
     Armor* getArmor() const;
     int getLevel() const;
     int getExperience() const;
+    int getIndexOfEquipedArmorInInventory() const;
+    int getIndexOfEquipedWeaponInInventory() const;
 
     void attack(Enemy* e);
     void simpleAttack(Character* ch);
