@@ -19,6 +19,7 @@ void Game::attackEnemy() {
     if(m_board->getCurrentRoom()->getBoardCells().at(m_hero->getY()).at(m_hero->getX())->getCharacter()->getActualHealth()<=0){
         m_board->getCurrentRoom()->getBoardCells().at(m_hero->getY()).at(m_hero->getX())->removeCharacter();
     }
+    //m_loader->saveGame(m_board, m_hero);
 }
 
 void Game::createBoard(EnumDifficulty difficulty) {

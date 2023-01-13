@@ -10,6 +10,11 @@ Board* Loader::loadNewGame(EnumDifficulty difficulty) {
 }
 
 void Loader::saveGame(const Board* currentBoard, Hero* hero){
+    std::cout << "zde" << std::endl;
+    QFile saveFile("save.json");
+    if (!saveFile.open(QIODevice::WriteOnly)) {
+        qWarning("Couldn't open save file.");
+    }
     QJsonObject board;
     //Position
     board["actualRoomIndex"] =  currentBoard->getCurrentRoomIndex();
@@ -30,9 +35,43 @@ void Loader::saveGame(const Board* currentBoard, Hero* hero){
         board["indexOfEqupiedArmorFromInventory"] = hero->getIndexOfEquipedArmorInInventory();
     }
     //Inventory
+    QJsonArray weaponArray = {};
+    QJsonArray armorArray = {};
+    QJsonArray potionArray = {};
+    for (auto item: hero->getInventory()){
+        if (item->getItemType() == Item::ItemType::Weapon){
+            QJsonObject weaponObj;
+            auto weapon = dynamic_cast<Weapon*>(item);
+            weaponObj["name"] = weapon->getQStringName();
+            weaponObj["description"] = weapon->getQstringDescription();
+            weaponObj["damage"] = weapon->getDamageBonus();
+            weaponObj["durability"] = weapon->getDurability();
+            weaponArray.append(weaponObj);
+        } else if (item->getItemType() == Item::ItemType::Armor){
+           QJsonObject armorObj;
+           auto armor = dynamic_cast<Armor*>(item);
+           armorObj["name"] = armor->getQStringName();
+           armorObj["description"] = armor->getQstringDescription();
+           armorObj["armor"] = armor->getArmorBonus();
+           armorObj["durability"] = armor->getDurability();
+           armorArray.append(armorObj);
+        } else {
+            QJsonObject potionObj;
+            auto potion = dynamic_cast<Potion*>(item);
+            potionObj["name"] = potion->getQStringName();
+            potionObj["description"] = potion->getQstringDescription();
+            potionObj["bonus"] = potion->getPercentageHealthBonus();
+            potionArray.append(potionObj);
+        }
+    }
+    board["inventoryWeapons"] = weaponArray;
+    board["inventoryArmors"] = armorArray;
+    board["inventoryPotions"] = potionArray;
 
     //Cells of individual rooms
 
+    QJsonDocument saveDoc(board);
+    saveFile.write(saveDoc.toJson());
 }
 
 QStringList Loader::loadHelpFile() {

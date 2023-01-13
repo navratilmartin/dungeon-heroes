@@ -24,6 +24,7 @@ public:
     int getX();
     int getY();
     QString getQStringName() const;
+    QString getQstringDescription() const;
     std::string getName();
     std::string getDescription();
     virtual Item::ItemType getItemType() const;

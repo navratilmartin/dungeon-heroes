@@ -5,6 +5,8 @@
 #include <QFile>
 #include <QTextStream>
 #include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
 #include "Board/board.h"
 
 class Loader
