@@ -34,3 +34,26 @@ void Loader::saveGame(const Board* currentBoard, Hero* hero){
     //Cells of individual rooms
 
 }
+
+QStringList Loader::loadHelpFile() {
+    QStringList fileMessages{};
+    QFile inputFile("../AppData/help.txt");
+
+
+    if (inputFile.open(QIODevice::ReadOnly)) {
+        QTextStream in(&inputFile);
+        std::string temporary;
+
+        while (!in.atEnd()) {
+            QString temporary = in.readLine();
+            fileMessages.push_back(temporary);
+        }
+
+        inputFile.close();
+    } else {
+        std::cerr << "File was not found\n";
+        fileMessages.push_back("Something went wrong. Perhaps, you deleted AppData folder.");
+    }
+
+    return fileMessages;
+}

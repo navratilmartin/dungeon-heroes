@@ -4,6 +4,7 @@ Game::Game() {
     m_loader = new Loader();
     m_board = nullptr;
     m_hero = nullptr;
+    m_helpMessages = m_loader->loadHelpFile();
 }
 
 Game::~Game() {
@@ -36,6 +37,9 @@ Board* Game::getBoardMatrix() const {
     return m_board;
 }
 
+QStringList Game::getHelpMessages() const {
+    return m_helpMessages;
+}
 
 void Game::play(int userInput) {
     if (userInput != 3) {
@@ -61,6 +65,6 @@ QString Game::enemyName() {
 
         }
 
-        return QString::fromStdString("Nothing");;
+        return QString::fromStdString("Nothing");
 }
 

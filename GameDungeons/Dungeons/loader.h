@@ -1,10 +1,11 @@
 #ifndef LOADER_H
 #define LOADER_H
 
-#include "Board/board.h"
+#include <QStringList>
 #include <QFile>
 #include <QTextStream>
 #include <QJsonObject>
+#include "Board/board.h"
 
 class Loader
 {
@@ -15,6 +16,7 @@ public:
     Board* loadNewGame(EnumDifficulty difficulty);
     Board* loadSavedGame();
     void saveGame(const Board* currentBoard, Hero* hero);
+    QStringList loadHelpFile();
 };
 
 #endif // LOADER_H

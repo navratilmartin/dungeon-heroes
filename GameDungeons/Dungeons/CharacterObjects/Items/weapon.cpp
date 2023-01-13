@@ -14,6 +14,10 @@ int Weapon::getDurability() const{
     return m_durability;
 }
 
+Item::ItemType Weapon::getItemType() const {
+    return Item::ItemType::Weapon;
+}
+
 void Weapon::decreaseDurabilityByOne() {
     m_durability--; // When swinging a sword, we call getDurability() to check, if its not one. If it is == 1
                     // the sword is destroyed and we return an announcmenet. If its more than 1, we call this method.

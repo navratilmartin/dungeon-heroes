@@ -9,6 +9,7 @@ private:
 public:
     Potion(int percentageHealthBonus, const std::string& name, const std::string& description, int x, int y);
     int getPercentageHealthBonus() const;
+    Item::ItemType getItemType() const override;
 };
 
 #endif // POTION_H

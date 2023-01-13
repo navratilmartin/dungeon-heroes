@@ -3,6 +3,7 @@ import QtQuick 2.15
 Column {
     id: sessionBlock
     property alias gameInventory: gameInventoryElement
+    property alias gameSessionMenu: gameSessionButtons
 
     // properties for hero's stats, then included in InfoField
     property string statsHeroName: "Hero"
@@ -54,6 +55,7 @@ Column {
     }
 
     Rectangle {
+        id: gameSessionButtons
         width: 250
         height: 20
         color: "#00000000"
@@ -69,7 +71,10 @@ Column {
                 anchors.fill: parent
 
                 onClicked: {
-
+                    sessionBlock.visible = false
+                    roomLoaderWrapper.visible = false
+                    roomLoader.visible = false
+                    gameSessionHelp.visible = true
                 }
             }
         }

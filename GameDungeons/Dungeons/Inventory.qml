@@ -95,16 +95,16 @@ GridLayout {
                 useItemButton.visible = false
                 dropItemButton.visible = false
 
-                // Hero inspects, if the item is a weapon, an armor or a potion
-                game.hero.inspectItem(useItemButton.currentItem)
+                // If Item has a type of Weapon (enum class)
+                if ((game.hero.heroInventory[useItemButton.currentItem].itemType === 3 && game.hero.heroWeapon === null) ||
 
-                if ((game.hero.isItemWeapon && game.hero.heroWeapon === null) ||
-                        (game.hero.isItemArmor && game.hero.heroArmor === null)) {
+                // or if Item has a type of Armor (enum class)
+                (game.hero.heroInventory[useItemButton.currentItem].itemType === 2 && game.hero.heroArmor === null)) {
                     game.hero.useItem(useItemButton.currentItem)
                     gameSessionBlock.statsHeroDamage = game.hero.heroDamage
                     gameSessionBlock.statsHeroDefense = game.hero.heroDefense
                     inventoryRepeater.itemAt(useItemButton.currentItem).borderColor = "blue"
-                } else if (game.hero.isItemPotion) {
+                } else if (game.hero.heroInventory[useItemButton.currentItem].itemType === 1) {
                     game.hero.useItem(useItemButton.currentItem)
                     gameSessionBlock.statsHeroHealth = game.hero.heroHealth
                 } else {

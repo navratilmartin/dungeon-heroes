@@ -24,18 +24,18 @@ Rectangle {
 
 
     Image {
-        Text{
-            id:onEnemy
-            text: game.onEnemy()
-            color:"red"
+//        Text{
+//            id:onEnemy
+//            text: game.onEnemy()
+//            color:"red"
 
-        }
-        Text{
-            id:enemyName
-            topPadding: 10
-            text:"Nothing"
-            color:"red"
-        }
+//        }
+//        Text{
+//            id:enemyName
+//            topPadding: 10
+//            text:"Nothing"
+//            color:"red"
+//        }
 
 
 
@@ -60,12 +60,12 @@ Rectangle {
         if(logicalPositiony-1>=0) {
 
             game.hero.changeY(-1)
-            onEnemy.text= game.onEnemy()
-            if(game.onEnemy()){
-                enemyName.text = game.enemyName
-            }else{
-                enemyName.text = "Nothing"
-            }
+//            onEnemy.text= game.onEnemy()
+//            if(game.onEnemy()){
+//                enemyName.text = game.enemyName
+//            }else{
+//                enemyName.text = "Nothing"
+//            }
 
 
             checkRoom()
@@ -73,6 +73,7 @@ Rectangle {
                 if(game.board.boardRoom.boardCells[game.hero.heroY][game.hero.heroX].characterHealth>0){
                     roomLoader.sourceComponent=fightFieldComp
                     gameSessionBlock.gameInventory.visible = false
+                    gameSessionBlock.gameSessionMenu.visible = false
                 }
             }
 
@@ -85,18 +86,19 @@ Rectangle {
         if(logicalPositionx+1<dimension) {
 
             game.hero.changeX(1);
-            onEnemy.text= game.onEnemy()
-            if(game.onEnemy()){
-                enemyName.text = game.enemyName
-            }else{
-                enemyName.text = "Nothing"
-            }
+//            onEnemy.text= game.onEnemy()
+//            if(game.onEnemy()){
+//                enemyName.text = game.enemyName
+//            }else{
+//                enemyName.text = "Nothing"
+//            }
             checkRoom()
             if(game.onEnemy()){
                 if(game.board.boardRoom.boardCells[game.hero.heroY][game.hero.heroX].characterHealth>0){
                     if(game.board.boardRoom.boardCells[game.hero.heroY][game.hero.heroX].characterHealth>0){
                         roomLoader.sourceComponent=fightFieldComp
                         gameSessionBlock.gameInventory.visible = false
+                        gameSessionBlock.gameSessionMenu.visible = false
                     }
                 }
 
@@ -112,17 +114,18 @@ Rectangle {
         if(logicalPositiony+1<dimension) {
 
             game.hero.changeY(1)
-            onEnemy.text= game.onEnemy()
-            if(game.onEnemy()){
-                enemyName.text = game.enemyName
-            }else{
-                enemyName.text = "Nothing"
-            }
+//            onEnemy.text= game.onEnemy()
+//            if(game.onEnemy()){
+//                enemyName.text = game.enemyName
+//            }else{
+//                enemyName.text = "Nothing"
+//            }
             checkRoom()
             if(game.onEnemy()){
                 if(game.board.boardRoom.boardCells[game.hero.heroY][game.hero.heroX].characterHealth>0){
                     roomLoader.sourceComponent=fightFieldComp
                     gameSessionBlock.gameInventory.visible = false
+                    gameSessionBlock.gameSessionMenu.visible = false
                 }
             }
 
@@ -135,17 +138,18 @@ Rectangle {
         if(logicalPositionx-1>=0) {
 
             game.hero.changeX(-1)
-            onEnemy.text= game.onEnemy()
-            if(game.onEnemy()){
-                enemyName.text = game.enemyName
-            }else{
-                enemyName.text = "Nothing"
-            }
+//            onEnemy.text= game.onEnemy()
+//            if(game.onEnemy()){
+//                enemyName.text = game.enemyName
+//            }else{
+//                enemyName.text = "Nothing"
+//            }
             checkRoom()
             if(game.onEnemy()){
                 if(game.board.boardRoom.boardCells[game.hero.heroY][game.hero.heroX].characterHealth>0){
                     roomLoader.sourceComponent=fightFieldComp
                     gameSessionBlock.gameInventory.visible = false
+                    gameSessionBlock.gameSessionMenu.visible = false
                 }
             }
         } else {

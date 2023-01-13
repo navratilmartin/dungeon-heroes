@@ -30,6 +30,7 @@
         <file>SessionBlock.qml</file>
         <file>InfoFieldText.qml</file>
         <file>GameOver.qml</file>
+        <file>SessionHelp.qml</file>
     </qresource>
     <qresource prefix="/images"/>
 </RCC>

@@ -76,10 +76,12 @@ Rectangle {
             roomLoader.source=""
             roomLoader.source="CellField.qml"
             gameSessionBlock.gameInventory.visible = true
+            gameSessionBlock.gameSessionMenu.visible = true
         }if(game.hero.heroHealth<=0){
             roomLoader.source=""
             roomLoader.source="GameOver.qml"
-
+            gameSessionBlock.gameInventory.visible = false
+            gameSessionBlock.gameSessionMenu.visible = true
         }
 
     }

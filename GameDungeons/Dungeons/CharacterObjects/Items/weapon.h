@@ -14,6 +14,7 @@ public:
     int getDamageBonus() const;
     int getDurability() const;
     void decreaseDurabilityByOne();
+    Item::ItemType getItemType() const override;
 };
 
 #endif // WEAPON_H

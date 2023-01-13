@@ -85,11 +85,18 @@ Window {
             }
         }
 
+        SessionHelp {
+            id: gameSessionHelp
+            width: 400
+            height: 460
+            anchors.centerIn: parent
+        }
+
         Loader {
             id: fightLoader
             property string enemy : ""
             active: false
-            focus:false
+            focus: false
             sourceComponent: fightFieldComp
 
             anchors.right: parent.right

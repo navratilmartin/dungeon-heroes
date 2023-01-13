@@ -21,6 +21,10 @@ QString Item::getQStringName() const {
     return QString::fromStdString(m_name);
 }
 
+Item::ItemType Item::getItemType() const {
+    return ItemType::None;
+}
+
 std::string Item::getName() {
     return m_name;
 }

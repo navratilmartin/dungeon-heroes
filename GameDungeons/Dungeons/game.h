@@ -10,13 +10,15 @@ class Game : public QObject {
     Q_PROPERTY(Board* board READ getBoardMatrix CONSTANT)
     Q_PROPERTY(Hero* hero READ getHero CONSTANT)
     Q_PROPERTY(QString enemyName READ enemyName CONSTANT)
+    Q_PROPERTY(QStringList helpMessages READ getHelpMessages CONSTANT)
 
     Loader* m_loader;
     Board* m_board;
     Hero* m_hero;
+    QStringList m_helpMessages;
+
     bool isOnEnemy();
     void createBoard(EnumDifficulty difficulty);
-
     void loadBoard();
 
 public:
@@ -24,17 +26,19 @@ public:
 
     Game& operator=(const Game&) = delete;
 
+    ~Game();
+
     Board* getBoardMatrix() const;
 
     Hero* getHero() const;
+
+    QStringList getHelpMessages() const;
 
     QString enemyName();
 
     Q_INVOKABLE void play(int userInput = 3);
     Q_INVOKABLE bool onEnemy();
     Q_INVOKABLE void attackEnemy();
-    ~Game();
-
 };
 
 Q_DECLARE_METATYPE(Board*); // None Qt Data types must be registered

@@ -9,10 +9,6 @@ Hero::Hero(int x, int y, const std::string& name, int baseDamage):
     m_armor = nullptr;
     m_indexOfEquipedWeaponInInventory = 0;
     m_indexOfEquipedArmorInInventory = 0;
-
-    m_isItemWeapon = false;
-    m_isItemArmor = false;
-    m_isItemPotion = false;
 }
 
 std::vector<Item*> Hero::getInventory() const {
@@ -84,18 +80,18 @@ void Hero::interactWithBoardCell(BoardCell* boardCell) {
 }
 
 void Hero::useItem(int itemIndex) {
-    if (dynamic_cast<Weapon*>(m_inventory.at(itemIndex)) and m_weapon == nullptr) {
+    if (m_inventory.at(itemIndex)->getItemType() == Item::ItemType::Weapon and m_weapon == nullptr) {
         m_weapon = dynamic_cast<Weapon*>(m_inventory.at(itemIndex));
         m_indexOfEquipedWeaponInInventory = itemIndex;
         m_baseDamage += m_weapon->getDamageBonus();
         emit damageChanged();
         emit weaponChanged();
-    } else if (dynamic_cast<Armor*>(m_inventory.at(itemIndex)) and m_armor == nullptr) {
+    } else if (m_inventory.at(itemIndex)->getItemType() == Item::ItemType::Armor and m_armor == nullptr) {
         m_armor = dynamic_cast<Armor*>(m_inventory.at(itemIndex));
         m_defense += m_armor->getArmorBonus();
         emit defenseChanged();
         emit armorChanged();
-    } else if (dynamic_cast<Potion*>(m_inventory.at(itemIndex))) {
+    } else if (m_inventory.at(itemIndex)->getItemType() == Item::ItemType::Potion) {
         m_actualHealth += m_maxHealth * dynamic_cast<Potion*>(m_inventory.at(itemIndex))
                 ->getPercentageHealthBonus() / 100;
         m_inventory.at(itemIndex) = nullptr;
@@ -119,19 +115,6 @@ void Hero::dropItem(int itemIndex) {
 
     m_inventory.at(itemIndex) = nullptr;
     emit inventoryChanged();
-}
-
-void Hero::inspectItem(int itemIndex) {
-    if (dynamic_cast<Weapon*>(m_inventory.at(itemIndex))) {
-        m_isItemWeapon = true;
-        emit isItemWeaponChanged();
-    } else if (dynamic_cast<Armor*>(m_inventory.at(itemIndex))) {
-        m_isItemArmor = true;
-        emit isItemArmorChanged();
-    } else if (dynamic_cast<Potion*>(m_inventory.at(itemIndex))) {
-        m_isItemPotion = true;
-        emit isItemPotionChanged();
-    }
 }
 
 void Hero::attack(Enemy *e) { // Hero always attacks the enemy, never the other way around.

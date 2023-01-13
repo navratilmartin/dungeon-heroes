@@ -8,3 +8,7 @@ Potion::Potion(int percentageHealthBonus, const std::string& name, const std::st
 int Potion::getPercentageHealthBonus() const {
     return m_percentageHealthBonus;
 }
+
+Item::ItemType Potion::getItemType() const {
+    return Item::ItemType::Potion;
+}
