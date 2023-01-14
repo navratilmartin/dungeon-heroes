@@ -1,0 +1,40 @@
+{
+    "actualRoomIndex": 3,
+    "heroDamage": 15,
+    "heroDefense": 0,
+    "heroExperience": 0,
+    "heroHealth": 21,
+    "heroLevel": 1,
+    "heroName": "Wanderer",
+    "heroX": 4,
+    "heroY": 3,
+    "inventoryArmors": [
+        {
+            "armor": 20,
+            "description": "Decreases the incoming damage from the enemy by 20.",
+            "durability": 100,
+            "name": "Armor"
+        }
+    ],
+    "inventoryPotions": [
+        {
+            "bonus": 8,
+            "description": "Regenerates 8 hp.",
+            "name": "Potion"
+        }
+    ],
+    "inventoryWeapons": [
+        {
+            "damage": 9,
+            "description": "Deals 9 to the enemy.",
+            "durability": 100,
+            "name": "Dagger"
+        },
+        {
+            "damage": 14,
+            "description": "Deals 14 to the enemy.",
+            "durability": 100,
+            "name": "Axe"
+        }
+    ]
+}
