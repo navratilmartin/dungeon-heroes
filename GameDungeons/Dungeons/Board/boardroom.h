@@ -19,6 +19,7 @@
 #include <QObject>
 #include <random>
 #include <map>
+
 const int roomSize = 8;
 
 class BoardRoom : public QObject {
@@ -34,6 +35,7 @@ private:
     BoardCell* m_oneBoardCell;
 
     void generateCells(EnumDifficulty difficulty);
+
 public:
     BoardRoom(EnumDifficulty difficulty);
     void addHideout();
@@ -46,8 +48,8 @@ public:
     std::vector<std::vector<BoardCell*>> getBoardCells() const;
     BoardCell* getOneBoardCell() const;
 
-    Q_INVOKABLE int enemyHealth(int x, int y);
     Q_INVOKABLE void extractOneBoardCell(int x, int y);
+
 signals:
     void bossRoomChanged();
     void roomChanged();

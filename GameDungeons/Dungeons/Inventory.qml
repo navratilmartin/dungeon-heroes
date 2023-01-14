@@ -20,6 +20,21 @@ GridLayout {
             property string borderColor: "white"
             property string fieldImage: fieldImagePath
 
+            property bool itemCorruptionOccured: if (modelData !== null) {
+                                                     if (game.hero.heroInventory[itemIndex] !== null &&
+                                                             game.hero.heroInventory[itemIndex].itemCorruption) {
+                                                         itemCorruptionOccured = true;
+                                                         gameSessionBlock.messageTimerRunning = true
+                                                         gameSessionBlock.messageVisible = true
+                                                         gameSessionBlock.messageText = "Item has been corrupted!"
+                                                     } else {
+                                                         false
+                                                     }
+
+                                                 } else {
+                                                     false
+                                                 }
+
             width: 57
             color: "#96001850"
             border.color: if (modelData !== null) {

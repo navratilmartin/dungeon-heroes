@@ -3,7 +3,7 @@
 Armor::Armor(int armorBonus, const std::string& name, const std::string& description, int x, int y):
     Item(x, y, name, description) {
     m_armorBonus = armorBonus;
-    m_durability = 100;
+    m_durability = 5;
 }
 
 int Armor::getDurability() const {

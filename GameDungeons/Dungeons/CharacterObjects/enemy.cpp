@@ -8,7 +8,3 @@ Enemy::Enemy(int x, int y, const std::string& name, int damage, int armor, int e
 int Enemy::getExperienceBonus() const {
     return m_experienceBonus;
 }
-
-Enemy::~Enemy() {
-    // Nejaky efekt v qt po smrti?
-}

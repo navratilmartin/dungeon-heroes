@@ -8,18 +8,9 @@ BoardRoom::BoardRoom(EnumDifficulty difficulty) {
     m_oneBoardCell = m_room.at(0).at(0);
 }
 
-
-int BoardRoom::enemyHealth(int x,int y){
-   if(this->getBoardCells().at(y).at(x)->getCharacter()!=nullptr)
-   {
-    return this->getBoardCells().at(y).at(x)->getCharacter()->getActualHealth();
-   }
-   return -1;
-}
-
-void BoardRoom::generateCells(EnumDifficulty difficulty) {  // Misto generate algorithmu for cykly - potrebuju
-    for(int height=0; height<roomSize; height++) {          // x a y souradnice do konstruktoru Roads.
-        for(int width=0; width<roomSize; width++) {
+void BoardRoom::generateCells(EnumDifficulty difficulty) {
+    for (int height=0; height < roomSize; height++) {
+        for (int width=0; width < roomSize; width++) {
             m_room.at(height).at(width) = new Road(height, width);
         }
     }
@@ -28,9 +19,10 @@ void BoardRoom::generateCells(EnumDifficulty difficulty) {  // Misto generate al
 void BoardRoom::addHideout() {
     int randx = rand()%(roomSize*roomSize);
     int x = randx / roomSize;
-    if(x == 0){     // First row is empty
+    if (x == 0) {     // First row is empty
         x++;
     }
+
     int y = randx % roomSize;
     m_room.at(x).at(y) = new Hideout(x, y, 15);
 }
@@ -40,19 +32,23 @@ void BoardRoom::addEnemy(int type) {
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(0, roomSize-1);
     int x = dis(gen);
-    if(x == 0){     // First row is empty
+
+    if (x == 0) {     // First row is empty
         x++;
     }
+
     int y = dis(gen);
-    while(m_room.at(x).at(y)->getCharacter() != nullptr){
+
+    while (m_room.at(x).at(y)->getCharacter() != nullptr){
         x = (x+1)%8;
     }
-    if(type == 1){
+
+    if (type == 1) {
         EnemyFactory* ef = new EnemyFactoryRobber();
 
         m_room.at(x).at(y)->addCharacter(ef->getEnemy(x,y));
 
-    } else if(type == 2){
+    } else if (type == 2) {
         EnemyFactory* ef = new EnemyFactorySlime();
 
         m_room.at(x).at(y)->addCharacter(ef->getEnemy(x,y));
@@ -74,36 +70,44 @@ void BoardRoom::addItem(int typeOfItem){
     std::uniform_int_distribution<int> arm(5, 20);
     std::uniform_int_distribution<int> dmg(5, 30);
     int x = dis(gen);
+
     if(x == 0){     // First row is empty
         x++;
     }
+
     int y = dis(gen);
-    while(m_room.at(x).at(y)->getItem() != nullptr){
+
+    while (m_room.at(x).at(y)->getItem() != nullptr) {
         x = (x+1)%8;
     }
-    if(typeOfItem == 1){
+
+    if (typeOfItem == 1) {
         int weaponBonus = dmg(gen);
         std::string weaponName;
-        if(weaponBonus >22){
+
+        if (weaponBonus > 22) {
             weaponName = "Sword";
         }
-        else if(weaponBonus > 12){
+
+        else if (weaponBonus > 12) {
             weaponName = "Axe";
         }
-        else{
+
+        else {
             weaponName = "Dagger";
         }
+
         Weapon* w = new Weapon(weaponBonus, weaponName,
                                "Deals " + std::to_string(weaponBonus) + " to the enemy.", x, y);
         m_room.at(x).at(y)->addItem(w);
-    }
-    else if(typeOfItem == 2){
+
+    } else if (typeOfItem == 2) {
         int armorBonus = arm(gen);
         Armor* a = new Armor(armorBonus, "Armor",
                              "Decreases the incoming damage from the enemy by " + std::to_string(armorBonus) + ".", x, y);
         m_room.at(x).at(y)->addItem(a);
-    }
-    else{
+
+    } else {
         int potionBonus = pot(gen);
         Potion* p = new Potion(potionBonus, "Potion",
                                "Regenerates " + std::to_string(potionBonus) + " hp.", x, y);

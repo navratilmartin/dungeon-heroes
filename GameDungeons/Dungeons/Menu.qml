@@ -22,10 +22,6 @@ Column {
                 gameSessionBlock.visible = true
                 roomLoaderWrapper.visible = true
                 roomLoader.visible = true
-
-                if (fightLoader.visible === false) {
-                    fightLoader.visible = true
-                }
             }
         }
     }
@@ -41,7 +37,14 @@ Column {
             }
 
             onClicked: {
-
+                gameMenu.visible = false
+                gameSessionBlock.visible = true
+                gameSessionBlock.messageText = "Game saved"
+                gameSessionBlock.messageVisible = true
+                gameSessionBlock.messageTimerRunning = true
+                roomLoaderWrapper.visible = true
+                roomLoader.visible = true
+                game.saveGame()
             }
         }
     }

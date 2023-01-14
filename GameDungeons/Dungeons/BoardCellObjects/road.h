@@ -3,7 +3,7 @@
 
 #include "../Board/boardcell.h"
 
-class Road: public BoardCell{
+class Road: public BoardCell {
 public:
     Road(int x, int y, Character*ch = nullptr, Item* i = nullptr);
 };

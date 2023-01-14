@@ -3,21 +3,22 @@
 
 #include "character.h"
 #include "item.h"
-#include <QObject>
 
 class BoardCell : public QObject {
 protected:
     Q_OBJECT
-    int m_x;
-    int m_y;
-    Character* m_character;
-    Item* m_item;
     Q_PROPERTY(Character* character READ getCharacter CONSTANT)
-    Q_PROPERTY(bool characterIsNotNull READ characterIsNotNull CONSTANT)
+    Q_PROPERTY(bool characterIsNotNull READ characterIsNotNull NOTIFY enemyIsNotNullChanged)
     Q_PROPERTY(QString characterName READ characterName CONSTANT)
     Q_PROPERTY(int characterHealth READ getCharacterHealth CONSTANT)
     Q_PROPERTY(bool itemIsNotNull READ itemIsNotNull NOTIFY itemIsNotNullChanged)
     Q_PROPERTY(QString itemName READ itemName CONSTANT)
+
+    int m_x;
+    int m_y;
+    Item* m_item;
+    Character* m_character;
+
 public:
     BoardCell(int x, int y, Character*ch, Item* i);
     bool itemIsNotNull();
@@ -34,8 +35,12 @@ public:
     void removeItem();
     QString characterName();
     QString itemName();
+
 signals:
     void itemIsNotNullChanged();
+    void enemyIsNotNullChanged();
 };
+
+Q_DECLARE_METATYPE(Character*)
 
 #endif // BOARDCELL_H

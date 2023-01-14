@@ -4,7 +4,6 @@
 #include <iostream>
 #include <algorithm>
 #include <cmath>
-#include <iterator>
 #include <vector>
 #include <QObject>
 
@@ -13,9 +12,9 @@
 const int boardSize = 8; // Initializing here for more transparency, could be initialized in the constructor
 
 class Board : public QObject {
-private:
     Q_OBJECT
     Q_PROPERTY(BoardRoom* boardRoom READ getCurrentRoom NOTIFY changedBoardRoom)
+
     int m_size;
     int m_boardRow;
     BoardRoom* m_boardCurrentRoom;
@@ -39,6 +38,7 @@ public:
     int getCurrentRoomIndex() const;
 
     Q_INVOKABLE void switchRoom(bool direction);
+
 signals:
     void changedBoardRoom();
 };

@@ -94,10 +94,6 @@ Column {
                     roomLoaderWrapper.visible = false
                     roomLoader.visible = false
 
-                    if (fightLoader.visible === true) {
-                        fightLoader.visible = false
-                    }
-
                     gameMainMenu.visible = true
                     gameMainMenu.resumeButtonVisible = true
                     gameMainMenu.saveButtonVisible = true

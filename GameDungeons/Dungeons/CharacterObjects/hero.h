@@ -31,6 +31,8 @@ private:
     Q_PROPERTY(Weapon* heroWeapon READ getWeapon NOTIFY weaponChanged)
     Q_PROPERTY(Armor* heroArmor READ getArmor NOTIFY armorChanged)
 
+    Q_PROPERTY(bool heroEncounter MEMBER m_encounter NOTIFY encounterChanged)
+
     const unsigned long long inventorySize = 8;
 
     int m_level;
@@ -38,6 +40,7 @@ private:
     std::vector<Item*> m_inventory;
     Weapon* m_weapon;
     Armor* m_armor;
+    bool m_encounter;
     int m_indexOfEquipedWeaponInInventory;
     int m_indexOfEquipedArmorInInventory;
 
@@ -56,15 +59,14 @@ public:
     int getIndexOfEquipedArmorInInventory() const;
     int getIndexOfEquipedWeaponInInventory() const;
 
-    void attack(Enemy* e);
-    void simpleAttack(Character* ch);
-
     Q_INVOKABLE int changeX(int by);
     Q_INVOKABLE int changeY(int by);
     Q_INVOKABLE void resetXY();
     Q_INVOKABLE void interactWithBoardCell(BoardCell* boardcell);
+    Q_INVOKABLE void attack(BoardCell* boardcell);
     Q_INVOKABLE void useItem(int itemIndex);
     Q_INVOKABLE void dropItem(int itemIndex);
+
 signals:
     void xChanged();
     void yChanged();
@@ -78,6 +80,8 @@ signals:
     void inventoryChanged();
     void weaponChanged();
     void armorChanged();
+
+    void encounterChanged();
 };
 
 Q_DECLARE_METATYPE(std::vector<Item* >)

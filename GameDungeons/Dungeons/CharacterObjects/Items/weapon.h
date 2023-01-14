@@ -9,6 +9,7 @@ class Weapon: public Item {
 private:
     int m_damageBonus;
     int m_durability;
+
 public:
     Weapon(int damageBonus, const std::string& name, std::string description, int x, int y);
     int getDamageBonus() const;

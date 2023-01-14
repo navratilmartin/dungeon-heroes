@@ -50,7 +50,7 @@ Window {
         Component {
             id: fightFieldComp
 
-            Fight{
+            Fight {
                 id: fightField
             }
         }
@@ -90,23 +90,6 @@ Window {
             width: 400
             height: 460
             anchors.centerIn: parent
-        }
-
-        Loader {
-            id: fightLoader
-            property string enemy : ""
-            active: false
-            focus: false
-            sourceComponent: fightFieldComp
-
-            anchors.right: parent.right
-            anchors.rightMargin: 40
-            anchors.verticalCenter: parent.verticalCenter
-            onLoaded: {
-                item.anchors.horizontalCenter = fightLoader.horizontalCenter
-                item.anchors.verticalCenter = fightLoader.verticalCenter
-            }
-
         }
     }
 }

@@ -3,7 +3,7 @@
 
 #include "enemyfactory.h"
 
-class EnemyFactoryShaman: public EnemyFactory{
+class EnemyFactoryShaman: public EnemyFactory {
 public:
     Enemy* getEnemy(int x, int y) override;
 };

@@ -1,7 +1,7 @@
 #ifndef DUNGEONS_CHARACTER_H
 #define DUNGEONS_CHARACTER_H
 
-#include <iostream>
+#include <string>
 #include <QObject>
 #include <QString>
 
@@ -9,14 +9,13 @@ class Character: public QObject {
 protected:
     int m_x;
     int m_y;
-    std::string m_name="Nothing";
+    std::string m_name;
     int m_maxHealth;
     int m_actualHealth;
     int m_baseDamage;
     int m_defense;
 
 public:
-
     Character(int x, int y, const std::string &name, int baseDamage, int defense);
     int getX() const;
     int getY() const;
@@ -26,9 +25,6 @@ public:
     int getActualHealth() const;
     int getBaseDamage() const;
     int getDefense() const;
-    //temp
-    void decHealth(int health);
-
 };
 
 

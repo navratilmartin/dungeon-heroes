@@ -6,7 +6,7 @@
 
 #include "../enemy.h"
 
-class EnemyFactory{
+class EnemyFactory {
 public:
     virtual Enemy*  getEnemy(int x, int y) = 0;
 };

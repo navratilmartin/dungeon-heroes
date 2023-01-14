@@ -46,6 +46,7 @@ Item *BoardCell::pickUpItem() {
 
 void BoardCell::removeCharacter() {
     m_character = nullptr;
+    emit enemyIsNotNullChanged();
 }
 
 void BoardCell::removeItem() {

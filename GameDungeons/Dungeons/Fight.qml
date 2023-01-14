@@ -1,7 +1,6 @@
 import QtQuick 2.15
 
 Rectangle {
-    property string enemy: game.enemyName
     color: "black"
     width: 600
     height: 600
@@ -18,11 +17,11 @@ Rectangle {
     }
 
     Image {
-        source: if(enemy == "Robber") {
+        source: if (game.board.boardRoom.oneBoardCell.characterName === "Robber") {
                     "images/robber-mask.png"
-                } else if(enemy == "Slime") {
+                } else if (game.board.boardRoom.oneBoardCell.characterName === "Slime") {
                     "images/slime.png"
-                } else if(enemy == "Shaman") {
+                } else if (game.board.boardRoom.oneBoardCell.characterName === "Shaman") {
                     "images/tribal-mask.png"
                 } else {
                     ""
@@ -37,15 +36,8 @@ Rectangle {
         Rectangle {
            id: healthBar
            height: 20
-           width: game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)
+           width: 100
            color: "green"
-
-           Text {
-               id: healthBarText
-               color: "red"
-               text: game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)
-
-           }
         }
     }
 
@@ -66,24 +58,25 @@ Rectangle {
 
 
     Keys.onDeletePressed: {
-        game.attackEnemy()
-        gameSessionBlock.statsHeroHealth = game.hero.heroHealth
+        healthBar.width -= game.hero.heroDamage
 
-        if(game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)>0) {
-            healthBarText.text=game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)
-            healthBar.width=game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)
-        } if(game.board.boardRoom.enemyHealth(game.hero.heroX,game.hero.heroY)<=0) {
-            roomLoader.source=""
-            roomLoader.source="CellField.qml"
+        if (healthBar.width <= 0) {
+            game.hero.attack(game.board.boardRoom.oneBoardCell)
+            roomLoader.source = "CellField.qml"
+            gameSessionBlock.statsHeroHealth = game.hero.heroHealth
+            gameSessionBlock.statsHeroDamage = game.hero.heroDamage
+            gameSessionBlock.statsHeroDefense = game.hero.heroDefense
+            gameSessionBlock.statsHeroExperience = game.hero.heroExperience
+            gameSessionBlock.statsHeroLevel = game.hero.heroLevel
             gameSessionBlock.gameInventory.visible = true
-            gameSessionBlock.gameSessionMenu.visible = true
-        }if(game.hero.heroHealth<=0){
-            roomLoader.source=""
-            roomLoader.source="GameOver.qml"
-            gameSessionBlock.gameInventory.visible = false
             gameSessionBlock.gameSessionMenu.visible = true
         }
 
+        if (game.hero.heroHealth <= 0) {
+            roomLoader.source = "GameOver.qml"
+            gameSessionBlock.gameInventory.visible = false
+            gameSessionBlock.gameSessionMenu.visible = true
+        }
     }
 
 }

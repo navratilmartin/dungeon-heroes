@@ -9,10 +9,10 @@
 #include <QJsonDocument>
 #include "Board/board.h"
 
-class Loader
-{
+class Loader {
 private:
     void controlFiles();
+
 public:
     Loader();
     Board* loadNewGame(EnumDifficulty difficulty);

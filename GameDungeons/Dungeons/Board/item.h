@@ -9,11 +9,13 @@ protected:
     Q_OBJECT
     Q_PROPERTY(QString QitemName READ getQStringName CONSTANT)
     Q_PROPERTY(ItemType itemType READ getItemType CONSTANT)
+    Q_PROPERTY(bool itemCorruption READ getItemCorruption NOTIFY itemCorruptionChanged)
 
     int m_x;
     int m_y;
     std::string m_name;
     std::string m_description;
+
 public:
     enum class ItemType {
         None, Potion, Armor, Weapon
@@ -27,7 +29,16 @@ public:
     QString getQstringDescription() const;
     std::string getName();
     std::string getDescription();
+    bool getItemCorruption() const;
     virtual Item::ItemType getItemType() const;
+
+    void setItemCorruption();
+
+protected:
+    bool m_itemCorruption;
+
+signals:
+    void itemCorruptionChanged();
 };
 
 Q_DECLARE_METATYPE(Item::ItemType)
