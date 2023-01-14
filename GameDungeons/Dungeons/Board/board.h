@@ -32,6 +32,8 @@ public:
     Board(EnumDifficulty difficulty);
 
     std::vector<BoardRoom*> getBoard() const;
+    int getSize() const;
+    BoardRoom* getRoom(int index) const;
 
     BoardRoom* getCurrentRoom() const;
     int getCurrentRoomIndex() const;

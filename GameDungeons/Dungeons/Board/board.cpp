@@ -113,6 +113,14 @@ int Board:: getCurrentRoomIndex() const {
     return m_boardCurrentRoomIndex;
 }
 
+int Board::getSize() const {
+    return m_size;
+}
+
+BoardRoom* Board::getRoom(int index) const {
+    return m_board.at(index)
+}
+
 void Board::printRooms(){
     for(int i=0; i<boardSize; i++){
         std::cout << "room" << i << std::endl;

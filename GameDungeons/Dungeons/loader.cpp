@@ -77,7 +77,15 @@ void Loader::saveGame(const Board* currentBoard, Hero* hero){
     board["inventoryPotions"] = potionArray;
 
     //Cells of individual rooms
+    /*
+    for (auto room:currentBoard->getBoard()){
+        for(auto row:room->getBoardCells()){
+            auto it=std::find(row.begin(), row.end(), [](){
 
+            });
+        }
+    }
+    */
     QJsonDocument saveDoc(board);
     saveFile.write(saveDoc.toJson());
     std::cout << "zde4" << std::endl;
