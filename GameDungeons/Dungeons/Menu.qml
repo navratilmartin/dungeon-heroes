@@ -91,6 +91,7 @@ Column {
 
                 // Initializing main session and hero inventory and stats
                 gameMenu.visible = false
+                newGameMenu.visible = false
                 gameTitle.visible = false
                 gameSessionBlock.gameInventory.visible = true
                 gameSessionBlock.visible = true
