@@ -44,7 +44,7 @@ void Loader::saveGame(const Board* currentBoard, Hero* hero){
                     weaponObj["description"] = weapon->getQstringDescription();
                     weaponObj["damage"] = weapon->getDamageBonus();
                     weaponObj["durability"] = weapon->getDurability();
-                    if(weapon->isEquiped()){
+                    if(weapon == hero->getWeapon()){
                         weaponObj["equiped"] = 1;
                     } else {
                         weaponObj["equiped"] = 0;
@@ -57,7 +57,7 @@ void Loader::saveGame(const Board* currentBoard, Hero* hero){
                    armorObj["description"] = armor->getQstringDescription();
                    armorObj["armor"] = armor->getArmorBonus();
                    armorObj["durability"] = armor->getDurability();
-                   if(armor->isEquiped()){
+                   if(armor == hero->getArmor()){
                        armorObj["equiped"] = 1;
                    } else{
                        armorObj["equiped"] = 0;
