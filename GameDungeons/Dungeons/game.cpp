@@ -30,7 +30,6 @@ Board* Game::getBoardMatrix() const {
 }
 
 QStringList Game::getHelpMessages() const {
-    //m_loader->saveGame(m_board, m_hero);
     return m_helpMessages;
 }
 
