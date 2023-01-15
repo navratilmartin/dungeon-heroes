@@ -29,10 +29,10 @@ void Loader::saveGame(const Board* currentBoard, Hero* hero){
     board["heroLevel"] = hero->getLevel();
     board["heroExperience"] = hero->getExperience();
     //Hero equiped items
-    if(hero->getIndexOfEquipedWeaponInInventory() != 0){
+    if(hero->getIndexOfEquipedWeaponInInventory() != -1){
         board["indexOfEqupiedWeaponFromInventory"] = hero->getIndexOfEquipedWeaponInInventory();
     }
-    if(hero->getIndexOfEquipedArmorInInventory() != 0){
+    if(hero->getIndexOfEquipedArmorInInventory() != -1){
         board["indexOfEqupiedArmorFromInventory"] = hero->getIndexOfEquipedArmorInInventory();
     }
     std::cout << "zde2" << std::endl;
@@ -77,15 +77,69 @@ void Loader::saveGame(const Board* currentBoard, Hero* hero){
     board["inventoryPotions"] = potionArray;
 
     //Cells of individual rooms
-    /*
-    for (auto room:currentBoard->getBoard()){
+    QJsonArray enemyArray = {};
+    QJsonArray boardWeaponArray = {};
+    QJsonArray boardArmorArray = {};
+    QJsonArray boardPotionArray = {};
+    for(int roomIndex=0; roomIndex<currentBoard->getSize(); roomIndex++){
+        BoardRoom* room=currentBoard->getRoom(roomIndex);
         for(auto row:room->getBoardCells()){
-            auto it=std::find(row.begin(), row.end(), [](){
-
+            std::for_each(row.begin(), row.end(), [&boardWeaponArray, &boardArmorArray, &boardPotionArray, &enemyArray, &roomIndex](BoardCell* b){
+                if(b->characterIsNotNull()){
+                    auto enemy = dynamic_cast<Enemy*>(b->getCharacter());
+                    QJsonObject enemyObj;
+                    enemyObj["x"] = enemy->getX();
+                    enemyObj["y"] = enemy->getY();
+                    enemyObj["roomIndex"] = roomIndex;
+                    enemyObj["name"] = enemy->getQName();
+                    enemyObj["defense"] = enemy->getDefense();
+                    enemyObj["attack"] = enemy->getBaseDamage();
+                    enemyObj["xp"] = enemy->getExperienceBonus();
+                    enemyArray.append(enemyObj);
+                }
+                if(b->itemIsNotNull()){
+                    if (b->getItem()->getItemType() == Item::ItemType::Weapon){
+                        QJsonObject weaponObj;
+                        auto weapon = dynamic_cast<Weapon*>(b->getItem());
+                        weaponObj["x"] = weapon->getX();
+                        weaponObj["y"] = weapon->getY();
+                        weaponObj["roomIndex"] = roomIndex;
+                        weaponObj["name"] = weapon->getQStringName();
+                        weaponObj["description"] = weapon->getQstringDescription();
+                        weaponObj["damage"] = weapon->getDamageBonus();
+                        weaponObj["durability"] = weapon->getDurability();
+                        boardWeaponArray.append(weaponObj);
+                    } else if (b->getItem()->getItemType() == Item::ItemType::Armor){
+                       QJsonObject armorObj;
+                       auto armor = dynamic_cast<Armor*>(b->getItem());
+                       armorObj["x"] = armor->getX();
+                       armorObj["y"] = armor->getY();
+                       armorObj["roomIndex"] = roomIndex;
+                       armorObj["name"] = armor->getQStringName();
+                       armorObj["description"] = armor->getQstringDescription();
+                       armorObj["armor"] = armor->getArmorBonus();
+                       armorObj["durability"] = armor->getDurability();
+                       boardArmorArray.append(armorObj);
+                    } else if (b->getItem()->getItemType() == Item::ItemType::Potion){
+                        QJsonObject potionObj;
+                        auto potion = dynamic_cast<Potion*>(b->getItem());
+                        potionObj["x"] =  potion->getX();
+                        potionObj["y"] = potion->getY();
+                        potionObj["roomIndex"] = roomIndex;
+                        potionObj["name"] = potion->getQStringName();
+                        potionObj["description"] = potion->getQstringDescription();
+                        potionObj["bonus"] = potion->getPercentageHealthBonus();
+                        boardPotionArray.append(potionObj);
+                    }
+                }
             });
         }
+        board["boardWeapons"] = boardWeaponArray;
+        board["boardArmors"] = boardArmorArray;
+        board["boardPotions"] = boardPotionArray;
+        board["enemies"] = enemyArray;
     }
-    */
+
     QJsonDocument saveDoc(board);
     saveFile.write(saveDoc.toJson());
     std::cout << "zde4" << std::endl;
