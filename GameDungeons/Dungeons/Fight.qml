@@ -17,7 +17,9 @@ Rectangle {
     }
 
     Image {
-        source: if (game.board.boardRoom.oneBoardCell.characterName === "Robber") {
+        source: if (game.board.boardRoom.oneBoardCell.isBossCell) {
+                    "images/totem-mask.png"
+                } else if (game.board.boardRoom.oneBoardCell.characterName === "Robber") {
                     "images/robber-mask.png"
                 } else if (game.board.boardRoom.oneBoardCell.characterName === "Slime") {
                     "images/slime.png"
@@ -68,14 +70,34 @@ Rectangle {
             gameSessionBlock.statsHeroDefense = game.hero.heroDefense
             gameSessionBlock.statsHeroExperience = game.hero.heroExperience
             gameSessionBlock.statsHeroLevel = game.hero.heroLevel
+            gameSessionBlock.statsKilledShamans = game.hero.killedShamans
             gameSessionBlock.gameInventory.visible = true
             gameSessionBlock.gameSessionMenu.visible = true
-        }
 
-        if (game.hero.heroHealth <= 0) {
-            roomLoader.source = "GameOver.qml"
-            gameSessionBlock.gameInventory.visible = false
-            gameSessionBlock.gameSessionMenu.visible = true
+            if (game.board.boardRoom.oneBoardCell.characterIsNotNull && gameSessionBlock.statsHeroHealth > 0) {
+                gameSessionBlock.messageText = "You miraculously escaped!"
+                gameSessionBlock.messageVisible = true
+                gameSessionBlock.messageTimerRunning = true
+
+            } else if (gameSessionBlock.statsHeroHealth > 0) {
+                gameSessionBlock.messageText = "Enemy has been slayed!"
+                gameSessionBlock.messageVisible = true
+                gameSessionBlock.messageTimerRunning = true
+
+                if (game.board.boardRoom.oneBoardCell.isBossCell) {
+                   roomLoader.source = "GameOver.qml"
+                   roomLoader.item.gameOverText = "You won!"
+                   gameSessionBlock.statsKilledShamans = game.hero.killedShamans-1
+                   gameSessionBlock.gameInventory.visible = false
+                   gameSessionBlock.gameSessionMenu.visible = true
+                }
+
+            } else {
+                roomLoader.source = "GameOver.qml"
+                gameSessionBlock.gameInventory.visible = false
+                gameSessionBlock.gameSessionMenu.visible = true
+
+           }
         }
     }
 

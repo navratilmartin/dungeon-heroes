@@ -5,6 +5,7 @@
 
 class Potion: public Item {
 private:
+    Q_OBJECT
     int m_percentageHealthBonus;
 
 public:

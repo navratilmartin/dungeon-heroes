@@ -8,6 +8,7 @@ Hero::Hero(int x, int y, const std::string& name, int baseDamage):
     m_weapon = nullptr;
     m_armor = nullptr;
     m_encounter = false;
+    m_numberOfkilledShamans = 0;
     m_indexOfEquipedWeaponInInventory = 0;
     m_indexOfEquipedArmorInInventory = 0;
 }
@@ -87,22 +88,21 @@ void Hero::interactWithBoardCell(BoardCell* boardCell) {
 
 void Hero::useItem(int itemIndex) {
     if (m_inventory.at(itemIndex)->getItemType() == Item::ItemType::Weapon and m_weapon == nullptr) {
-        m_weapon = dynamic_cast<Weapon*>(m_inventory.at(itemIndex));
+        m_weapon = qobject_cast<Weapon*>(m_inventory.at(itemIndex));
         m_indexOfEquipedWeaponInInventory = itemIndex;
         m_baseDamage += m_weapon->getDamageBonus();
         emit damageChanged();
         emit weaponChanged();
     } else if (m_inventory.at(itemIndex)->getItemType() == Item::ItemType::Armor and m_armor == nullptr) {
-        m_armor = dynamic_cast<Armor*>(m_inventory.at(itemIndex));
+        m_armor = qobject_cast<Armor*>(m_inventory.at(itemIndex));
         m_indexOfEquipedArmorInInventory = itemIndex;
         m_defense += m_armor->getArmorBonus();
         emit defenseChanged();
         emit armorChanged();
     } else if (m_inventory.at(itemIndex)->getItemType() == Item::ItemType::Potion) {
-        m_actualHealth += m_maxHealth * dynamic_cast<Potion*>(m_inventory.at(itemIndex))
+        m_actualHealth += m_maxHealth * qobject_cast<Potion*>(m_inventory.at(itemIndex))
                 ->getPercentageHealthBonus() / 100;
 
-        // delete m_inventory.at(itemIndex);
         m_inventory.at(itemIndex) = nullptr;
 
         emit healthChanged();
@@ -115,7 +115,6 @@ void Hero::dropItem(int itemIndex) {
         m_baseDamage -= m_weapon->getDamageBonus();
         m_baseDamage = m_baseDamage < 0 ? 0 : m_baseDamage;
 
-        // delete m_weapon;
         m_weapon = nullptr;
 
         emit weaponChanged();
@@ -124,7 +123,6 @@ void Hero::dropItem(int itemIndex) {
         m_defense -= m_armor->getArmorBonus();
         m_defense = m_defense < 0 ? 0 : m_defense;
 
-        // delete m_armor;
         m_armor = nullptr;
 
         emit armorChanged();
@@ -136,8 +134,7 @@ void Hero::dropItem(int itemIndex) {
 }
 
 void Hero::attack(BoardCell* boardcell) { // Hero always attacks the enemy, never the other way around.
-    Enemy* enemy = dynamic_cast<Enemy*>(boardcell->getCharacter());
-
+    Enemy* enemy = qobject_cast<Enemy*>(boardcell->getCharacter());
     int weaponBonusDamage = 0;
 
     if (m_weapon != nullptr) {
@@ -154,6 +151,12 @@ void Hero::attack(BoardCell* boardcell) { // Hero always attacks the enemy, neve
 
         getXp(enemy->getExperienceBonus());
         emit experienceChanged();
+
+        if (enemy->getName() == "Shaman") {
+            m_numberOfkilledShamans++;
+            emit numberOfKilledShamansChanged();
+        }
+
         boardcell->removeCharacter();
 
     } else if (attackDamage >= attackDamageEnemy) { // If the hero wins, he takes only half the damage
@@ -169,6 +172,12 @@ void Hero::attack(BoardCell* boardcell) { // Hero always attacks the enemy, neve
 
         getXp(enemy->getExperienceBonus());
         emit experienceChanged();
+
+        if (enemy->getName() == "Shaman") {
+            m_numberOfkilledShamans++;
+            emit numberOfKilledShamansChanged();
+        }
+
         boardcell->removeCharacter();
 
     } else if (attackDamage < attackDamageEnemy) {  // If the hero loses, he takes full damage and doesnt hurt the enemy
@@ -181,8 +190,6 @@ void Hero::attack(BoardCell* boardcell) { // Hero always attacks the enemy, neve
         if (m_armor != nullptr) {
             useArmor(2);
         }
-
-        boardcell->removeCharacter();
     }
 
     m_encounter = false;
@@ -236,4 +243,8 @@ int Hero::getIndexOfEquipedArmorInInventory() const {
 
 int Hero::getIndexOfEquipedWeaponInInventory() const {
     return m_indexOfEquipedWeaponInInventory;
+}
+
+int Hero::getNumberOfKilledShamans() const {
+    return m_numberOfkilledShamans;
 }

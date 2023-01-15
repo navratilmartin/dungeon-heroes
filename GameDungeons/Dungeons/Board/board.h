@@ -14,17 +14,20 @@ const int boardSize = 8; // Initializing here for more transparency, could be in
 class Board : public QObject {
     Q_OBJECT
     Q_PROPERTY(BoardRoom* boardRoom READ getCurrentRoom NOTIFY changedBoardRoom)
+    Q_PROPERTY(int numberOfShamans READ getNumberOfShamans CONSTANT)
 
     int m_size;
     int m_boardRow;
-    BoardRoom* m_boardCurrentRoom;
     int m_boardCurrentRoomIndex;
+    int m_totalNumberOfShamans;
+    BoardRoom* m_boardCurrentRoom;
     std::vector<BoardRoom*> m_board;
+    EnumDifficulty m_boardDifficulty;
 
-    void generateRooms(EnumDifficulty difficulty);
-    void generateHideouts(EnumDifficulty difficulty);
-    void generateEnemies(EnumDifficulty difficulty);
-    void generateItems(EnumDifficulty difficulty);
+    void generateRooms();
+    void generateHideouts();
+    void generateEnemies();
+    void generateItems();
     void printRooms();
 
 public:
@@ -33,11 +36,13 @@ public:
     std::vector<BoardRoom*> getBoard() const;
     int getSize() const;
     BoardRoom* getRoom(int index) const;
+    int getNumberOfShamans() const;
 
     BoardRoom* getCurrentRoom() const;
     int getCurrentRoomIndex() const;
 
     Q_INVOKABLE void switchRoom(bool direction);
+    Q_INVOKABLE void revealBoss();
 
 signals:
     void changedBoardRoom();

@@ -5,33 +5,41 @@ Board::Board(EnumDifficulty difficulty) {
     m_boardRow = 0;
     m_boardCurrentRoom = nullptr;
     m_boardCurrentRoomIndex = 0;
+    m_totalNumberOfShamans = 0;
     m_board = std::vector<BoardRoom*> (std::vector<BoardRoom*> (boardSize));
-    generateRooms(difficulty);
+    m_boardDifficulty = difficulty;
+    generateRooms();
+
+    std::for_each(m_board.begin(), m_board.end(), [this](const BoardRoom* br) {
+        this->m_totalNumberOfShamans += br->getNumberOfShamansInRoom();
+    });
+
+    // std::cout << "NUMBER OF SHAMANS: " << m_totalNumberOfShamans << "\n";
 }
 
-void Board::generateRooms(EnumDifficulty difficulty) {
-    generate(m_board.begin(), m_board.end(), [difficulty]() -> BoardRoom * {
-        BoardRoom *r = new BoardRoom(difficulty);
+void Board::generateRooms() {
+    generate(m_board.begin(), m_board.end(), [this]() -> BoardRoom * {
+        BoardRoom *r = new BoardRoom(this->m_boardDifficulty);
         return r;
     });
 
-    generateHideouts(difficulty);
-    generateEnemies(difficulty);
-    generateItems(difficulty);
+    generateHideouts();
+    generateEnemies();
+    generateItems();
 
     m_boardCurrentRoom = m_board.at(m_boardRow);
     m_board.at(boardSize-1)->setBoss(); // last room always has a boss
 }
 
-void Board::generateHideouts(EnumDifficulty difficulty) {
+void Board::generateHideouts() {
     srand(time(0));
     int numOfHideouts=0;
 
-    if (difficulty == EnumDifficulty::Easy) {
+    if (m_boardDifficulty == EnumDifficulty::Easy) {
         numOfHideouts = boardSize/2;
-    }else if (difficulty == EnumDifficulty::Medium) {
+    }else if (m_boardDifficulty == EnumDifficulty::Medium) {
         numOfHideouts = boardSize/3;
-    } else if (difficulty == EnumDifficulty::Hard) {
+    } else if (m_boardDifficulty == EnumDifficulty::Hard) {
         numOfHideouts = boardSize/4;
     }
 
@@ -42,17 +50,17 @@ void Board::generateHideouts(EnumDifficulty difficulty) {
     }
 }
 
-void Board::generateEnemies(EnumDifficulty difficulty) {
+void Board::generateEnemies() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(0, boardSize-1);
     int numOfEnemies=0;
 
-    if (difficulty == EnumDifficulty::Easy) {
+    if (m_boardDifficulty == EnumDifficulty::Easy) {
         numOfEnemies = boardSize * 1.8;
-    } else if (difficulty == EnumDifficulty::Medium) {
+    } else if (m_boardDifficulty == EnumDifficulty::Medium) {
         numOfEnemies = boardSize * 2.4;
-    } else if (difficulty == EnumDifficulty::Hard) {
+    } else if (m_boardDifficulty == EnumDifficulty::Hard) {
         numOfEnemies = boardSize * 3.0;
     }
 
@@ -69,20 +77,22 @@ void Board::generateEnemies(EnumDifficulty difficulty) {
     }
 }
 
-void Board::generateItems(EnumDifficulty difficulty){
+void Board::generateItems() {
     std::random_device rd;
     std::mt19937 gen(rd());
     int numOfItems=0, typeOfItem=0;
     std::uniform_int_distribution<> dis(0, boardSize-1);
     std::uniform_int_distribution<> ite(1, 3);
-    if(difficulty == EnumDifficulty::Easy){
+
+    if (m_boardDifficulty == EnumDifficulty::Easy) {
         numOfItems = boardSize * 1.5;
-    }else if(difficulty == EnumDifficulty::Medium){
+    } else if (m_boardDifficulty  == EnumDifficulty::Medium) {
         numOfItems = boardSize * 1.3;
-    }else if(difficulty == EnumDifficulty::Hard){
+    } else if (m_boardDifficulty  == EnumDifficulty::Hard) {
         numOfItems = boardSize * 1;
     }
-    for(int count=0; count<numOfItems; count++){
+
+    for (int count=0; count<numOfItems; count++) {
         int x = dis(gen);
         typeOfItem = ite(gen);
         m_board.at(x) ->addItem(typeOfItem);
@@ -113,6 +123,14 @@ void Board::switchRoom(bool direction) {
     }
 }
 
+void Board::revealBoss() {
+    EnemyFactoryShaman boss;
+    BoardCell* bossCell = m_board.at(boardSize-1)->getBoardCells().at(7).at(7);
+
+    bossCell->addCharacter(boss.getEnemy(7, 7));
+    bossCell->setBossCell(m_boardDifficulty);
+}
+
 int Board:: getCurrentRoomIndex() const {
     return m_boardCurrentRoomIndex;
 }
@@ -123,6 +141,10 @@ int Board::getSize() const {
 
 BoardRoom* Board::getRoom(int index) const {
     return m_board.at(index);
+}
+
+int Board::getNumberOfShamans() const {
+    return m_totalNumberOfShamans;
 }
 
 void Board::printRooms(){

@@ -42,3 +42,35 @@ int Character::getDefense() const {
 int Character::getBaseDamage() const {
     return m_baseDamage;
 }
+
+// Used only for the boss
+void Character::setCharacterStatsByDifficulty(EnumDifficulty difficulty) {
+    switch(int(difficulty)) {
+        case 0:
+            m_baseDamage *= 1.5;
+            m_defense *= 1.5;
+            m_maxHealth *= 1.3;
+            m_actualHealth = m_maxHealth;
+            break;
+
+        case 1:
+            m_baseDamage *= 1.7;
+            m_defense *= 1.6;
+            m_maxHealth *= 1.5;
+            m_actualHealth = m_maxHealth;
+            break;
+
+        case 2:
+            m_baseDamage *= 1.8;
+            m_defense *= 1.7;
+            m_maxHealth *= 1.8;
+            m_actualHealth = m_maxHealth;
+            break;
+
+        default:
+            m_baseDamage *= 1.5;
+            m_defense *= 1.5;
+            m_maxHealth *= 1.3;
+            m_actualHealth = m_maxHealth;
+    }
+}

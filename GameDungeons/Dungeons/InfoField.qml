@@ -1,8 +1,6 @@
 import QtQuick 2.15
 
 Rectangle {
-    width: 200
-    height: 200
     border.width: 2
     border.color: "white"
     radius: 5
@@ -28,5 +26,10 @@ Rectangle {
         InfoFieldText { text: "Level: "+gameSessionBlock.statsHeroLevel }
 
         InfoFieldText { text: "Experience: "+gameSessionBlock.statsHeroExperience }
+
+        InfoFieldText {
+            text: "Slayed shamans: "+gameSessionBlock.statsKilledShamans+"/"+gameSessionBlock.totalShamans
+            color: "red"
+        }
     }
 }

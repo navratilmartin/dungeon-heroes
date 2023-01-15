@@ -6,6 +6,7 @@ BoardRoom::BoardRoom(EnumDifficulty difficulty) {
     generateCells(difficulty);
     m_boss = false;
     m_oneBoardCell = m_room.at(0).at(0);
+    m_numberOfShamansInRoom = 0;
 }
 
 void BoardRoom::generateCells(EnumDifficulty difficulty) {
@@ -39,7 +40,7 @@ void BoardRoom::addEnemy(int type) {
 
     int y = dis(gen);
 
-    while (m_room.at(x).at(y)->getCharacter() != nullptr){
+    while (m_room.at(x).at(y)->getCharacter() != nullptr) {
         x = (x+1)%8;
     }
 
@@ -54,6 +55,8 @@ void BoardRoom::addEnemy(int type) {
         m_room.at(x).at(y)->addCharacter(ef->getEnemy(x,y));
 
     } else {
+        m_numberOfShamansInRoom++;
+
         EnemyFactory* ef = new EnemyFactoryShaman();
 
         m_room.at(x).at(y)->addCharacter(ef->getEnemy(x,y));
@@ -137,6 +140,10 @@ std::vector<std::vector<BoardCell*>> BoardRoom::getBoardCells() const {
 
 BoardCell* BoardRoom::getOneBoardCell() const {
     return m_oneBoardCell;
+}
+
+int BoardRoom::getNumberOfShamansInRoom() const {
+    return m_numberOfShamansInRoom;
 }
 
 void BoardRoom::printCells(){

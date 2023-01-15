@@ -4,6 +4,7 @@ Rectangle {
     property int logicalPositionx: game.hero.heroX
     property int logicalPositiony: game.hero.heroY
 
+    property bool allShamansKilled: false
 
     property int realPositionx: logicalPositionx+1
     property int realPositiony: logicalPositiony+1
@@ -68,6 +69,14 @@ Rectangle {
                   roomLoader.sourceComponent = fightFieldComp
                   gameSessionBlock.gameInventory.visible = false
                   gameSessionBlock.gameSessionMenu.visible = false
+              }
+
+              if (game.hero.killedShamans === game.board.numberOfShamans && !allShamansKilled) {
+                  game.board.revealBoss()
+                  allShamansKilled = true
+                  gameSessionBlock.messageText = "The Greatest Shaman appeared!"
+                  gameSessionBlock.messageVisible = true
+                  gameSessionBlock.messageTimerRunning = true
               }
 
               gameSessionBlock.gameInventory.inventoryModel = game.hero.heroInventory

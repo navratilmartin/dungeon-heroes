@@ -31,11 +31,14 @@ Rectangle {
             // Initializing new Board and Hero
             game.play(levelDifficulty)
             roomLoader.active = true
+            roomLoader.visible = true
             roomLoaderWrapper.visible = true
 
             // Initializing main session and hero inventory and stats
             gameTitle.visible = false
+            gameSessionBlock.gameInventory.visible = true
             gameSessionBlock.visible = true
+            gameSessionBlock.messageText = "Use the arrow keys to move the hero on the map"
             gameSessionBlock.messageVisible = true
             gameSessionBlock.messageTimerRunning = true
 
@@ -46,6 +49,8 @@ Rectangle {
             gameSessionBlock.statsHeroDefense = game.hero.heroDefense
             gameSessionBlock.statsHeroLevel = game.hero.heroLevel
             gameSessionBlock.statsHeroExperience = game.hero.heroExperience
+            gameSessionBlock.statsKilledShamans = game.hero.killedShamans
+            gameSessionBlock.totalShamans = game.board.numberOfShamans
         }
     }
 }

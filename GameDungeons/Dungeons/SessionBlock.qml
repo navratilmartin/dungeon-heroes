@@ -12,6 +12,8 @@ Column {
     property int statsHeroDefense: 0
     property int statsHeroLevel: 1
     property int statsHeroExperience: 0
+    property int statsKilledShamans: 0
+    property int totalShamans: 0
 
     property bool messageVisible: false
     property alias messageText: infoMessage.text
@@ -23,7 +25,7 @@ Column {
 
     InfoField {
         width: 250
-        height: 200
+        height: 220
     }
 
     Inventory {

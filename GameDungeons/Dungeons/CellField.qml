@@ -14,18 +14,21 @@ Grid {
                 Field {
                     Cell {
                                  Image {
+
                                      source: if(modelData !== null && modelData.characterIsNotNull) {
-                                                    if(modelData.characterName==="Robber") {
-                                                        "images/robber-mask.png"
-                                                    } else if(modelData.characterName==="Shaman") {
-                                                        "images/tribal-mask.png"
-                                                    } else if(modelData.characterName==="Slime") {
+                                                    if (modelData.isBossCell) {
+                                                        "images/totem-mask.png"
+                                                    } else if (modelData.characterName === "Robber") {
+                                                        "images/robber-mask.png" 
+                                                    } else if (modelData.characterName==="Slime") {
                                                         "images/slime.png"
+                                                    } else if (modelData.characterName==="Shaman") {
+                                                        "images/tribal-mask.png"
                                                     }
+
+                                                } else {
+                                                    ""
                                                 }
-                                              else {
-                                                ""
-                                             }
 
                                      width: 30
                                      height: 30

@@ -30,6 +30,7 @@ private:
     Q_PROPERTY(BoardCell* oneBoardCell READ getOneBoardCell NOTIFY boardCellChanged)
 
     int m_size;
+    int m_numberOfShamansInRoom;
     bool m_boss;
     std::vector<std::vector<BoardCell*>> m_room;
     BoardCell* m_oneBoardCell;
@@ -45,6 +46,7 @@ public:
     void setBoss();
     void printCells();
 
+    int getNumberOfShamansInRoom() const;
     std::vector<std::vector<BoardCell*>> getBoardCells() const;
     BoardCell* getOneBoardCell() const;
 

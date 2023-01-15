@@ -32,11 +32,13 @@ private:
     Q_PROPERTY(Armor* heroArmor READ getArmor NOTIFY armorChanged)
 
     Q_PROPERTY(bool heroEncounter MEMBER m_encounter NOTIFY encounterChanged)
+    Q_PROPERTY(int killedShamans READ getNumberOfKilledShamans NOTIFY numberOfKilledShamansChanged)
 
     const unsigned long long inventorySize = 8;
 
     int m_level;
     int m_experience;
+    int m_numberOfkilledShamans;
     std::vector<Item*> m_inventory;
     Weapon* m_weapon;
     Armor* m_armor;
@@ -58,6 +60,7 @@ public:
     int getExperience() const;
     int getIndexOfEquipedArmorInInventory() const;
     int getIndexOfEquipedWeaponInInventory() const;
+    int getNumberOfKilledShamans() const;
 
     Q_INVOKABLE int changeX(int by);
     Q_INVOKABLE int changeY(int by);
@@ -82,6 +85,7 @@ signals:
     void armorChanged();
 
     void encounterChanged();
+    void numberOfKilledShamansChanged();
 };
 
 Q_DECLARE_METATYPE(std::vector<Item* >)

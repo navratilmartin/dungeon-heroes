@@ -5,6 +5,7 @@
 
 class Armor: public Item {
 private:
+    Q_OBJECT
     int m_armorBonus;
     int m_durability;
 

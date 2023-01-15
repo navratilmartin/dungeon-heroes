@@ -5,10 +5,13 @@ BoardCell::BoardCell(int x, int y, Character*ch, Item* i){
     m_y = y;
     m_character = ch;
     m_item = i;
+    m_isBossCell = false;
 }
+
 int BoardCell::getCharacterHealth(){
     return m_character->getActualHealth();
 }
+
 int BoardCell::getY() const{
     return m_y;
 }
@@ -17,11 +20,15 @@ int BoardCell::getX() const{
     return m_x;
 }
 
-bool BoardCell::characterIsNotNull(){
+bool BoardCell::getIsBossCell() const {
+    return m_isBossCell;
+}
+
+bool BoardCell::characterIsNotNull() {
     return m_character!=nullptr;
 }
 
-bool BoardCell::itemIsNotNull(){
+bool BoardCell::itemIsNotNull() {
     return m_item!=nullptr;
 }
 Character *BoardCell::getCharacter() {
@@ -54,12 +61,17 @@ void BoardCell::removeItem() {
     emit itemIsNotNullChanged();
 }
 
-QString BoardCell::characterName(){
+void BoardCell::setBossCell(EnumDifficulty difficulty) {
+    m_isBossCell = true;
+    m_character->setCharacterStatsByDifficulty(difficulty);
+}
+
+QString BoardCell::characterName() {
     std::string str = m_character->getName();
     QString qstr = QString::fromStdString(str);
     return qstr;
 }
-QString BoardCell::itemName(){
+QString BoardCell::itemName() {
     std::string str = m_item->getName();
     QString qstr = QString::fromStdString(str);
     return qstr;

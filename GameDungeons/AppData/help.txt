@@ -12,5 +12,5 @@ Q: How can I fight the enemy?
 A: Everytime you move your hero
 
 Q: How can I win?
-A: You have to defeat all the enemies
-But beware, you are not immortal!
+A: You have to defeat all the shamans
+and then, defeat the Greatest Shaman

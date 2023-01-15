@@ -4,6 +4,7 @@
 #include <string>
 #include <QObject>
 #include <QString>
+#include "EnumDifficulty.h"
 
 class Character: public QObject {
 protected:
@@ -25,6 +26,9 @@ public:
     int getActualHealth() const;
     int getBaseDamage() const;
     int getDefense() const;
+
+    // Used only for the boss
+    void setCharacterStatsByDifficulty(EnumDifficulty difficulty);
 };
 
 

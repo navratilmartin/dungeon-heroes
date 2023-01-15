@@ -7,6 +7,7 @@
 
 class Weapon: public Item {
 private:
+    Q_OBJECT
     int m_damageBonus;
     int m_durability;
 
