@@ -8,8 +8,8 @@ Hero::Hero(int x, int y, const std::string& name, int baseDamage):
     m_weapon = nullptr;
     m_armor = nullptr;
     m_encounter = false;
-    m_indexOfEquipedWeaponInInventory = 0;
-    m_indexOfEquipedArmorInInventory = 0;
+    m_indexOfEquipedWeaponInInventory = -1;
+    m_indexOfEquipedArmorInInventory = -1;
 }
 
 std::vector<Item*> Hero::getInventory() const {
