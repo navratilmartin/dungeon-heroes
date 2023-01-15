@@ -57,6 +57,8 @@ public:
     std::vector<Item*> getInventory() const;
     Weapon* getWeapon() const;
     Armor* getArmor() const;
+    void equipWeapon(Weapon* w);
+    void equipArmor(Armor* a);
     int getLevel() const;
     int getExperience() const;
     int getIndexOfEquipedArmorInInventory() const;

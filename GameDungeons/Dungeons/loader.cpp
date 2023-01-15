@@ -42,6 +42,11 @@ void Loader::saveGame(const Board* currentBoard, Hero* hero){
                     weaponObj["description"] = weapon->getQstringDescription();
                     weaponObj["damage"] = weapon->getDamageBonus();
                     weaponObj["durability"] = weapon->getDurability();
+                    if(weapon->isEquiped()){
+                        weaponObj["equiped"] = 1;
+                    } else {
+                        weaponObj["equiped"] = 0;
+                    }
                     weaponArray.append(weaponObj);
                 } else if (item->getItemType() == Item::ItemType::Armor){
                    QJsonObject armorObj;
@@ -50,6 +55,11 @@ void Loader::saveGame(const Board* currentBoard, Hero* hero){
                    armorObj["description"] = armor->getQstringDescription();
                    armorObj["armor"] = armor->getArmorBonus();
                    armorObj["durability"] = armor->getDurability();
+                   if(armor->isEquiped()){
+                       armorObj["equiped"] = 1;
+                   } else{
+                       armorObj["equiped"] = 0;
+                   }
                    armorArray.append(armorObj);
                 } else if (item->getItemType() == Item::ItemType::Potion){
                     QJsonObject potionObj;
@@ -210,6 +220,8 @@ Hero* Loader::loadSavedHero(){
        throw std::invalid_argument("Nepodarilo se otevrit soubor v loadSavedHero");
      }
     else{
+        Weapon* equipedWeapon = nullptr;
+        Armor* equipedArmor = nullptr;
         QByteArray saveData = loadFile.readAll();
         QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
         QJsonObject board = loadDoc.object();
@@ -222,7 +234,7 @@ Hero* Loader::loadSavedHero(){
         int level = board["heroLevel"].toInt();
         int experience = board["heroExperience"].toInt();
         int numberOfKilledShamans = board["numberOfKilledShamans"].toInt();
-        std::vector<Item*> inventory = {};
+        std::vector<Item*> inventory = {8, nullptr};
         int inventoryIndex=0;
         QJsonArray inventoryWeapons = board["inventoryWeapons"].toArray();
         QJsonArray inventoryArmors = board["inventoryArmors"].toArray();
@@ -234,7 +246,10 @@ Hero* Loader::loadSavedHero(){
             std::string description = inventoryWeaponObj["description"].toString().toStdString();
             int durability = inventoryWeaponObj["durability"].toInt();
             Weapon* w = new Weapon(damage, name, description, 0, 0, durability);
-            inventory.at(inventoryIndex)=w;
+            if(inventoryWeaponObj["equiped"].toInt() == 1){
+                equipedWeapon = w;
+            }
+            inventory.at(inventoryIndex) = w;
             inventoryIndex++;
         }
         for(int index=0; index<inventoryArmors.size(); index++){
@@ -244,7 +259,10 @@ Hero* Loader::loadSavedHero(){
             std::string description = inventoryArmorObj["description"].toString().toStdString();
             int durability = inventoryArmorObj["durability"].toInt();
             Armor* a = new Armor(armor, name, description, 0, 0, durability);
-            inventory.at(inventoryIndex)=a;
+            if(inventoryArmorObj["equiped"].toInt() == 1){
+                equipedArmor = a;
+            }
+            inventory.at(inventoryIndex) = a;
             inventoryIndex++;
         }
         for(int index=0; index<inventoryPotions.size(); index++){
@@ -253,11 +271,17 @@ Hero* Loader::loadSavedHero(){
             std::string name = inventoryPotionObj["name"].toString().toStdString();
             std::string description = inventoryPotionObj["description"].toString().toStdString();
             Potion* p = new Potion(bonus, name, description, 0, 0);
-            inventory.at(inventoryIndex)=p;
+            inventory.at(inventoryIndex) = p;
             inventoryIndex++;
         }
         Hero* loadedHero = new Hero(x, y, name, baseDamage, experience, level, inventory,
                                     numberOfKilledShamans, defense, health);
+        if (equipedWeapon != nullptr){
+            loadedHero->equipWeapon(equipedWeapon);
+        }
+        if(equipedArmor != nullptr){
+            loadedHero->equipArmor(equipedArmor);
+        }
         return loadedHero;
     }
 }

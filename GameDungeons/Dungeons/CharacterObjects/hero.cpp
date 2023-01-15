@@ -90,12 +90,14 @@ void Hero::useItem(int itemIndex) {
         m_weapon = qobject_cast<Weapon*>(m_inventory.at(itemIndex));
         m_indexOfEquipedWeaponInInventory = itemIndex;
         m_baseDamage += m_weapon->getDamageBonus();
+        m_weapon->equip();
         emit damageChanged();
         emit weaponChanged();
     } else if (m_inventory.at(itemIndex)->getItemType() == Item::ItemType::Armor and m_armor == nullptr) {
         m_armor = qobject_cast<Armor*>(m_inventory.at(itemIndex));
         m_indexOfEquipedArmorInInventory = itemIndex;
         m_defense += m_armor->getArmorBonus();
+        m_armor->equip();
         emit defenseChanged();
         emit armorChanged();
     } else if (m_inventory.at(itemIndex)->getItemType() == Item::ItemType::Potion) {
@@ -242,6 +244,14 @@ int Hero::getIndexOfEquipedArmorInInventory() const {
 
 int Hero::getIndexOfEquipedWeaponInInventory() const {
     return m_indexOfEquipedWeaponInInventory;
+}
+
+void Hero::equipWeapon(Weapon* w){
+    m_weapon = w;
+}
+
+void Hero::equipArmor(Armor* a){
+    m_armor = a;
 }
 
 int Hero::getNumberOfKilledShamans() const {

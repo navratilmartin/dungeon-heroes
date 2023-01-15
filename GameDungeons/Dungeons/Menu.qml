@@ -77,7 +77,36 @@ Column {
             }
 
             onClicked: {
+                if (roomLoader.active === true) {
+                    roomLoader.active = false
+                }
                 game.loadBoard();
+                roomLoader.active = true
+                // console.log(game.hero.heroX)
+                // console.log(game.hero.heroX)
+                roomLoader.visible = true
+                roomLoaderWrapper.visible = true
+                roomLoader.focus = true
+                //roomLoader.item.gameHeroEntity.focus = true
+
+                // Initializing main session and hero inventory and stats
+                gameMenu.visible = false
+                gameTitle.visible = false
+                gameSessionBlock.gameInventory.visible = true
+                gameSessionBlock.visible = true
+                gameSessionBlock.messageText = "Use the arrow keys to move the hero on the map"
+                gameSessionBlock.messageVisible = true
+                gameSessionBlock.messageTimerRunning = true
+
+                gameSessionBlock.gameInventory.inventoryModel = game.hero.heroInventory
+                gameSessionBlock.statsHeroName = game.hero.heroName
+                gameSessionBlock.statsHeroHealth = game.hero.heroHealth
+                gameSessionBlock.statsHeroDamage = game.hero.heroDamage
+                gameSessionBlock.statsHeroDefense = game.hero.heroDefense
+                gameSessionBlock.statsHeroLevel = game.hero.heroLevel
+                gameSessionBlock.statsHeroExperience = game.hero.heroExperience
+                gameSessionBlock.statsKilledShamans = game.hero.killedShamans
+                gameSessionBlock.totalShamans = game.board.numberOfShamans
             }
         }
 

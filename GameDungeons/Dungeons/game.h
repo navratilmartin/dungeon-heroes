@@ -18,7 +18,6 @@ class Game : public QObject {
 
     bool isOnEnemy();
     void createBoard(EnumDifficulty difficulty);
-    void loadBoard();
 
 public:
     Game();
@@ -35,6 +34,7 @@ public:
 
     Q_INVOKABLE void play(int userInput = 3);
     Q_INVOKABLE void saveGame();
+    Q_INVOKABLE void loadBoard();
 };
 
 Q_DECLARE_METATYPE(Board*); // None Qt Data types must be registered

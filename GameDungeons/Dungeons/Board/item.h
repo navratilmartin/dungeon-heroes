@@ -15,6 +15,7 @@ protected:
     int m_y;
     std::string m_name;
     std::string m_description;
+    bool m_isEquiped;
 
 public:
     enum class ItemType {
@@ -22,9 +23,12 @@ public:
     };
     Q_ENUM(ItemType)
 
-    Item(int x, int y, std::string name, std::string description);
+    Item(int x, int y, std::string name, std::string description, bool isEquiped=false);
     int getX();
     int getY();
+    bool isEquiped();
+    void equip();
+    void unEquip();
     QString getQStringName() const;
     QString getQstringDescription() const;
     std::string getName();
