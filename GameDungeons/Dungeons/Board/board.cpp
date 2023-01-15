@@ -31,13 +31,13 @@ void Board::generateRooms() {
     m_board.at(boardSize-1)->setBoss(); // last room always has a boss
 }
 
-void Board::generateLoadedRooms(int numberOfKilledShamans){
+void Board::generateLoadedRooms(int totalNumberOfShamans){
     generate(m_board.begin(), m_board.end(), [this]() -> BoardRoom * {
         BoardRoom *r = new BoardRoom(this->m_boardDifficulty);
         return r;
     });
 
-    m_totalNumberOfShamans += numberOfKilledShamans;
+    this->setNumberOfShamans(totalNumberOfShamans);
     m_boardCurrentRoom = m_board.at(m_boardRow);
     m_board.at(boardSize-1)->setBoss(); // last room always has a boss
 }
@@ -164,6 +164,10 @@ BoardRoom* Board::getRoom(int index) const {
 
 int Board::getNumberOfShamans() const {
     return m_totalNumberOfShamans;
+}
+
+void Board::setNumberOfShamans(int numberTotalShamans) {
+    m_totalNumberOfShamans = numberTotalShamans;
 }
 
 void Board::printRooms(){

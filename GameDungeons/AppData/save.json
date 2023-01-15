@@ -1,229 +1,230 @@
 {
-    "actualRoomIndex": 1,
+    "actualRoomIndex": 0,
     "boardArmors": [
+        {
+            "armor": 13,
+            "description": "Decreases the incoming damage from the enemy by 13.",
+            "durability": 5,
+            "name": "Armor",
+            "roomIndex": 3,
+            "x": 5,
+            "y": 0
+        },
         {
             "armor": 15,
             "description": "Decreases the incoming damage from the enemy by 15.",
             "durability": 5,
             "name": "Armor",
-            "roomIndex": 1,
-            "x": 1,
-            "y": 4
+            "roomIndex": 6,
+            "x": 7,
+            "y": 5
         },
         {
-            "armor": 11,
-            "description": "Decreases the incoming damage from the enemy by 11.",
+            "armor": 7,
+            "description": "Decreases the incoming damage from the enemy by 7.",
             "durability": 5,
             "name": "Armor",
-            "roomIndex": 5,
-            "x": 1,
-            "y": 2
-        },
-        {
-            "armor": 5,
-            "description": "Decreases the incoming damage from the enemy by 5.",
-            "durability": 5,
-            "name": "Armor",
-            "roomIndex": 7,
-            "x": 2,
-            "y": 0
+            "roomIndex": 6,
+            "x": 7,
+            "y": 7
         }
     ],
     "boardPotions": [
         {
-            "bonus": 4,
-            "description": "Regenerates 4 hp.",
+            "bonus": 5,
+            "description": "Regenerates 5 hp.",
             "name": "Potion",
-            "roomIndex": 2,
-            "x": 1,
-            "y": 2
-        },
-        {
-            "bonus": 8,
-            "description": "Regenerates 8 hp.",
-            "name": "Potion",
-            "roomIndex": 2,
-            "x": 5,
-            "y": 4
+            "roomIndex": 5,
+            "x": 3,
+            "y": 0
         },
         {
             "bonus": 9,
             "description": "Regenerates 9 hp.",
             "name": "Potion",
-            "roomIndex": 3,
+            "roomIndex": 7,
             "x": 3,
-            "y": 5
+            "y": 0
         }
     ],
     "boardWeapons": [
         {
-            "damage": 6,
-            "description": "Deals 6 to the enemy.",
+            "damage": 25,
+            "description": "Deals 25 to the enemy.",
             "durability": 5,
-            "name": "Dagger",
-            "roomIndex": 1,
+            "name": "Sword",
+            "roomIndex": 4,
             "x": 1,
-            "y": 5
-        },
-        {
-            "damage": 13,
-            "description": "Deals 13 to the enemy.",
-            "durability": 5,
-            "name": "Axe",
-            "roomIndex": 5,
-            "x": 6,
             "y": 2
         },
         {
-            "damage": 30,
-            "description": "Deals 30 to the enemy.",
+            "damage": 14,
+            "description": "Deals 14 to the enemy.",
             "durability": 5,
-            "name": "Sword",
-            "roomIndex": 6,
-            "x": 3,
-            "y": 3
+            "name": "Axe",
+            "roomIndex": 4,
+            "x": 1,
+            "y": 5
         }
     ],
     "enemies": [
         {
-            "attack": 23,
-            "defense": 9,
-            "name": "Shaman",
-            "roomIndex": 0,
-            "x": 1,
-            "xp": 37,
-            "y": 4
-        },
-        {
-            "attack": 19,
-            "defense": 3,
-            "name": "Robber",
-            "roomIndex": 0,
-            "x": 2,
-            "xp": 22,
-            "y": 1
-        },
-        {
-            "attack": 19,
-            "defense": 3,
+            "attack": 15,
+            "defense": 2,
             "name": "Robber",
             "roomIndex": 0,
             "x": 7,
-            "xp": 22,
-            "y": 3
+            "xp": 19,
+            "y": 0
         },
         {
-            "attack": 18,
-            "defense": 20,
-            "name": "Slime",
-            "roomIndex": 2,
-            "x": 1,
-            "xp": 27,
-            "y": 5
-        },
-        {
-            "attack": 18,
-            "defense": 20,
-            "name": "Slime",
-            "roomIndex": 2,
-            "x": 2,
-            "xp": 27,
-            "y": 2
-        },
-        {
-            "attack": 19,
-            "defense": 3,
+            "attack": 15,
+            "defense": 2,
             "name": "Robber",
-            "roomIndex": 2,
-            "x": 3,
-            "xp": 22,
-            "y": 4
-        },
-        {
-            "attack": 19,
-            "defense": 3,
-            "name": "Robber",
-            "roomIndex": 3,
-            "x": 1,
-            "xp": 22,
-            "y": 4
-        },
-        {
-            "attack": 23,
-            "defense": 9,
-            "name": "Shaman",
-            "roomIndex": 3,
-            "x": 6,
-            "xp": 37,
+            "roomIndex": 0,
+            "x": 7,
+            "xp": 19,
             "y": 6
         },
         {
-            "attack": 18,
-            "defense": 20,
+            "attack": 16,
+            "defense": 19,
             "name": "Slime",
+            "roomIndex": 1,
+            "x": 2,
+            "xp": 24,
+            "y": 1
+        },
+        {
+            "attack": 15,
+            "defense": 2,
+            "name": "Robber",
+            "roomIndex": 2,
+            "x": 1,
+            "xp": 19,
+            "y": 0
+        },
+        {
+            "attack": 15,
+            "defense": 2,
+            "name": "Robber",
+            "roomIndex": 2,
+            "x": 1,
+            "xp": 19,
+            "y": 1
+        },
+        {
+            "attack": 16,
+            "defense": 19,
+            "name": "Slime",
+            "roomIndex": 2,
+            "x": 7,
+            "xp": 24,
+            "y": 0
+        },
+        {
+            "attack": 15,
+            "defense": 2,
+            "name": "Robber",
+            "roomIndex": 3,
+            "x": 3,
+            "xp": 19,
+            "y": 7
+        },
+        {
+            "attack": 15,
+            "defense": 2,
+            "name": "Robber",
+            "roomIndex": 3,
+            "x": 7,
+            "xp": 19,
+            "y": 6
+        },
+        {
+            "attack": 15,
+            "defense": 2,
+            "name": "Robber",
+            "roomIndex": 4,
+            "x": 1,
+            "xp": 19,
+            "y": 4
+        },
+        {
+            "attack": 15,
+            "defense": 2,
+            "name": "Robber",
             "roomIndex": 4,
             "x": 2,
-            "xp": 27,
-            "y": 1
-        },
-        {
-            "attack": 19,
-            "defense": 3,
-            "name": "Robber",
-            "roomIndex": 5,
-            "x": 7,
-            "xp": 22,
-            "y": 3
-        },
-        {
-            "attack": 18,
-            "defense": 20,
-            "name": "Slime",
-            "roomIndex": 5,
-            "x": 7,
-            "xp": 27,
+            "xp": 19,
             "y": 6
         },
         {
-            "attack": 19,
-            "defense": 3,
+            "attack": 15,
+            "defense": 2,
             "name": "Robber",
+            "roomIndex": 4,
+            "x": 7,
+            "xp": 19,
+            "y": 0
+        },
+        {
+            "attack": 16,
+            "defense": 19,
+            "name": "Slime",
             "roomIndex": 6,
-            "x": 4,
-            "xp": 22,
-            "y": 4
+            "x": 1,
+            "xp": 24,
+            "y": 6
         },
         {
-            "attack": 18,
-            "defense": 20,
+            "attack": 16,
+            "defense": 19,
             "name": "Slime",
             "roomIndex": 7,
-            "x": 1,
-            "xp": 27,
+            "x": 2,
+            "xp": 24,
             "y": 4
         },
         {
-            "attack": 19,
-            "defense": 3,
+            "attack": 15,
+            "defense": 2,
             "name": "Robber",
             "roomIndex": 7,
+            "x": 4,
+            "xp": 19,
+            "y": 0
+        },
+        {
+            "attack": 16,
+            "defense": 19,
+            "name": "Slime",
+            "roomIndex": 7,
             "x": 7,
-            "xp": 22,
+            "xp": 24,
             "y": 6
+        },
+        {
+            "attack": 33,
+            "defense": 10,
+            "name": "Shaman",
+            "roomIndex": 7,
+            "x": 7,
+            "xp": 30,
+            "y": 7
         }
     ],
-    "heroDamage": 17,
-    "heroDefense": 0,
-    "heroExperience": 0,
-    "heroHealth": 100,
-    "heroLevel": 1,
+    "heroDamage": 23,
+    "heroDefense": 20,
+    "heroExperience": 26,
+    "heroHealth": 73,
+    "heroLevel": 2,
     "heroName": "Wanderer",
-    "heroX": 1,
-    "heroY": 1,
+    "heroX": 3,
+    "heroY": 0,
     "inventoryArmors": [
         {
-            "armor": 17,
-            "description": "Decreases the incoming damage from the enemy by 17.",
+            "armor": 20,
+            "description": "Decreases the incoming damage from the enemy by 20.",
             "durability": 5,
             "equiped": 0,
             "name": "Armor"
@@ -231,19 +232,20 @@
     ],
     "inventoryPotions": [
         {
-            "bonus": 9,
-            "description": "Regenerates 9 hp.",
+            "bonus": 3,
+            "description": "Regenerates 3 hp.",
             "name": "Potion"
         }
     ],
     "inventoryWeapons": [
         {
-            "damage": 7,
-            "description": "Deals 7 to the enemy.",
+            "damage": 11,
+            "description": "Deals 11 to the enemy.",
             "durability": 5,
-            "equiped": 1,
+            "equiped": 0,
             "name": "Dagger"
         }
     ],
-    "numberOfKilledShamans": 0
+    "numberOfKilledShamans": 3,
+    "numberOfTotalShamans": 3
 }

@@ -40,6 +40,7 @@ public:
     int getSize() const;
     BoardRoom* getRoom(int index) const;
     int getNumberOfShamans() const;
+    void setNumberOfShamans(int numberTotalShamans);
 
     BoardRoom* getCurrentRoom() const;
     int getCurrentRoomIndex() const;

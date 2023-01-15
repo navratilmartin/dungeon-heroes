@@ -16,7 +16,8 @@ void Loader::saveGame(const Board* currentBoard, Hero* hero){
     } else {
         QJsonObject board;
         //Position
-        board["actualRoomIndex"] =  currentBoard->getCurrentRoomIndex();
+        board["actualRoomIndex"] = 0;
+        //board["actualRoomIndex"] =  currentBoard->getCurrentRoomIndex();
         board["heroX"] = hero->getX();
         board["heroY"] =  hero->getY();
         //Hero atributes
@@ -27,6 +28,7 @@ void Loader::saveGame(const Board* currentBoard, Hero* hero){
         board["heroLevel"] = hero->getLevel();
         board["heroExperience"] = hero->getExperience();
         board["numberOfKilledShamans"] = hero->getNumberOfKilledShamans();
+        board["numberOfTotalShamans"] = currentBoard->getNumberOfShamans();
         //Hero equiped items
 
         //Inventory
@@ -156,7 +158,7 @@ Board* Loader::loadSavedGame(){
         QJsonObject board = loadDoc.object();
         int roomIndex = board["actualRoomIndex"].toInt();
         Board* loadedBoard = new Board(EnumDifficulty::Easy, roomIndex);
-        loadedBoard->generateLoadedRooms(board["numberOfKilledShamans"].toInt());
+        loadedBoard->generateLoadedRooms(board["numberOfTotalShamans"].toInt());
         QJsonArray boardWeapons = board["boardWeapons"].toArray();
         QJsonArray boardArmors = board["boardArmors"].toArray();
         QJsonArray boardPotions = board["boardPotions"].toArray();
