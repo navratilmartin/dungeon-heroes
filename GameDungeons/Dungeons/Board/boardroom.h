@@ -39,6 +39,8 @@ private:
 
 public:
     BoardRoom(EnumDifficulty difficulty);
+    void addItemCell(int cellX, int cellY, Item* i);
+    void addEnemyCell(int cellX, int cellY, Enemy* e);
     void addHideout();
     void addEnemy(int type);
     void addItem(int typeOfItem);

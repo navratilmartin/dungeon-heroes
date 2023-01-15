@@ -31,7 +31,10 @@ class Board : public QObject {
     void printRooms();
 
 public:
-    Board(EnumDifficulty difficulty);
+    Board(EnumDifficulty difficulty, int boardCurrentRoomIndex=0);
+    void generateLoadedRooms(int numberOfKilledShamans);
+    void addItem(int roomIndex, int cellX, int cellY, Item* i);
+    void addEnemy(int roomIndex, int cellX, int cellY, Enemy* e);
 
     std::vector<BoardRoom*> getBoard() const;
     int getSize() const;

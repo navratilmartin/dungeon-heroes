@@ -17,7 +17,7 @@ protected:
     int m_defense;
 
 public:
-    Character(int x, int y, const std::string &name, int baseDamage, int defense);
+    Character(int x, int y, const std::string &name, int baseDamage, int defense, int actualHealth=100);
     int getX() const;
     int getY() const;
     std::string getName();

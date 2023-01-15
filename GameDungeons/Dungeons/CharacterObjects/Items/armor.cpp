@@ -1,9 +1,9 @@
 #include "CharacterObjects/Items/armor.h"
 
-Armor::Armor(int armorBonus, const std::string& name, const std::string& description, int x, int y):
+Armor::Armor(int armorBonus, const std::string& name, const std::string& description, int x, int y, int durability):
     Item(x, y, name, description) {
     m_armorBonus = armorBonus;
-    m_durability = 5;
+    m_durability = durability;
 }
 
 int Armor::getDurability() const {

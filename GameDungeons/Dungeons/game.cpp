@@ -18,7 +18,8 @@ void Game::createBoard(EnumDifficulty difficulty) {
 }
 
 void Game::loadBoard() {
-
+    m_board = m_loader->loadSavedGame();
+    m_hero = m_loader->loadSavedHero();
 }
 
 Hero* Game::getHero() const {

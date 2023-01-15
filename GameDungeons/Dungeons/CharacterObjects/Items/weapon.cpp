@@ -1,8 +1,8 @@
 #include "CharacterObjects/Items/weapon.h"
 
-Weapon::Weapon(int damageBonus, const std::string& name, std::string description, int x, int y):
+Weapon::Weapon(int damageBonus, const std::string& name, std::string description, int x, int y, int durability):
     Item(x, y, name, description) {
-    m_durability = 5;
+    m_durability = durability;
     m_damageBonus = damageBonus;
 }
 

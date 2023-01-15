@@ -17,6 +17,14 @@ void BoardRoom::generateCells(EnumDifficulty difficulty) {
     }
 }
 
+void BoardRoom::addItemCell(int cellX, int cellY, Item* i){
+    m_room.at(cellX).at(cellY)->addItem(i);
+}
+
+void BoardRoom::addEnemyCell(int cellX, int cellY, Enemy* e){
+    m_room.at(cellX).at(cellY)->addCharacter(e);
+}
+
 void BoardRoom::addHideout() {
     int randx = rand()%(roomSize*roomSize);
     int x = randx / roomSize;

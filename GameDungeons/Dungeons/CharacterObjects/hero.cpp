@@ -1,16 +1,15 @@
 #include "hero.h"
 
-Hero::Hero(int x, int y, const std::string& name, int baseDamage):
-        Character(x, y, name, baseDamage, 0){
-    m_experience = 0;
-    m_level = 1;
-    m_inventory = std::vector<Item*>(inventorySize, nullptr);
+Hero::Hero(int x, int y, const std::string& name, int baseDamage,int experience, int level,
+           std::vector<Item*>inventory, int numberOfKilledShamans, int defense, int health):
+        Character(x, y, name, baseDamage, defense, health){
+    m_experience = experience;
+    m_level = level;
+    m_inventory = inventory;
     m_weapon = nullptr;
     m_armor = nullptr;
     m_encounter = false;
-    m_numberOfkilledShamans = 0;
-    m_indexOfEquipedWeaponInInventory = 0;
-    m_indexOfEquipedArmorInInventory = 0;
+    m_numberOfkilledShamans = numberOfKilledShamans;
 }
 
 std::vector<Item*> Hero::getInventory() const {

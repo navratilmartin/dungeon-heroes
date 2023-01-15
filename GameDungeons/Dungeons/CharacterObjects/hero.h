@@ -34,7 +34,7 @@ private:
     Q_PROPERTY(bool heroEncounter MEMBER m_encounter NOTIFY encounterChanged)
     Q_PROPERTY(int killedShamans READ getNumberOfKilledShamans NOTIFY numberOfKilledShamansChanged)
 
-    const unsigned long long inventorySize = 8;
+    const unsigned long long static inventorySize = 8;
 
     int m_level;
     int m_experience;
@@ -51,7 +51,8 @@ private:
     void getXp(int experienceBonus);
 
 public:
-    Hero(int x, int y, const std::string& name, int baseDamage);
+    Hero(int x, int y, const std::string& name, int baseDamage,int experience=0, int level=1,
+         std::vector<Item*>inventory=std::vector<Item*>(8, nullptr), int numberOfKilledShamans=0, int defense=0, int health=100);
     void takeDamage(int damage);
     std::vector<Item*> getInventory() const;
     Weapon* getWeapon() const;

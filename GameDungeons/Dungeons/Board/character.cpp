@@ -1,14 +1,14 @@
 
 #include "character.h"
 
-Character::Character(int x, int y, const std::string &name, int baseDamage, int defense) {
+Character::Character(int x, int y, const std::string &name, int baseDamage, int defense, int actualHealth) {
     m_x = x;
     m_y = y;
     m_name = name;
     m_baseDamage = baseDamage;
     m_defense = defense;
     m_maxHealth = 100;
-    m_actualHealth = m_maxHealth;
+    m_actualHealth = actualHealth;
 }
 
 std::string Character::getName(){

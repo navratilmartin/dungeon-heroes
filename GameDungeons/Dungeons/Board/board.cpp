@@ -1,14 +1,14 @@
 #include "board.h"
 
-Board::Board(EnumDifficulty difficulty) {
+Board::Board(EnumDifficulty difficulty, int boardCurrentRoomIndex) {
     m_size = boardSize;
     m_boardRow = 0;
-    m_boardCurrentRoom = nullptr;
-    m_boardCurrentRoomIndex = 0;
+    m_boardCurrentRoomIndex = boardCurrentRoomIndex;
     m_totalNumberOfShamans = 0;
     m_board = std::vector<BoardRoom*> (std::vector<BoardRoom*> (boardSize));
     m_boardDifficulty = difficulty;
     generateRooms();
+    m_boardCurrentRoom = m_board.at(m_boardCurrentRoomIndex);
 
     std::for_each(m_board.begin(), m_board.end(), [this](const BoardRoom* br) {
         this->m_totalNumberOfShamans += br->getNumberOfShamansInRoom();
@@ -29,6 +29,25 @@ void Board::generateRooms() {
 
     m_boardCurrentRoom = m_board.at(m_boardRow);
     m_board.at(boardSize-1)->setBoss(); // last room always has a boss
+}
+
+void Board::generateLoadedRooms(int numberOfKilledShamans){
+    generate(m_board.begin(), m_board.end(), [this]() -> BoardRoom * {
+        BoardRoom *r = new BoardRoom(this->m_boardDifficulty);
+        return r;
+    });
+
+    m_totalNumberOfShamans += numberOfKilledShamans;
+    m_boardCurrentRoom = m_board.at(m_boardRow);
+    m_board.at(boardSize-1)->setBoss(); // last room always has a boss
+}
+
+void Board::addItem(int roomIndex, int cellX, int cellY, Item* i){
+    m_board.at(roomIndex)->addItemCell(cellX, cellY, i);
+}
+
+void Board::addEnemy(int roomIndex, int cellX, int cellY, Enemy* e){
+    m_board.at(roomIndex)->addEnemyCell(cellX, cellY, e);
 }
 
 void Board::generateHideouts() {

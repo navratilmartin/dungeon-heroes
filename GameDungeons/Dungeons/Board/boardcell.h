@@ -1,6 +1,7 @@
 #ifndef BOARDCELL_H
 #define BOARDCELL_H
 
+#include "CharacterObjects/enemy.h"
 #include "character.h"
 #include "item.h"
 

@@ -7,6 +7,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include "CharacterObjects/hero.h"
 #include "Board/board.h"
 
 class Loader {
@@ -17,6 +18,7 @@ public:
     Loader();
     Board* loadNewGame(EnumDifficulty difficulty);
     Board* loadSavedGame();
+    Hero* loadSavedHero();
     void saveGame(const Board* currentBoard, Hero* hero);
     QStringList loadHelpFile();
 };

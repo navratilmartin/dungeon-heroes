@@ -77,7 +77,7 @@ Column {
             }
 
             onClicked: {
-
+                game.loadBoard();
             }
         }
 

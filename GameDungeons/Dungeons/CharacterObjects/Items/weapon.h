@@ -12,7 +12,7 @@ private:
     int m_durability;
 
 public:
-    Weapon(int damageBonus, const std::string& name, std::string description, int x, int y);
+    Weapon(int damageBonus, const std::string& name, std::string description, int x, int y, int durability=5);
     int getDamageBonus() const;
     int getDurability() const;
     void decreaseDurabilityByOne();

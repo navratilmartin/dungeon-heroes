@@ -10,7 +10,7 @@ private:
     int m_durability;
 
 public:
-    Armor(int armorBonus, const std::string& name, const std::string& description, int x, int y);
+    Armor(int armorBonus, const std::string& name, const std::string& description, int x, int y, int durability=5);
     int getArmorBonus() const;
     int getDurability() const;
     Item::ItemType getItemType() const override;
