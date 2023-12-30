@@ -1,0 +1,37 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>images/Papirus-Team-dungeon.ico</file>
+        <file>Room.qml</file>
+        <file>Hero.qml</file>
+        <file>Field.qml</file>
+        <file>Exit.qml</file>
+        <file>MenuDifficulty.qml</file>
+        <file>MenuButton.qml</file>
+        <file>Menu.qml</file>
+        <file>NewGame.qml</file>
+        <file>Cell.qml</file>
+        <file>CellField.qml</file>
+        <file>images/stone-path.png</file>
+        <file>images/exit-door.png</file>
+        <file>images/frog-mouth-helm.png</file>
+        <file>images/path-tile.png</file>
+        <file>images/robber-mask.png</file>
+        <file>images/slime.png</file>
+        <file>images/tribal-mask.png</file>
+        <file>images/armor-vest.png</file>
+        <file>images/battle-axe.png</file>
+        <file>images/piercing-sword.png</file>
+        <file>images/plain-dagger.png</file>
+        <file>images/potion-ball.png</file>
+        <file>InfoField.qml</file>
+        <file>Inventory.qml</file>
+        <file>Fight.qml</file>
+        <file>SessionBlock.qml</file>
+        <file>InfoFieldText.qml</file>
+        <file>GameOver.qml</file>
+        <file>SessionHelp.qml</file>
+        <file>images/totem-mask.png</file>
+    </qresource>
+    <qresource prefix="/images"/>
+</RCC>
