@@ -5,6 +5,14 @@
 Dungeon Heroes is an exciting and adventurous game where players navigate through a mysterious dungeon filled with hidden treasures, dangerous traps, and formidable foes. The goal is to survive the dungeon, defeat the enemies, and emerge as the ultimate Dungeon Hero.
 The game was created as a school project for a beginner/intermediate C++ course.
 
+## Technologies Used
+
+Dungeon Heroes is built with the following technologies:
+
+- **C++**: The main programming language used for the game's logic.
+- **QML**: A user interface markup language.
+- **Qt**: A free and open-source widget toolkit for creating graphical user interfaces.
+
 ## Installation
 
 To install Dungeon Heroes, follow these steps:
